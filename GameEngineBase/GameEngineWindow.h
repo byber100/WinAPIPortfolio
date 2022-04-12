@@ -1,24 +1,70 @@
 #pragma once
+#include <Windows.h>
+#include <string>
+#include "GameEngineMath.h"
+#include "GameEngineDebug.h"
 
-// 분류 :
-// 용도 :
 // 설명 :
 class GameEngineWindow
 {
-private:	// member Var
+private:
+	static GameEngineWindow* Inst_;
 
-public:		
-	GameEngineWindow(); // default constructor 디폴트 생성자
-	~GameEngineWindow(); // default destructor 디폴트 소멸자
+public:
+	inline static GameEngineWindow& GetInst() 
+	{
+		return *Inst_;
+	}
 
-public:		// delete constructor
-	GameEngineWindow(const GameEngineWindow& _other) = delete; // default Copy constructor 디폴트 복사생성자
-	GameEngineWindow(GameEngineWindow&& _other) noexcept; // default RValue Copy constructor 디폴트 RValue 복사생성자
+	static void Destroy()
+	{
+		if (nullptr != Inst_)
+		{
+			delete Inst_;
+			Inst_ = nullptr;
+		}
+	}
 
-public:		//delete operator
-	GameEngineWindow& operator=(const GameEngineWindow& _other) = delete; // default Copy operator 디폴트 대입 연산자
-	GameEngineWindow& operator=(const GameEngineWindow&& _other) = delete; // default RValue Copy operator 디폴트 RValue 대입연산자
+public:
+	void RegClass(HINSTANCE _hInst);
+	void CreateGameWindow(HINSTANCE _hInst, const std::string& _Title);
+	void ShowGameWindow();
+	void MessageLoop(void(*_InitFunction)(), void(*_LoopFunction)());
 
-public:		//member Func
+	void SetWindowScaleAndPosition(float4 _Pos, float4 _Scale);
+
+	void Off();
+
+	static inline HDC GetHDC()
+	{
+		return Inst_->HDC_;
+	}
+
+	static inline float4 GetScale()
+	{
+		return Inst_->Scale_;
+	}
+
+
+protected:
+
+private:
+	std::string Title_;
+	bool WindowOn_;
+	HINSTANCE hInst_;
+	HWND hWnd_;
+	HDC HDC_;
+	float4 Scale_;
+
+	// constrcuter destructer
+	GameEngineWindow();
+	~GameEngineWindow();
+
+	// delete Function
+	GameEngineWindow(const GameEngineWindow& _Other) = delete;
+	GameEngineWindow(GameEngineWindow&& _Other) noexcept = delete;
+	GameEngineWindow& operator=(const GameEngineWindow& _Other) = delete;
+	GameEngineWindow& operator=(GameEngineWindow&& _Other) noexcept = delete;
+
 };
 
