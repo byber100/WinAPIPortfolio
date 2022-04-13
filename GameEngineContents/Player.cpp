@@ -84,12 +84,11 @@ void Player::Start()
 	SetPosition(GameEngineWindow::GetScale().Half());
 	SetScale({ 5, 5 });
 
-	//GameEngineRenderer* Render = CreateRendererToScale("Right_Beam_Kirby.bmp", float4(500, 500));
-	//Render->SetIndex(10, float4( 500, 500 ));
+	Render1 = CreateRendererToScale("Player.bmp", { 300, 300 }, 100);
+	Render1->SetPivot({100.0f, 0.0f});
 
-	//Render1 = CreateRendererToScale("Idle.bmp", { 300, 300 }, 100);
-	//Render1->SetPivot({100.0f, 0.0f});
-	//Render1->SetAlpha(100);
+	//Render1->CreateAnimation("Player.bmp", "Idle", 2, 5, 0.5f);
+	//Render1->ChangeAnimation("Idle");
 
 	
 

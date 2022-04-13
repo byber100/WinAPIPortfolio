@@ -17,8 +17,7 @@ AntarcticAdventure::~AntarcticAdventure()
 
 void AntarcticAdventure::GameInit()
 {
-	GameEngineWindow::GetInst().SetWindowScaleAndPosition({ 100, 100 }, { 1280, 768 });
-
+	GameEngineWindow::GetInst().SetWindowScaleAndPosition({ 100, 100 }, { 1024, 768 });
 
 	{
 		GameEngineDirectory ResourcesDir;
@@ -33,9 +32,7 @@ void AntarcticAdventure::GameInit()
 			GameEngineImageManager::GetInst()->Load(AllImageFileList[i].GetFullPath());
 		}
 	}
-
 	{
-
 		GameEngineDirectory ResourcesDir;
 		ResourcesDir.MoveParent("WinAPIPortfolio");
 		ResourcesDir.Move("Resources");
@@ -47,17 +44,16 @@ void AntarcticAdventure::GameInit()
 		{
 			GameEngineSound::LoadRes(AllImageFileList[i].GetFullPath());
 		}
-
 	}
 
-
-	//GameEngineImage* Image = GameEngineImageManager::GetInst()->Find("Right_Beam_Kirby.bmp");
-	//Image->Cut({ 256, 256 });
+	{
+		GameEngineImage* Image = GameEngineImageManager::GetInst()->Find("OceanTiles.bmp");
+		Image->CutCount(4, 2);
+	}
 
 
 	CreateLevel<TitleLevel>("Title");
 	CreateLevel<PlayLevel>("Play");
-
 	ChangeLevel("Play");
 }
 
