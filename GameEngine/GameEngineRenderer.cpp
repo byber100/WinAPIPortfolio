@@ -98,10 +98,17 @@ void GameEngineRenderer::Render()
 		else {
 			GameEngine::BackBufferImage()->AlphaCopy(Image_, RenderPos - Scale, RenderScale_, RenderImagePivot_, RenderImageScale_, Alpha_);
 		}
-
-		
 		break;
 	}
+	case RenderPivot::LEFTTOP:
+		if (Alpha_ == 255)
+		{
+			GameEngine::BackBufferImage()->TransCopy(Image_, RenderPos, RenderScale_, RenderImagePivot_, RenderImageScale_, TransColor_);
+		}
+		else {
+			GameEngine::BackBufferImage()->AlphaCopy(Image_, RenderPos, RenderScale_, RenderImagePivot_, RenderImageScale_, Alpha_);
+		}
+		break;
 	default:
 		break;
 	}
