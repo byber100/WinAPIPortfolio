@@ -45,6 +45,7 @@ void RandomStage::Start()
 	rightGround_->CreateAnimation("GroundTiles.bmp", "RightGround", 2, 3, 0.2f);
 	rightGround_->ChangeAnimation("RightGround");
 
+
 	//LeftOcean_ = CreateRenderer("OceanTiles.bmp");
 	//LeftOcean_->SetPivot({ -416, -32 });
 	//LeftOcean_->SetIndex(0);
