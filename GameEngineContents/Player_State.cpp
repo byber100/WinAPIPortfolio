@@ -7,94 +7,9 @@
 #include <GameEngine/GameEngineRenderer.h>
 
 
-
-void Player::IdleUpdate() 
-{
-	if (true == IsMoveKey())
-	{
-		ChangeState(PlayerState::Move);
-		return;
-	}
-
-
-	if (true == GameEngineInput::GetInst()->IsDown("Fire"))
-	{
-		ChangeState(PlayerState::Attck);
-		return;
-	}
-}
-
-void Player::AttackUpdate() 
-{
-	SetMove(MoveDir * GameEngineTime::GetDeltaTime());
-
-	MoveDir += float4::DOWN * GameEngineTime::GetDeltaTime() * 1000.0f;
-}
-
-void Player::MoveUpdate()
+void Player::IdleStart()
 {
 
-	if (true == GameEngineInput::GetInst()->IsDown("Fire"))
-	{
-		ChangeState(PlayerState::Attck);
-		return;
-	}
-
-	if (true == GameEngineInput::GetInst()->IsPress("MoveRight"))
-	{
-		// °¡¼Ó·Â
-		MoveDir += float4::RIGHT * GameEngineTime::GetDeltaTime() * AccSpeed_;
-	}
-	if (true == GameEngineInput::GetInst()->IsPress("MoveLeft"))
-	{
-		MoveDir += float4::LEFT * GameEngineTime::GetDeltaTime() * AccSpeed_;
-	}
-	if (true == GameEngineInput::GetInst()->IsPress("MoveUp"))
-	{
-		MoveDir += float4::UP * GameEngineTime::GetDeltaTime() * AccSpeed_;
-	}
-
-	if (true == GameEngineInput::GetInst()->IsPress("MoveDown"))
-	{
-		MoveDir += float4::DOWN * GameEngineTime::GetDeltaTime() * AccSpeed_;
-	}
-
-	if (0.3f <= MoveDir.Len2D())
-	{
-		MoveDir.Range2D(0.3f);
-	}
-
-	if (false == IsMoveKey())
-	{
-		MoveDir += -MoveDir * GameEngineTime::GetDeltaTime();
-
-		if (0.005f >= MoveDir.Len2D())
-		{
-			MoveDir = float4::ZERO;
-			return;
-		}
-
-		SetMove(MoveDir * GameEngineTime::GetDeltaTime() * Speed_);
-		return;
-	}
-
-	SetMove(MoveDir * GameEngineTime::GetDeltaTime() * Speed_);
-
-
-}
-
-
-//////////////////////////////////////// State
-
-void Player::IdleStart() 
-{
-
-}
-
-void Player::AttackStart() 
-{
-
-	MoveDir = float4::UP * 500.0f;
 }
 
 void Player::MoveStart()
@@ -102,3 +17,55 @@ void Player::MoveStart()
 
 }
 
+void Player::JumpStart()
+{
+
+}
+
+void Player::IdleUpdate()
+{
+	if (true == IsMoveKey())
+	{
+		ChangeState(PlayerState::Move);
+		return;
+	}
+}
+
+void Player::MoveUpdate()
+{
+	Render_->ChangeAnimation("Walk");
+
+	if (true == GameEngineInput::GetInst()->IsPress("MoveLeft"))
+	{
+		if (288 < GetPosition().ix())
+		{
+			SetMove(float4::LEFT * GameEngineTime::GetDeltaTime() * 250.0f);
+		}
+	}
+	if (true == GameEngineInput::GetInst()->IsPress("MoveRight"))
+	{
+		if (736 > GetPosition().ix())
+		{
+			SetMove(float4::RIGHT * GameEngineTime::GetDeltaTime() * 250.0f);
+		}
+	}
+	if (true == GameEngineInput::GetInst()->IsPress("Fast"))
+	{
+		if (110.0f > ForwardSpeed_)
+		{
+			ForwardSpeed_ = (ForwardSpeed_ + 10.0f * GameEngineTime::GetDeltaTime());
+		}
+	}
+	if (true == GameEngineInput::GetInst()->IsPress("Slow"))
+	{
+		if (1.0f < ForwardSpeed_)
+		{
+			ForwardSpeed_ = (ForwardSpeed_ - 10.0f * GameEngineTime::GetDeltaTime());
+		}
+	}
+}
+
+void Player::JumpUpdate()
+{
+
+}

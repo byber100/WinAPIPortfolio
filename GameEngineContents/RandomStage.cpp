@@ -1,4 +1,5 @@
 #include "RandomStage.h"
+#include "Player.h"
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngineBase/GameEngineDebug.h>

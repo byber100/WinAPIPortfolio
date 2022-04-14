@@ -8,9 +8,8 @@
 
 
 Player::Player() 
-	: Speed_(500.0f)
-	, AccSpeed_(500.0f)
-	, MoveDir(float4::ZERO)
+	: ForwardSpeed_(1.0f)
+	, SideSpeed_(300.0f)
 {
 }
 
@@ -20,12 +19,12 @@ Player::~Player()
 
 // 아무키도 눌리지 않았다면 false
 // 아무키든 눌렸다면 true
-bool Player::IsMoveKey() 
+bool Player::IsMoveKey()
 {
 	if (false == GameEngineInput::GetInst()->IsPress("MoveLeft") &&
 		false == GameEngineInput::GetInst()->IsPress("MoveRight") &&
-		false == GameEngineInput::GetInst()->IsPress("MoveUp") &&
-		false == GameEngineInput::GetInst()->IsPress("MoveDown"))
+		false == GameEngineInput::GetInst()->IsPress("Fast") &&
+		false == GameEngineInput::GetInst()->IsPress("Slow"))
 	{
 		return false;
 	}
@@ -42,11 +41,15 @@ void Player::ChangeState(PlayerState _State)
 		case Idle:
 			IdleStart();
 			break;
-		case Attck:
-			AttackStart();
-			break;
 		case Move:
 			MoveStart();
+			break;
+		case Jump:
+			JumpStart();
+			break;
+		case TakeHit:
+			break;
+		case Clear:
 			break;
 		case Max:
 			break;
@@ -58,18 +61,22 @@ void Player::ChangeState(PlayerState _State)
 	CurState_ = _State;
 }
 
-void Player::StateUpdate() 
+void Player::StateUpdate()
 {
 	switch (CurState_)
 	{
 	case Idle:
 		IdleUpdate();
 		break;
-	case Attck:
-		AttackUpdate();
-		break;
 	case Move:
 		MoveUpdate();
+		break;
+	case Jump:
+		JumpUpdate();
+		break;
+	case TakeHit:
+		break;
+	case Clear:
 		break;
 	case Max:
 		break;
@@ -78,51 +85,34 @@ void Player::StateUpdate()
 	}
 }
 
-
 void Player::Start() 
 {
 	SetPosition(GameEngineWindow::GetScale().Half());
 	SetScale({ 5, 5 });
 
-	Render1 = CreateRendererToScale("Player.bmp", { 300, 300 }, 100);
-	Render1->SetPivot({100.0f, 0.0f});
+	Render_ = CreateRenderer(300);
+	Render_->SetPivot({ 0, 235 });
+	Render_->CreateAnimation("Player.bmp", "Walk", 2, 5, 0.13f);
+	Render_->ChangeAnimation("Walk");
 
-	//Render1->CreateAnimation("Player.bmp", "Idle", 2, 5, 0.5f);
-	//Render1->ChangeAnimation("Idle");
-
-	
-
-
-	// CreateRendererToScale("hpbar.bmp", float4(300.0f, 20.0f), RenderPivot::CENTER, float4(0.0f, -100.0f));
+	LevelRegist("Penguin");
 
 	if (false == GameEngineInput::GetInst()->IsKey("MoveLeft"))
 	{
-		// 키는 대문자로
 		GameEngineInput::GetInst()->CreateKey("MoveLeft", 'A');
 		GameEngineInput::GetInst()->CreateKey("MoveRight", 'D');
-		GameEngineInput::GetInst()->CreateKey("MoveUp", 'W');
-		GameEngineInput::GetInst()->CreateKey("MoveDown", 'S');
-		GameEngineInput::GetInst()->CreateKey("Jump", VK_LSHIFT);
-		GameEngineInput::GetInst()->CreateKey("Fire", VK_SPACE);
-
+		GameEngineInput::GetInst()->CreateKey("Fast", 'W');
+		GameEngineInput::GetInst()->CreateKey("Slow", 'S');
+		GameEngineInput::GetInst()->CreateKey("Jump", VK_SPACE);
 	}
 }
 
 void Player::Update()
 {
-
 	StateUpdate();
-
-
-	// 내가 키를 눌렀다면 움직여라.
-	//if (0 != GetAsyncKeyState('A'))
-	//{
-	//	int a = 0;
-	//}
-	
 }
 
-void Player::Render() 
+void Player::Render()
 {
 	DebugRectRender();
 }

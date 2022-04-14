@@ -12,17 +12,24 @@
 enum PlayerState
 {
 	Idle,
-	Attck,
 	Move,
-	Max,
+	Jump,
+	TakeHit,
+	Clear,
+	Max
 };
 
 // Ό³Έν :
 class Player : public GameEngineActor
 {
+private:
+	float ForwardSpeed_;
+	float SideSpeed_;
+
+	PlayerState CurState_;
+	GameEngineRenderer* Render_;
+
 public:
-
-
 	// constrcuter destructer
 	Player();
 	~Player();
@@ -33,40 +40,29 @@ public:
 	Player& operator=(const Player& _Other) = delete;
 	Player& operator=(Player&& _Other) noexcept = delete;
 
+	float GetForwardSpeed()
+	{
+		return ForwardSpeed_;
+	}
+
 protected:
 
 private:
-	float Speed_;
-	float AccSpeed_;
+	bool IsMoveKey();
+
+	void ChangeState(PlayerState _State);
+	void StateUpdate();
 
 	void Start() override;
 	void Update() override;
 	void Render() override;
 
-
-
-private:
-	static float4 NextLevelPosition;
-
-	float4 MoveDir;
-
-	PlayerState CurState_;
-	GameEngineRenderer* Render1;
-
-	bool IsMoveKey();
-	void KeyMove();
-
-public:
-	void ChangeState(PlayerState _State);
-	void StateUpdate();
-
-private:
-	void IdleUpdate();
-	void AttackUpdate();
-	void MoveUpdate();
-
 	void IdleStart();
-	void AttackStart();
 	void MoveStart();
+	void JumpStart();
+
+	void IdleUpdate();
+	void MoveUpdate();
+	void JumpUpdate();
 };
 
