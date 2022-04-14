@@ -1,27 +1,28 @@
 #pragma once
 #include <GameEngine/GameEngineActor.h>
+#include <GameEngineBase/GameEngineRandom.h>
 
 // 분류 :
 // 용도 :
 // 설명 :
-class GameEngineRandom;
 class RandomStage : public GameEngineActor
 {
 private:	// member Var
+	GameEngineRenderer* BackStage_;
 	GameEngineRenderer* LeftOcean_;
-	GameEngineRenderer* rightOcean_;
-	GameEngineRenderer* leftGround_;
-	GameEngineRenderer* rightGround_;
+	GameEngineRenderer* RightOcean_;
+	GameEngineRenderer* LeftGround_;
+	GameEngineRenderer* RightGround_;
 	GameEngineRenderer* CurveTiles_;
-	GameEngineRenderer* mountain1_;
-	GameEngineRenderer* mountain2_;
-	GameEngineRenderer* leftGlacier_;
-	GameEngineRenderer* rightGlacier_;
+	GameEngineRenderer* Mountain1_;
+	GameEngineRenderer* Mountain2_;
+	GameEngineRenderer* LeftGlacier_;
+	GameEngineRenderer* RightGlacier_;
 
-	GameEngineRandom* randomValue_;
+	GameEngineRandom RandomValue_;
 
-	unsigned int roundStateValue_; // 맵 상태
-	unsigned int mountainDirectionValue_; // 산 이동 방향 값 0==stay, 1==right, 2==left
+	unsigned int RoundStateValue_; // 맵 상태
+	unsigned int MountainDirectionValue_; // 산 이동 방향 값 0==stay, 1==right, 2==left
 	bool isCurve_;
 
 
@@ -38,13 +39,15 @@ public:		//delete operator
 	RandomStage& operator=(const RandomStage&& _Other) noexcept = delete; // default RValue Copy operator 디폴트 RValue 대입연산자
 
 protected: //member Func
-	void Start() override;
-	void Update() override;
-	void Render() override;
-
-	void MountainMove(GameEngineRenderer* _mountain);
+	void MountainMove(GameEngineRenderer* _Mountain);
 	void MountainFrame();
 	void CurveFrameCount();
 	void TilemapChange();
+	void ResetStageOrder();
+	void PivotMove();
+	
+	void Start() override;
+	void Update() override;
+	void Render() override;
 };
 
