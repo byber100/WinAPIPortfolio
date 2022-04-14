@@ -23,9 +23,6 @@
     <ClCompile Include="PlayUI.cpp">
       <Filter>Play\Global</Filter>
     </ClCompile>
-    <ClCompile Include="RandomStage.cpp">
-      <Filter>Play</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TitleLevel.h">
@@ -46,9 +43,6 @@
     <ClInclude Include="AntarcticAdventure.h" />
     <ClInclude Include="PlayUI.h">
       <Filter>Play\Global</Filter>
-    </ClInclude>
-    <ClInclude Include="RandomStage.h">
-      <Filter>Play</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

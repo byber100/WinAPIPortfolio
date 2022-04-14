@@ -164,10 +164,6 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="RandomStage.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <SubType>
       </SubType>
@@ -192,10 +188,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AntarcticAdventure.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="RandomStage.cpp">
       <SubType>
       </SubType>
     </ClCompile>
