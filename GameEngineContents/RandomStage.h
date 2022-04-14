@@ -40,13 +40,14 @@ public:		//delete operator
 
 private: //member Func
 	void MountainMove(GameEngineRenderer* _Mountain);
-	void MountainFrame();
 	void CurveFrameCount();
-	void TilemapChange();
+	void StageChange();
 
 	void Start() override;
 	void Update() override;
-	void UpdateAfter() override;
 	void Render() override;
+
+public:
+	void MountainFrame();
 };
 

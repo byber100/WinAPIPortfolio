@@ -8,7 +8,7 @@
 
 
 Player::Player() 
-	: ForwardSpeed_(1.0f)
+	: ForwardSpeed_(100.0f)
 	, SideSpeed_(300.0f)
 {
 }
@@ -115,4 +115,5 @@ void Player::Update()
 void Player::Render()
 {
 	DebugRectRender();
+	Render_->Render();
 }

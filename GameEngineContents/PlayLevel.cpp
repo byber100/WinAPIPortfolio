@@ -3,6 +3,11 @@
 #include "PlayUI.h"
 #include "RandomStage.h"
 #include <GameEngineBase/GameEngineTime.h>
+#include <GameEngineBase/GameEngineDebug.h>
+
+PlayLevel* PlayLevel::PlayLevelStage = nullptr;
+int PlayLevel::FrameCount = 8;
+bool PlayLevel::is2FrameUnit_ = false;
 
 enum class ORDER
 {
@@ -12,6 +17,7 @@ enum class ORDER
 };
 
 PlayLevel::PlayLevel() 
+	:PlayerInfo_(nullptr)
 {
 }
 
@@ -19,22 +25,60 @@ PlayLevel::~PlayLevel()
 {
 }
 
+float PlayLevel::GetLevelInterTime()
+{
+	if (nullptr == PlayerInfo_)
+	{
+		MsgBoxAssert("플레이어 정보가 없습니다.");
+	}
+
+	float PlayerSpeed = PlayerInfo_->GetForwardSpeed();
+	PlayerSpeed = 1 / PlayerSpeed;
+	return PlayerSpeed;
+}
+
 void PlayLevel::Loading()
 {
-	CreateActor<RandomStage>();
-	CreateActor<Player>();
+	StageInfo_ = CreateActor<RandomStage>();
+	PlayerInfo_ = CreateActor<Player>();
 	CreateActor<PlayUI>();
 
+	PlayLevelStage = this;
 }
 
 void PlayLevel::Update() 
 {
+	if (nullptr == PlayerInfo_ ||
+		nullptr == StageInfo_)
+	{
+		MsgBoxAssert("필수 액터 정보가 없습니다.")
+	}
 	//Time -= GameEngineTime::GetDeltaTime();
 
 	//if (0 >= Time)
 	//{
 	//	BgmPlayer.Stop();
 	//}
+
+	float LevelInterTime = PlayLevelStage->GetLevelInterTime();
+
+	if (0.0f >= CurframeTime_)
+	{
+		++FrameUnitCount_;
+		is2FrameUnit_ = false;
+		CurframeTime_ = LevelInterTime;
+		++Distance_;
+
+		if (2 == FrameUnitCount_)
+		{
+			--FrameCount;
+			FrameUnitCount_ = 0;
+			is2FrameUnit_ = true;
+
+			StageInfo_->MountainFrame();
+		}
+	}
+	CurframeTime_ -= GameEngineTime::GetDeltaTime();
 }
 void PlayLevel::LevelChangeStart()
 {
