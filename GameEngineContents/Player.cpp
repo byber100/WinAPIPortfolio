@@ -115,5 +115,4 @@ void Player::Update()
 void Player::Render()
 {
 	DebugRectRender();
-	Render_->Render();
 }

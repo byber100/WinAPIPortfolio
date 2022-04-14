@@ -39,8 +39,8 @@ float PlayLevel::GetLevelInterTime()
 
 void PlayLevel::Loading()
 {
-	StageInfo_ = CreateActor<RandomStage>();
-	PlayerInfo_ = CreateActor<Player>();
+	StageInfo_ = CreateActor<RandomStage>(0);
+	PlayerInfo_ = CreateActor<Player>(1);
 	CreateActor<PlayUI>();
 
 	PlayLevelStage = this;

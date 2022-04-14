@@ -38,7 +38,7 @@ void RandomStage::Start()
 	SetPosition(GameEngineWindow::GetScale().Half());
 	SetScale(GameEngineWindow::GetScale());
 
-	BackStage_ = CreateRenderer("BackStage.bmp", 100);
+	BackStage_ = CreateRenderer("BackStage.bmp", 101);
 	BackStage_->SetPivot({ 0,16 });
 
 	LeftOcean_ = CreateRenderer(100, RenderPivot::LEFTTOP);
@@ -215,6 +215,77 @@ void RandomStage::StageChange()
 	}
 }
 
+void RandomStage::ResetOrder()
+{
+	LeftOcean_->SetOrder(100);
+	RightOcean_->SetOrder(100);
+	LeftGround_->SetOrder(100);
+	RightGround_->SetOrder(100);
+	CurveTiles_->SetOrder(100);
+	// Mountain1_->SetOrder(100);
+	// Mountain2_->SetOrder(100);
+	LeftGlacier_->SetOrder(100);
+	RightGlacier_->SetOrder(100);
+
+}
+
+void RandomStage::StageRender()
+{
+	switch (RoundStateValue_)
+	{
+	case 0:
+		if (true == isCurve_)
+		{
+			MsgBoxAssert("잘못된 커브");
+			return;
+		}
+		LeftOcean_->SetOrder(101);
+		RightOcean_->SetOrder(101);
+		LeftGlacier_->SetOrder(101);
+		RightGlacier_->SetOrder(101);
+		break;
+
+	case 1:
+		LeftOcean_->SetOrder(101);
+		RightGround_->SetOrder(101);
+		if (true == isCurve_)
+		{
+			CurveTiles_->SetOrder(101);
+		}
+		else
+		{
+			LeftGlacier_->SetOrder(101);
+		}
+		break;
+
+	case 2:
+		LeftGround_->SetOrder(101);
+		RightOcean_->SetOrder(101);
+		if (true == isCurve_)
+		{
+			CurveTiles_->SetOrder(101);
+		}
+		else
+		{
+			RightGlacier_->SetOrder(101);
+		}
+		break;
+
+	case 3:
+		LeftGround_->SetOrder(101);
+		RightGround_->SetOrder(101);
+		if (true == isCurve_)
+		{
+			CurveTiles_->SetOrder(101);
+		}
+		break;
+
+	default:
+		MsgBoxAssert("없는 스테이지");
+		return;
+	}
+}
+
 void RandomStage::Update()
 {
 	if (0 == PlayLevel::FrameCount)
@@ -231,65 +302,14 @@ void RandomStage::Update()
 		LeftGround_->SetInterTime(FrameTime);
 		RightGround_->SetInterTime(FrameTime);
 	}
+
+	Mountain1_->SetOrder(101);
+	Mountain2_->SetOrder(101);
+	ResetOrder();
+	StageRender();
 }
 
 void RandomStage::Render()
 {
-	BackStage_->Render();
-	Mountain1_->Render();
-	Mountain2_->Render();
-
-	switch (RoundStateValue_)
-	{
-	case 0:
-		if (true == isCurve_)
-		{
-			MsgBoxAssert("잘못된 커브");
-			return;
-		}
-		LeftOcean_->Render();
-		RightOcean_->Render();
-		LeftGlacier_->Render();
-		RightGlacier_->Render();
-		break;
-
-	case 1:
-		LeftOcean_->Render();
-		RightGround_->Render();
-		if (true == isCurve_)
-		{
-			CurveTiles_->Render();
-		}
-		else
-		{
-			LeftGlacier_->Render();
-		}
-		break;
-
-	case 2:
-		LeftGround_->Render();
-		RightOcean_->Render();
-		if (true == isCurve_)
-		{
-			CurveTiles_->Render();
-		}
-		else
-		{
-			RightGlacier_->Render();
-		}
-		break;
-
-	case 3:
-		LeftGround_->Render();
-		RightGround_->Render();
-		if (true == isCurve_)
-		{
-			CurveTiles_->Render();
-		}
-		break;
-
-	default:
-		MsgBoxAssert("없는 스테이지");
-		return;
-	}
+	
 }

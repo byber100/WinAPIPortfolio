@@ -42,6 +42,8 @@ private: //member Func
 	void MountainMove(GameEngineRenderer* _Mountain);
 	void CurveFrameCount();
 	void StageChange();
+	void ResetOrder();
+	void StageRender();
 
 	void Start() override;
 	void Update() override;
