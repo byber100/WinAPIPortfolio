@@ -54,6 +54,14 @@ void AntarcticAdventure::GameInit()
 		GameEngineImage* Image = GameEngineImageManager::GetInst()->Find("GroundTiles.bmp");
 		Image->CutCount(2, 2);
 	}
+	{
+		GameEngineImage* Image = GameEngineImageManager::GetInst()->Find("CurveTiles.bmp");
+		Image->CutCount(1, 4);
+	}
+	{
+		GameEngineImage* Image = GameEngineImageManager::GetInst()->Find("Glaciers.bmp");
+		Image->CutCount(1, 2);
+	}
 
 
 	CreateLevel<TitleLevel>("Title");
