@@ -89,5 +89,61 @@ void RandomStage::Update()
 
 void RandomStage::Render()
 {
+	BackStage_->Render();
+	Mountain1_->Render();
+	Mountain2_->Render();
 
+	switch (RoundStateValue_)
+	{
+	case 0:
+		if (true == isCurve_)
+		{
+			MsgBoxAssert("잘못된 커브");
+			return;
+		}
+		LeftOcean_->Render();
+		RightOcean_->Render();
+		LeftGlacier_->Render();
+		RightGlacier_->Render();
+		break;
+
+	case 1:
+		LeftOcean_->Render();
+		RightGround_->Render();
+		if (true == isCurve_)
+		{
+			CurveTiles_->Render();
+		}
+		else
+		{
+			LeftGlacier_->Render();
+		}
+		break;
+
+	case 2:
+		LeftGround_->Render();
+		RightOcean_->Render();
+		if (true == isCurve_)
+		{
+			CurveTiles_->Render();
+		}
+		else
+		{
+			RightGlacier_->Render();
+		}
+		break;
+
+	case 3:
+		LeftGround_->Render();
+		RightGround_->Render();
+		if (true == isCurve_)
+		{
+			CurveTiles_->Render();
+		}
+		break;
+
+	default:
+		MsgBoxAssert("없는 스테이지");
+		return;
+	}
 }

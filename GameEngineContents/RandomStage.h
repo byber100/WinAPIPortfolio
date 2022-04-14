@@ -39,6 +39,10 @@ public:		//delete operator
 	RandomStage& operator=(const RandomStage&& _Other) noexcept = delete; // default RValue Copy operator 디폴트 RValue 대입연산자
 
 private: //member Func
+	void MountainMove(GameEngineRenderer* _Mountain);
+	void MountainFrame();
+	void CurveFrameCount();
+	void TilemapChange();
 
 	void Start() override;
 	void Update() override;
