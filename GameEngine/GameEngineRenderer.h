@@ -33,6 +33,11 @@ public:
 		RenderPivot_ = _Pos;
 	}
 
+	inline void SetPivotMove(const float4& _Pos)
+	{
+		RenderPivot_ += _Pos;
+	}
+
 	inline float4 GetPivot()
 	{
 		return RenderPivot_;
@@ -190,6 +195,11 @@ public:
 	bool IsEndAnimation();
 
 	bool IsAnimationName(const std::string& _Name);
+
+	void SetInterTime(float _InterTime)
+	{
+		CurrentAnimation_->InterTime_ = _InterTime;
+	}
 
 private:
 	std::map<std::string, FrameAnimation> Animations_;
