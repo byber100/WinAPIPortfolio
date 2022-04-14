@@ -46,6 +46,7 @@ private: //member Func
 
 	void Start() override;
 	void Update() override;
+	void UpdateAfter() override;
 	void Render() override;
 };
 

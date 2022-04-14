@@ -88,7 +88,7 @@ void RandomStage::Update()
 
 }
 
-void RandomStage::Render()
+void RandomStage::UpdateAfter()
 {
 	BackStage_->Render();
 	Mountain1_->Render();
@@ -147,4 +147,9 @@ void RandomStage::Render()
 		MsgBoxAssert("없는 스테이지");
 		return;
 	}
+}
+
+void RandomStage::Render()
+{
+	
 }

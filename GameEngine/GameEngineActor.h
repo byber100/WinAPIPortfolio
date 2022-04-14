@@ -72,6 +72,7 @@ protected:
 	virtual void Start() = 0;
 	// 지속적으로 게임이 실행될때 호출된다.
 	virtual void Update() {}
+	virtual void UpdateAfter() {}
 	// 지속적으로 게임이 실행될때 호출된다.
 	virtual void Render() {}
 
