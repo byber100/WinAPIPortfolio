@@ -4,6 +4,8 @@
 // Ό³Έν :
 class PlayUI : public GameEngineActor
 {
+private:
+
 public:
 	// constrcuter destructer
 	PlayUI();

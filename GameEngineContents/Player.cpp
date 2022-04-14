@@ -8,8 +8,8 @@
 
 
 Player::Player() 
-	: ForwardSpeed_(100.0f)
-	, SideSpeed_(300.0f)
+	: ForwardSpeed_(10.0f)
+	, SideSpeed_(50.0f)
 {
 }
 
@@ -87,11 +87,11 @@ void Player::StateUpdate()
 
 void Player::Start() 
 {
-	SetPosition(GameEngineWindow::GetScale().Half());
-	SetScale({ 5, 5 });
+	SetPosition({ 512 , 619 });
+	SetScale({ 80, 90 });
 
 	Render_ = CreateRenderer(300);
-	Render_->SetPivot({ 0, 235 });
+	Render_->SetPivot({ 0, 0 });
 	Render_->CreateAnimation("Player.bmp", "Walk", 2, 5, 0.13f);
 	Render_->ChangeAnimation("Walk");
 
@@ -114,5 +114,5 @@ void Player::Update()
 
 void Player::Render()
 {
-	DebugRectRender();
+	//DebugRectRender();
 }

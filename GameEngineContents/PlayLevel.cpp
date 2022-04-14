@@ -6,7 +6,7 @@
 #include <GameEngineBase/GameEngineDebug.h>
 
 PlayLevel* PlayLevel::PlayLevelStage = nullptr;
-int PlayLevel::FrameCount = 8;
+int PlayLevel::FrameCount = 64; // Start Stage Stay Time
 bool PlayLevel::is2FrameUnit_ = false;
 
 enum class ORDER
@@ -41,7 +41,7 @@ void PlayLevel::Loading()
 {
 	StageInfo_ = CreateActor<RandomStage>(0);
 	PlayerInfo_ = CreateActor<Player>(1);
-	CreateActor<PlayUI>();
+	CreateActor<PlayUI>(2);
 
 	PlayLevelStage = this;
 }

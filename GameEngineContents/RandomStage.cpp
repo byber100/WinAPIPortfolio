@@ -39,7 +39,7 @@ void RandomStage::Start()
 	SetScale(GameEngineWindow::GetScale());
 
 	BackStage_ = CreateRenderer("BackStage.bmp", 101);
-	BackStage_->SetPivot({ 0,16 });
+	BackStage_->SetPivot({ 0,32 });
 
 	LeftOcean_ = CreateRenderer(100, RenderPivot::LEFTTOP);
 	LeftOcean_->SetPivot({ -416, 0 });
@@ -116,7 +116,7 @@ void RandomStage::MountainFrame()
 
 void RandomStage::CurveFrameCount()
 {
-	PlayLevel::FrameCount = 26 * RandomValue_.RandomInt(1, 1);
+	PlayLevel::FrameCount = 52 * RandomValue_.RandomInt(1, 2); // Curve Stay Time
 }
 
 void RandomStage::StageChange()
@@ -129,7 +129,7 @@ void RandomStage::StageChange()
 
 	if (true == PlayLevel::is2FrameUnit_)
 	{
-		PlayLevel::FrameCount = 16 * RandomValue_.RandomInt(1, 1); // Change Time
+		PlayLevel::FrameCount = 64 * RandomValue_.RandomInt(1, 3); // Stay Time
 
 		switch (RoundStateValue_)
 		{
@@ -295,7 +295,7 @@ void RandomStage::Update()
 
 	if (false == PlayLevel::is2FrameUnit_)
 	{
-		float FrameTime = 2 * PlayLevel::PlayLevelStage->GetLevelInterTime(); // 임의로 2로 함
+		float FrameTime = 2 * PlayLevel::PlayLevelStage->GetLevelInterTime(); // 전진 정밀도
 
 		LeftOcean_->SetInterTime(FrameTime);
 		RightOcean_->SetInterTime(FrameTime);
