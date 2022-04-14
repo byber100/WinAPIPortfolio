@@ -109,7 +109,7 @@ public:
 
 	void SetOrder(int _Order) override;
 
-public:
+protected:
 	// EngineImage의 TransCopy 로 이미지를 백버퍼에 그린다.
 	void Render();
 
