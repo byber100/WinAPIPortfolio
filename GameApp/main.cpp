@@ -9,7 +9,7 @@ int __stdcall WinMain(_In_ HINSTANCE hInstance,
     _In_ char* lpCmdLine,
     _In_ int       nCmdShow)
 {
-    new int(); // leak test
+    //new int(); // leak test
 
     GameEngine::Start<AntarcticAdventure>();
 
