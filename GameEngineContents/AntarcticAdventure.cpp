@@ -67,7 +67,7 @@ void AntarcticAdventure::GameInit()
 		Image->CutCount(5, 3);
 	}
 	{
-		GameEngineImage* Image = GameEngineImageManager::GetInst()->Find("TrapTiles.bmp");
+		GameEngineImage* Image = GameEngineImageManager::GetInst()->Find("HoleTraps.bmp");
 		Image->CutCount(1, 9);
 	}
 

@@ -34,6 +34,10 @@ public:
 	static bool is2FrameUnit_; // 2번째 단위시간
 
 	float GetLevelInterTime();
+	float GetCurframeTime()
+	{
+		return CurframeTime_;
+	}
 
 protected:
 	void Loading() override;

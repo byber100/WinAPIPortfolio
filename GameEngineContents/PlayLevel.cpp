@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "PlayUI.h"
 #include "RandomStage.h"
+#include "HoleTrap.h"
 #include <GameEngineBase/GameEngineTime.h>
 #include <GameEngineBase/GameEngineDebug.h>
 
@@ -76,6 +77,7 @@ void PlayLevel::Update()
 			is2FrameUnit_ = true;
 
 			StageInfo_->MountainFrame();
+			CreateActor<HoleTrap>();
 		}
 	}
 	CurframeTime_ -= GameEngineTime::GetDeltaTime();
