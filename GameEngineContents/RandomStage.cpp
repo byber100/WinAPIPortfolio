@@ -303,13 +303,13 @@ void RandomStage::Update()
 		RightGround_->SetInterTime(FrameTime);
 	}
 
-	Mountain1_->SetOrder(101);
-	Mountain2_->SetOrder(101);
-	ResetOrder();
-	StageRender();
+	
 }
 
 void RandomStage::Render()
 {
-	
+	Mountain1_->SetOrder(101);
+	Mountain2_->SetOrder(101);
+	ResetOrder();
+	StageRender();
 }
