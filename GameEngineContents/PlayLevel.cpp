@@ -82,7 +82,15 @@ void PlayLevel::Update()
 	}
 	CurframeTime_ -= GameEngineTime::GetDeltaTime();
 }
-void PlayLevel::LevelChangeStart()
+void PlayLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
+{
+	//if (_NextLevel->GetNameCopy() != "Title")
+	//{
+	//	PlayerInfo_->NextLevelOn();
+	//}
+}
+
+void PlayLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
 	// Player->SetPosition();
 
