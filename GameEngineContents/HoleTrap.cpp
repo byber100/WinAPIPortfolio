@@ -134,5 +134,5 @@ void HoleTrap::Update()
 
 void HoleTrap::Render()
 {
-
+	
 }

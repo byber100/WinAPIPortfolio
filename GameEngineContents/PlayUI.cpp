@@ -16,11 +16,16 @@ void PlayUI::Start()
 	SetPosition(GameEngineWindow::GetScale().Half());
 	SetScale(GameEngineWindow::GetScale());
 
-	GameEngineRenderer* Renderer = CreateRenderer("BackInterface.bmp", 103);
+	GameEngineRenderer* Renderer = CreateRenderer("BackInterface.bmp", 400);
+	
+}
+
+void PlayUI::Update()
+{
 	
 }
 
 void PlayUI::Render()
 {
-
+	
 }
