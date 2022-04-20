@@ -22,16 +22,16 @@ HoleTrap::HoleTrap()
 		DirVector_ = { 0, yDown };
 		break;
 	case 1:
-		DirVector_ = { 18, yDown };
+		DirVector_ = { 21, yDown };
 		break;
 	case 2:
-		DirVector_ = { 36, yDown };
+		DirVector_ = { 42, yDown };
 		break;
 	case 3:
-		DirVector_ = { -18, yDown };
+		DirVector_ = { -21, yDown };
 		break;
 	case 4:
-		DirVector_ = { -36, yDown };
+		DirVector_ = { -42, yDown };
 		break;
 	default:
 		Death();
