@@ -5,6 +5,7 @@
 #include "HoleTrap.h"
 #include <GameEngineBase/GameEngineTime.h>
 #include <GameEngineBase/GameEngineDebug.h>
+#include <GameEngineBase/GameEngineInput.h>
 
 PlayLevel* PlayLevel::PlayLevelStage = nullptr;
 int PlayLevel::FrameCount = 64; // Start Stage Stay Time
@@ -45,6 +46,9 @@ void PlayLevel::Loading()
 	CreateActor<PlayUI>(2);
 
 	PlayLevelStage = this;
+
+	// Test///////////////////////////////////////////////////
+	GameEngineInput::GetInst()->CreateKey("TestTrap", 'Q');
 }
 
 void PlayLevel::Update() 
@@ -60,6 +64,12 @@ void PlayLevel::Update()
 	//{
 	//	BgmPlayer.Stop();
 	//}
+
+	// Test///////////////////////////////////////////////////
+	if (GameEngineInput::GetInst()->IsDown("TestTrap"))
+	{
+		//CreateActor<HoleTrap>();
+	}
 
 	float LevelInterTime = PlayLevelStage->GetLevelInterTime();
 

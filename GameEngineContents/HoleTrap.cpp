@@ -15,7 +15,7 @@ HoleTrap::HoleTrap()
 {
 	GameEngineRandom NewRandom;
 
-	switch (NewRandom.RandomInt(0, 3))
+	switch (NewRandom.RandomInt(0, 2))
 	{
 	case 0:
 		DirVector_ = { 0, 42 };
@@ -27,6 +27,7 @@ HoleTrap::HoleTrap()
 		DirVector_ = { -20, 42 };
 		break;
 	default:
+		Death();
 		break;
 	}
 }
@@ -50,23 +51,19 @@ void HoleTrap::Update()
 	float DownTime = PlayLevel::PlayLevelStage->GetCurframeTime();
 	if (0.0f >= DownTime)
 	{
-
+		int LODInterval = 607;
 		if (false == PlayLevel::is2FrameUnit_)
 		{
-			if (593 > GetPosition().y)
+
+			if (LODInterval > GetPosition().y)
 			{
 				SetMove(DirVector_);
-				++TrapLOD_;
-			}
-			else
-			{
-				SetMove({ DirVector_.x , DirVector_.y - 14 });
 				++TrapLOD_;
 			}
 		}
 		else
 		{
-			if (593 < GetPosition().y)
+			if (LODInterval < GetPosition().y)
 			{
 				SetMove({ DirVector_.x , DirVector_.y - 14 });
 				++TrapLOD_;
@@ -117,6 +114,11 @@ void HoleTrap::Update()
 	default:
 		TrapLOD_ = 0;
 		break;
+	}
+
+	if (768 < GetPosition().y)
+	{
+		Death();
 	}
 }
 
