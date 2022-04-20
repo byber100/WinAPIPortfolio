@@ -2,7 +2,14 @@
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngineRenderer.h>
 
+int PlayUI::RestDistance_ = 1500;
+
 PlayUI::PlayUI()
+	: Score_(0)
+	, HiScore_(0)
+	, Stage_(1)
+	, TimeOut_(100)
+	, Speed_(5)
 {
 }
 

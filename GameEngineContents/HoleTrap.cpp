@@ -16,22 +16,16 @@ HoleTrap::HoleTrap()
 	GameEngineRandom NewRandom;
 	float yDown = 38;
 
-	switch (NewRandom.RandomInt(0, 4))
+	switch (NewRandom.RandomInt(0, 2))
 	{
 	case 0:
 		DirVector_ = { 0, yDown };
 		break;
 	case 1:
-		DirVector_ = { 21, yDown };
+		DirVector_ = { 32, yDown };
 		break;
 	case 2:
-		DirVector_ = { 42, yDown };
-		break;
-	case 3:
-		DirVector_ = { -21, yDown };
-		break;
-	case 4:
-		DirVector_ = { -42, yDown };
+		DirVector_ = { -32, yDown };
 		break;
 	default:
 		Death();

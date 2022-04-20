@@ -43,21 +43,23 @@ void PlayLevel::Loading()
 {
 	StageInfo_ = CreateActor<RandomStage>(0);
 	PlayerInfo_ = CreateActor<Player>(1);
-	CreateActor<PlayUI>(3);
+	PlayUI* UI = CreateActor<PlayUI>(3);
 
 	PlayLevelStage = this;
 
 	// Test///////////////////////////////////////////////////
 	GameEngineInput::GetInst()->CreateKey("TestTrap", 'Q');
+
+	if (nullptr == PlayerInfo_ ||
+		nullptr == StageInfo_ ||
+		nullptr == UI)
+	{
+		MsgBoxAssert("필수 액터 정보가 없습니다.")
+	}
 }
 
 void PlayLevel::Update() 
 {
-	if (nullptr == PlayerInfo_ ||
-		nullptr == StageInfo_)
-	{
-		MsgBoxAssert("필수 액터 정보가 없습니다.")
-	}
 	//Time -= GameEngineTime::GetDeltaTime();
 
 	//if (0 >= Time)
@@ -78,7 +80,7 @@ void PlayLevel::Update()
 		++FrameUnitCount_;
 		is2FrameUnit_ = false;
 		CurframeTime_ = LevelInterTime;
-		++Distance_;
+		++PlayUI::RestDistance_;
 
 		if (2 == FrameUnitCount_)
 		{

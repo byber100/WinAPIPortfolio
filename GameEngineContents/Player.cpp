@@ -8,8 +8,8 @@
 
 
 Player::Player() 
-	: ForwardSpeed_(10.0f)
-	, SideSpeed_(50.0f)
+	: ForwardSpeed_(8.0f) // 0ø° µµ¥ﬁ«œ∏È æ÷¥œ∏ÿ√„
+	, SideSpeed_(40.0f)
 {
 }
 

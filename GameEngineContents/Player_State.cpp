@@ -51,14 +51,14 @@ void Player::MoveUpdate()
 	}
 	if (true == GameEngineInput::GetInst()->IsPress("Fast"))
 	{
-		if (110.0f > ForwardSpeed_)
+		if (14.0f > ForwardSpeed_)
 		{
 			ForwardSpeed_ = (ForwardSpeed_ + 10.0f * GameEngineTime::GetDeltaTime());
 		}
 	}
 	if (true == GameEngineInput::GetInst()->IsPress("Slow"))
 	{
-		if (1.0f < ForwardSpeed_)
+		if (2.0f < ForwardSpeed_)
 		{
 			ForwardSpeed_ = (ForwardSpeed_ - 10.0f * GameEngineTime::GetDeltaTime());
 		}
