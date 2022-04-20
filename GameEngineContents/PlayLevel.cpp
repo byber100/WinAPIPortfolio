@@ -68,7 +68,7 @@ void PlayLevel::Update()
 	// Test///////////////////////////////////////////////////
 	if (GameEngineInput::GetInst()->IsDown("TestTrap"))
 	{
-		//CreateActor<HoleTrap>();
+		CreateActor<HoleTrap>();
 	}
 
 	float LevelInterTime = PlayLevelStage->GetLevelInterTime();
@@ -87,7 +87,7 @@ void PlayLevel::Update()
 			is2FrameUnit_ = true;
 
 			StageInfo_->MountainFrame();
-			CreateActor<HoleTrap>();
+			//CreateActor<HoleTrap>();
 		}
 	}
 	CurframeTime_ -= GameEngineTime::GetDeltaTime();

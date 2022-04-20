@@ -14,17 +14,24 @@ HoleTrap::HoleTrap()
 	, Hole_(nullptr)
 {
 	GameEngineRandom NewRandom;
+	float yDown = 38;
 
-	switch (NewRandom.RandomInt(0, 2))
+	switch (NewRandom.RandomInt(0, 4))
 	{
 	case 0:
-		DirVector_ = { 0, 42 };
+		DirVector_ = { 0, yDown };
 		break;
 	case 1:
-		DirVector_ = { 20, 42 };
+		DirVector_ = { 18, yDown };
 		break;
 	case 2:
-		DirVector_ = { -20, 42 };
+		DirVector_ = { 36, yDown };
+		break;
+	case 3:
+		DirVector_ = { -18, yDown };
+		break;
+	case 4:
+		DirVector_ = { -36, yDown };
 		break;
 	default:
 		Death();
@@ -39,7 +46,10 @@ HoleTrap::~HoleTrap()
 //member Func
 void HoleTrap::Start()
 {
-	SetPosition(GameEngineWindow::GetScale().Half());
+	float x = static_cast<int>(GameEngineWindow::GetScale().Half().ix());
+	float y = static_cast<int>(GameEngineWindow::GetScale().Half().iy());
+
+	SetPosition({ x , y + 32 });
 	SetScale(GameEngineWindow::GetScale());
 
 	Hole_ = CreateRenderer("HoleTraps.bmp", 200);
