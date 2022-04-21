@@ -9,28 +9,13 @@
 
 Player::Player() 
 	: ForwardSpeed_(8.0f) // 0에 도달하면 애니멈춤
-	, SideSpeed_(40.0f)
+	, SideSpeed_(200.0f)
 	, isJumping_(false)
 {
 }
 
 Player::~Player() 
 {
-}
-
-// 아무키도 눌리지 않았다면 false
-// 아무키든 눌렸다면 true
-bool Player::IsMoveKey()
-{
-	if (false == GameEngineInput::GetInst()->IsPress("MoveLeft") &&
-		false == GameEngineInput::GetInst()->IsPress("MoveRight") &&
-		false == GameEngineInput::GetInst()->IsPress("Fast") &&
-		false == GameEngineInput::GetInst()->IsPress("Slow"))
-	{
-		return false;
-	}
-
-	return true;
 }
 
 void Player::ChangeState(PlayerState _State)
@@ -43,6 +28,12 @@ void Player::ChangeState(PlayerState _State)
 			MoveStart();
 			break;
 		case Jump:
+			JumpStart();
+			break;
+		case JumpL:
+			JumpStart();
+			break;
+		case JumpR:
 			JumpStart();
 			break;
 		case TakeHit:
@@ -68,6 +59,12 @@ void Player::StateUpdate()
 		break;
 	case Jump:
 		JumpUpdate();
+		break;
+	case JumpL:
+		JumpLUpdate();
+		break;
+	case JumpR:
+		JumpRUpdate();
 		break;
 	case TakeHit:
 		break;

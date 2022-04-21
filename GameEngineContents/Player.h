@@ -13,6 +13,8 @@ enum PlayerState
 {
 	Move,
 	Jump,
+	JumpL,
+	JumpR,
 	TakeHit,
 	Clear,
 	Max
@@ -49,8 +51,6 @@ public:
 protected:
 
 private:
-	bool IsMoveKey();
-
 	void ChangeState(PlayerState _State);
 	void StateUpdate();
 
@@ -65,5 +65,7 @@ private:
 	void IdleUpdate();
 	void MoveUpdate();
 	void JumpUpdate();
+	void JumpLUpdate();
+	void JumpRUpdate();
 };
 
