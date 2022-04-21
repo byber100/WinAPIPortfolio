@@ -6,21 +6,21 @@ class PlayUI : public GameEngineActor
 {
 private:
 	// Interface Renderer //////////////////////////////////////////////////////
-	GameEngineRenderer* ScroeTile1_; // 240 96
-	GameEngineRenderer* ScroeTile2_;
-	GameEngineRenderer* ScroeTile3_;
-	GameEngineRenderer* ScroeTile4_;
-	GameEngineRenderer* ScroeTile5_;
-	GameEngineRenderer* ScroeTile6_;
+	GameEngineRenderer* ScoreTile1_; // 240 92
+	GameEngineRenderer* ScoreTile2_;
+	GameEngineRenderer* ScoreTile3_;
+	GameEngineRenderer* ScoreTile4_;
+	GameEngineRenderer* ScoreTile5_;
+	GameEngineRenderer* ScoreTile6_;
 
-	GameEngineRenderer* HiScroeTile1_; // 496 96
-	GameEngineRenderer* HiScroeTile2_;
-	GameEngineRenderer* HiScroeTile3_;
-	GameEngineRenderer* HiScroeTile4_;
-	GameEngineRenderer* HiScroeTile5_;
-	GameEngineRenderer* HiScroeTile6_;
+	GameEngineRenderer* HiScoreTile1_; // 496 92
+	GameEngineRenderer* HiScoreTile2_;
+	GameEngineRenderer* HiScoreTile3_;
+	GameEngineRenderer* HiScoreTile4_;
+	GameEngineRenderer* HiScoreTile5_;
+	GameEngineRenderer* HiScoreTile6_;
 
-	GameEngineRenderer* StageTile1_; // 816 96
+	GameEngineRenderer* StageTile1_; // 816 92
 	GameEngineRenderer* StageTile2_;
 
 	GameEngineRenderer* TimeOutTile1_; // 288 124

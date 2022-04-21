@@ -72,7 +72,7 @@ void AntarcticAdventure::GameInit()
 	}
 	{
 		GameEngineImage* Image = GameEngineImageManager::GetInst()->Find("InterfaceWords.bmp");
-		Image->CutCount(12, 1);
+		Image->CutCount(13, 1);
 	}
 
 	CreateLevel<TitleLevel>("Title");
