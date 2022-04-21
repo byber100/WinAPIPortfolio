@@ -39,9 +39,6 @@ void Player::ChangeState(PlayerState _State)
 	{
 		switch (_State)
 		{
-		case Idle:
-			IdleStart();
-			break;
 		case Move:
 			MoveStart();
 			break;
@@ -66,9 +63,6 @@ void Player::StateUpdate()
 {
 	switch (CurState_)
 	{
-	case Idle:
-		IdleUpdate();
-		break;
 	case Move:
 		MoveUpdate();
 		break;

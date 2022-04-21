@@ -12,7 +12,6 @@
 enum PlayerState
 {
 	Move,
-	Idle,
 	Jump,
 	TakeHit,
 	Clear,

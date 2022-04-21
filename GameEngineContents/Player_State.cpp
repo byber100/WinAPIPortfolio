@@ -7,14 +7,9 @@
 #include <GameEngine/GameEngineRenderer.h>
 
 
-void Player::IdleStart()
-{
-
-}
-
 void Player::MoveStart()
 {
-
+	Render_->ChangeAnimation("Walk");
 }
 
 void Player::JumpStart()
@@ -22,30 +17,21 @@ void Player::JumpStart()
 	JumpDir_ = float4::UP * 500.0f;
 }
 
-void Player::IdleUpdate()
-{
-	if (true == IsMoveKey())
-	{
-		ChangeState(PlayerState::Move);
-		return;
-	}
-
-	if (true == GameEngineInput::GetInst()->IsDown("Jump"))
-	{
-		ChangeState(PlayerState::Jump);
-		return;
-	}
-}
-
 void Player::MoveUpdate()
 {
+	//if (true == IsMoveKey())
+	//{
+	//	ChangeState(PlayerState::Move);
+	//	return;
+	//}
+
 	if (true == GameEngineInput::GetInst()->IsDown("Jump"))
 	{
 		ChangeState(PlayerState::Jump);
 		return;
 	}
 
-	Render_->ChangeAnimation("Walk");
+	
 
 	if (true == GameEngineInput::GetInst()->IsPress("MoveLeft"))
 	{
