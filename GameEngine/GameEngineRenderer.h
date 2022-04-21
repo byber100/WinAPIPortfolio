@@ -33,11 +33,6 @@ public:
 		RenderPivot_ = _Pos;
 	}
 
-	inline void SetPivotMove(const float4& _Pos)
-	{
-		RenderPivot_ += _Pos;
-	}
-
 	inline float4 GetPivot()
 	{
 		return RenderPivot_;
@@ -101,6 +96,26 @@ public:
 		IsCameraEffect_ = true;
 	}
 
+	void SetPause(bool _Value)
+	{
+		Pause_ = _Value;
+	}
+
+	void PauseOn()
+	{
+		Pause_ = true;
+	}
+
+	void PauseOff()
+	{
+		Pause_ = false;
+	}
+
+	void PauseSwitch()
+	{
+		Pause_ = !Pause_;
+	}
+
 	void SetImageScale();
 
 	void SetImage(const std::string& _Name);
@@ -109,6 +124,7 @@ public:
 
 	void SetOrder(int _Order) override;
 
+
 protected:
 	// EngineImage의 TransCopy 로 이미지를 백버퍼에 그린다.
 	void Render();
@@ -116,7 +132,7 @@ protected:
 private:
 	friend class FrameAnimation;
 
-	GameEngineImage* Image_;	
+	GameEngineImage* Image_;
 	RenderPivot PivotType_;		// 센터 bot 등, 이미지 어느곳을 중심으로 출력할것인가
 	RenderScaleMode ScaleMode_;	// ENUM(Image, User), 엔진이 정의해준 기본값으로 쓸것인가, 프로그래머가 정의한 USER값으로 쓸것인가.
 
@@ -142,9 +158,13 @@ private:
 	/// </summary>
 
 	float RotZ_;
-	GameEngineImage* RotationCuttingImage_;
+	GameEngineImage* RotationFilterImage_;
 
 public:
+	void SetRotationFilter(const std::string& _ImageName);
+
+
+
 	void SetRotationZ(float _RotZ)
 	{
 		RotZ_ = _RotZ;
@@ -222,5 +242,10 @@ private:
 	std::map<std::string, FrameAnimation> Animations_;
 	FrameAnimation* CurrentAnimation_;
 
-};
 
+public:
+	inline void SetPivotMove(const float4& _Pos)
+	{
+		RenderPivot_ += _Pos;
+	}
+};
