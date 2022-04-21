@@ -9,12 +9,12 @@
 
 void Player::MoveStart()
 {
-	Render_->ChangeAnimation("Walk");
+	Penguin_->ChangeAnimation("Walk");
 }
 
 void Player::JumpStart()
 {
-	Render_->ChangeAnimation("Jump");
+	Penguin_->ChangeAnimation("Jump");
 	JumpDir_ = float4::UP * 200.0f;
 }
 
@@ -68,15 +68,15 @@ void Player::MoveUpdate()
 
 void Player::JumpUpdate()
 {
-	if (1 > Render_->GetPivot().iy())
+	if (1 > Penguin_->GetPivot().iy())
 	{
-		Render_->SetPivotMove(JumpDir_ * GameEngineTime::GetDeltaTime());
-		JumpDir_ += float4::DOWN * GameEngineTime::GetDeltaTime() * 400.0f;
+		JumpLoop();
 	}
 	else
 	{
-		Render_->SetPivot(float4::ZERO);
-   		Render_->ChangeAnimation("Walk");
+		Penguin_->SetPivot(float4::ZERO);
+		Penguin_->ChangeAnimation("Walk");
+		Shadow_->SetIndex(0);
 		isJumping_ = false;
 		ChangeState(PlayerState::Move);
 	}
@@ -84,10 +84,9 @@ void Player::JumpUpdate()
 
 void Player::JumpLUpdate()
 {
-	if (1 > Render_->GetPivot().iy())
+	if (1 > Penguin_->GetPivot().iy())
 	{
-		Render_->SetPivotMove(JumpDir_ * GameEngineTime::GetDeltaTime());
-		JumpDir_ += float4::DOWN * GameEngineTime::GetDeltaTime() * 400.0f;
+		JumpLoop();
 
 		if (288 < GetPosition().ix())
 		{
@@ -96,8 +95,9 @@ void Player::JumpLUpdate()
 	}
 	else
 	{
-		Render_->SetPivot(float4::ZERO);
-		Render_->ChangeAnimation("Walk");
+		Penguin_->SetPivot(float4::ZERO);
+		Penguin_->ChangeAnimation("Walk");
+		Shadow_->SetIndex(0);
 		isJumping_ = false;
 		ChangeState(PlayerState::Move);
 	}
@@ -105,10 +105,9 @@ void Player::JumpLUpdate()
 
 void Player::JumpRUpdate()
 {
-	if (1 > Render_->GetPivot().iy())
+	if (1 > Penguin_->GetPivot().iy())
 	{
-		Render_->SetPivotMove(JumpDir_ * GameEngineTime::GetDeltaTime());
-		JumpDir_ += float4::DOWN * GameEngineTime::GetDeltaTime() * 400.0f;
+		JumpLoop();
 
 		if (736 > GetPosition().ix())
 		{
@@ -117,8 +116,9 @@ void Player::JumpRUpdate()
 	}
 	else
 	{
-		Render_->SetPivot(float4::ZERO);
-		Render_->ChangeAnimation("Walk");
+		Penguin_->SetPivot(float4::ZERO);
+		Penguin_->ChangeAnimation("Walk");
+		Shadow_->SetIndex(0);
 		isJumping_ = false;
 		ChangeState(PlayerState::Move);
 	}

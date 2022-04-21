@@ -67,12 +67,16 @@ void AntarcticAdventure::GameInit()
 		Image->CutCount(5, 3);
 	}
 	{
-		GameEngineImage* Image = GameEngineImageManager::GetInst()->Find("HoleTraps.bmp");
-		Image->CutCount(1, 9);
+		GameEngineImage* Image = GameEngineImageManager::GetInst()->Find("PlayerShadow.bmp");
+		Image->CutCount(1, 4);
 	}
 	{
 		GameEngineImage* Image = GameEngineImageManager::GetInst()->Find("InterfaceWords.bmp");
 		Image->CutCount(13, 1);
+	}
+	{
+		GameEngineImage* Image = GameEngineImageManager::GetInst()->Find("HoleTraps.bmp");
+		Image->CutCount(1, 9);
 	}
 
 	CreateLevel<TitleLevel>("Title");

@@ -30,7 +30,8 @@ private:
 	float4 JumpDir_;
 
 	PlayerState CurState_;
-	GameEngineRenderer* Render_;
+	GameEngineRenderer* Penguin_;
+	GameEngineRenderer* Shadow_;
 
 public:
 	// constrcuter destructer
@@ -51,6 +52,7 @@ public:
 protected:
 
 private:
+	void JumpLoop();
 	void ChangeState(PlayerState _State);
 	void StateUpdate();
 

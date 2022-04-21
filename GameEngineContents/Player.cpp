@@ -18,6 +18,22 @@ Player::~Player()
 {
 }
 
+void Player::JumpLoop()
+{
+	Penguin_->SetPivotMove(JumpDir_ * GameEngineTime::GetDeltaTime());
+	JumpDir_ += float4::DOWN * GameEngineTime::GetDeltaTime() * 400.0f;
+
+	if (-20 > Penguin_->GetPivot().y)
+	{
+		Shadow_->SetIndex(1);
+		if (-40 > Penguin_->GetPivot().y)
+		{
+			Shadow_->SetIndex(2);
+		}
+	}
+	
+}
+
 void Player::ChangeState(PlayerState _State)
 {
 	if (CurState_ != _State)
@@ -82,11 +98,15 @@ void Player::Start()
 	SetPosition({ 512 , 619 });
 	SetScale({ 80, 90 });
 
-	Render_ = CreateRenderer(300);
-	Render_->SetPivot({ 0, 0 });
-	Render_->CreateAnimation("Player.bmp", "Walk", 2, 5, 0.13f);
-	Render_->CreateAnimation("Player.bmp", "Jump", 9, 10, 0.1f);
-	Render_->ChangeAnimation("Walk");
+	Penguin_ = CreateRenderer(301);
+	Penguin_->SetPivot({ 0, 0 });
+	Penguin_->CreateAnimation("Player.bmp", "Walk", 2, 5, 0.13f);
+	Penguin_->CreateAnimation("Player.bmp", "Jump", 9, 10, 0.1f);
+	Penguin_->ChangeAnimation("Walk");
+
+	Shadow_ = CreateRenderer("PlayerShadow.bmp",300);
+	Shadow_->SetPivot({ 0,45 });
+	Shadow_->SetIndex(0);
 
 	LevelRegist("Penguin");
 

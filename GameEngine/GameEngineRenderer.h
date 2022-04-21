@@ -233,11 +233,6 @@ public:
 
 	bool IsAnimationName(const std::string& _Name);
 
-	void SetInterTime(float _InterTime)
-	{
-		CurrentAnimation_->InterTime_ = _InterTime;
-	}
-
 private:
 	std::map<std::string, FrameAnimation> Animations_;
 	FrameAnimation* CurrentAnimation_;
@@ -247,5 +242,10 @@ public:
 	inline void SetPivotMove(const float4& _Pos)
 	{
 		RenderPivot_ += _Pos;
+	}
+
+	void SetInterTime(float _InterTime)
+	{
+		CurrentAnimation_->InterTime_ = _InterTime;
 	}
 };
