@@ -66,5 +66,8 @@ private:
 	GameEngineWindow& operator=(const GameEngineWindow& _Other) = delete;
 	GameEngineWindow& operator=(GameEngineWindow&& _Other) noexcept = delete;
 
+
+	static LRESULT CALLBACK MessageProcess(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+
 };
 
