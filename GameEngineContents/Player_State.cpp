@@ -39,6 +39,12 @@ void Player::IdleUpdate()
 
 void Player::MoveUpdate()
 {
+	if (true == GameEngineInput::GetInst()->IsDown("Jump"))
+	{
+		ChangeState(PlayerState::Jump);
+		return;
+	}
+
 	Render_->ChangeAnimation("Walk");
 
 	if (true == GameEngineInput::GetInst()->IsPress("MoveLeft"))
@@ -82,7 +88,8 @@ void Player::JumpUpdate()
 	}
 	else
 	{
-		Render_->ChangeAnimation("Walk");
+		Render_->SetPivot(float4::ZERO);
+   		Render_->ChangeAnimation("Walk");
 		isJumping_ = false;
 		ChangeState(PlayerState::Move);
 	}
