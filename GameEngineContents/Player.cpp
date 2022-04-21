@@ -10,6 +10,7 @@
 Player::Player() 
 	: ForwardSpeed_(8.0f) // 0¿¡ µµ´ÞÇÏ¸é ¾Ö´Ï¸ØÃã
 	, SideSpeed_(40.0f)
+	, isJumping_(false)
 {
 }
 
@@ -93,6 +94,7 @@ void Player::Start()
 	Render_ = CreateRenderer(300);
 	Render_->SetPivot({ 0, 0 });
 	Render_->CreateAnimation("Player.bmp", "Walk", 2, 5, 0.13f);
+	Render_->CreateAnimation("Player.bmp", "Jump", 9, 10, 0.1f);
 	Render_->ChangeAnimation("Walk");
 
 	LevelRegist("Penguin");

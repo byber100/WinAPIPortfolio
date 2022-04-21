@@ -19,7 +19,7 @@ void Player::MoveStart()
 
 void Player::JumpStart()
 {
-
+	JumpDir_ = float4::UP * 500.0f;
 }
 
 void Player::IdleUpdate()
@@ -27,6 +27,12 @@ void Player::IdleUpdate()
 	if (true == IsMoveKey())
 	{
 		ChangeState(PlayerState::Move);
+		return;
+	}
+
+	if (true == GameEngineInput::GetInst()->IsDown("Jump"))
+	{
+		ChangeState(PlayerState::Jump);
 		return;
 	}
 }
@@ -67,5 +73,17 @@ void Player::MoveUpdate()
 
 void Player::JumpUpdate()
 {
+	if (1 > Render_->GetPivot().iy())
+	{
+		Render_->ChangeAnimation("Jump");
+		Render_->SetPivotMove(JumpDir_ * GameEngineTime::GetDeltaTime());
 
+		JumpDir_ += float4::DOWN * GameEngineTime::GetDeltaTime() * 1000.0f;
+	}
+	else
+	{
+		Render_->ChangeAnimation("Walk");
+		isJumping_ = false;
+		ChangeState(PlayerState::Move);
+	}
 }

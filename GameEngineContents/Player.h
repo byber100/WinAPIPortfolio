@@ -25,6 +25,8 @@ class Player : public GameEngineActor
 private:
 	float ForwardSpeed_;
 	float SideSpeed_;
+	bool isJumping_;
+	float4 JumpDir_;
 
 	PlayerState CurState_;
 	GameEngineRenderer* Render_;
