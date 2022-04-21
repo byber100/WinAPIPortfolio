@@ -6,34 +6,34 @@ class PlayUI : public GameEngineActor
 {
 private:
 	// Interface Renderer //////////////////////////////////////////////////////
-	GameEngineRenderer* ScroeTile1_;
+	GameEngineRenderer* ScroeTile1_; // 240 96
 	GameEngineRenderer* ScroeTile2_;
 	GameEngineRenderer* ScroeTile3_;
 	GameEngineRenderer* ScroeTile4_;
 	GameEngineRenderer* ScroeTile5_;
 	GameEngineRenderer* ScroeTile6_;
 
-	GameEngineRenderer* HiScroeTile1_;
+	GameEngineRenderer* HiScroeTile1_; // 496 96
 	GameEngineRenderer* HiScroeTile2_;
 	GameEngineRenderer* HiScroeTile3_;
 	GameEngineRenderer* HiScroeTile4_;
 	GameEngineRenderer* HiScroeTile5_;
 	GameEngineRenderer* HiScroeTile6_;
 
-	GameEngineRenderer* StageTile1_;
+	GameEngineRenderer* StageTile1_; // 816 96
 	GameEngineRenderer* StageTile2_;
 
-	GameEngineRenderer* TimeOutTile1_;
+	GameEngineRenderer* TimeOutTile1_; // 288 124
 	GameEngineRenderer* TimeOutTile2_;
 	GameEngineRenderer* TimeOutTile3_;
 	GameEngineRenderer* TimeOutTile4_;
 
-	GameEngineRenderer* RestDistanceTile1_;
+	GameEngineRenderer* RestDistanceTile1_; // 496 124
 	GameEngineRenderer* RestDistanceTile2_;
 	GameEngineRenderer* RestDistanceTile3_;
 	GameEngineRenderer* RestDistanceTile4_;
 
-	GameEngineRenderer* SpeedTile1_;
+	GameEngineRenderer* SpeedTile1_; // 752 124
 	GameEngineRenderer* SpeedTile2_;
 	GameEngineRenderer* SpeedTile3_;
 	GameEngineRenderer* SpeedTile4_;
