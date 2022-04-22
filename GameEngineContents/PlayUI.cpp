@@ -17,13 +17,13 @@ PlayUI::~PlayUI()
 {
 }
 
-void PlayUI::NumberUpdate(int _Object,
-	GameEngineRenderer* _Word1,
-	GameEngineRenderer* _Word2 /*= nullptr*/,
-	GameEngineRenderer* _Word3 /*= nullptr*/,
-	GameEngineRenderer* _Word4 /*= nullptr*/,
-	GameEngineRenderer* _Word5 /*= nullptr*/,
-	GameEngineRenderer* _Word6 /*= nullptr*/)
+void PlayUI::NumberUpdate(int _Object, // 한자리 숫자씩 뽑아낼 대상
+	GameEngineRenderer* _Word1,					// 1의 자리   (랜더링은 SetIndex함수로)
+	GameEngineRenderer* _Word2 /*= nullptr*/,	// 10의 자리 -> null이면 0으로 랜더링
+	GameEngineRenderer* _Word3 /*= nullptr*/,	// 100의 자리
+	GameEngineRenderer* _Word4 /*= nullptr*/,	// 1000의 자리
+	GameEngineRenderer* _Word5 /*= nullptr*/,	// 10000의 자리
+	GameEngineRenderer* _Word6 /*= nullptr*/)	// 100000의 자리
 {
 	int Object = _Object;
 	int SingleNumber[6] = {};
@@ -131,15 +131,15 @@ void PlayUI::Start()
 	}
 
 	ScoreTile1_->SetIndex(0);
-	ScoreTile2_->SetIndex(0);
-	ScoreTile3_->SetIndex(0);
-	ScoreTile4_->SetIndex(0);
-	ScoreTile5_->SetIndex(0);
-	ScoreTile6_->SetIndex(0);
-	HiScoreTile1_->SetIndex(0);
-	HiScoreTile2_->SetIndex(0);
-	HiScoreTile3_->SetIndex(0);
-	HiScoreTile4_->SetIndex(0);
+	ScoreTile2_->SetIndex(1);
+	ScoreTile3_->SetIndex(2);
+	ScoreTile4_->SetIndex(3);
+	ScoreTile5_->SetIndex(4);
+	ScoreTile6_->SetIndex(5);
+	HiScoreTile1_->SetIndex(6);
+	HiScoreTile2_->SetIndex(7);
+	HiScoreTile3_->SetIndex(8);
+	HiScoreTile4_->SetIndex(9);
 	HiScoreTile5_->SetIndex(0);
 	HiScoreTile6_->SetIndex(0);
 	StageTile1_->SetIndex(0);
