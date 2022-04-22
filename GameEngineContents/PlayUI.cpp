@@ -17,6 +17,31 @@ PlayUI::~PlayUI()
 {
 }
 
+void PlayUI::NumberUpdate(int _Object,
+	GameEngineRenderer* _Word1,
+	GameEngineRenderer* _Word2 /*= nullptr*/,
+	GameEngineRenderer* _Word3 /*= nullptr*/,
+	GameEngineRenderer* _Word4 /*= nullptr*/,
+	GameEngineRenderer* _Word5 /*= nullptr*/,
+	GameEngineRenderer* _Word6 /*= nullptr*/)
+{
+	int Object = _Object;
+	int SingleNumber[6] = {};
+
+	//while (0 != Object)
+	//{
+	//	Object % 10;
+	//	Object /= 10;
+	//	
+	//	for (size_t i = 6; i == 0; --i)
+	//	{
+	//		Object % 10;
+	//		Object
+
+	//	}
+	//}
+}
+
 void PlayUI::Start()
 {
 	SetPosition(float4::ZERO);

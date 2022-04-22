@@ -65,6 +65,14 @@ public:
 protected:
 
 private:
+	void NumberUpdate(int _Object,
+		GameEngineRenderer* _Word1,
+		GameEngineRenderer* _Word2 = nullptr,
+		GameEngineRenderer* _Word3 = nullptr,
+		GameEngineRenderer* _Word4 = nullptr,
+		GameEngineRenderer* _Word5 = nullptr,
+		GameEngineRenderer* _Word6 = nullptr);
+
 	void Start() override;
 	void Update() override;
 	void Render() override;

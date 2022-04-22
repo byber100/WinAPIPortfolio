@@ -89,7 +89,7 @@ void PlayLevel::Update()
 			is2FrameUnit_ = true;
 
 			StageInfo_->MountainFrame();
-			CreateActor<HoleTrap>(2);
+			//CreateActor<HoleTrap>(2);
 		}
 	}
 	CurframeTime_ -= GameEngineTime::GetDeltaTime();
