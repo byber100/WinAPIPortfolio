@@ -162,7 +162,11 @@ void PlayUI::Start()
 
 void PlayUI::Update()
 {
-	
+	NumberUpdate(RestDistance_,
+		RestDistanceTile1_,
+		RestDistanceTile2_,
+		RestDistanceTile3_,
+		RestDistanceTile4_);
 }
 
 void PlayUI::Render()
