@@ -1,5 +1,6 @@
 #include "PlayUI.h"
 #include "Player.h"
+#include "PlayLevel.h"
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngineBase/GameEngineInput.h>
@@ -10,8 +11,8 @@ PlayUI::PlayUI()
 	: Score_(0)
 	, HiScore_(0)
 	, Stage_(1)
-	, TimeOut_(100)
 	, Speed_(5)
+	, CountTime_(10)
 	, VeiledDebuging_(true)
 {
 }
@@ -23,7 +24,6 @@ PlayUI::~PlayUI()
 void PlayUI::NumberUpdate(int _Object, const std::vector<GameEngineRenderer*> ScoreImage)
 {
 	std::string Value = std::to_string(_Object);
-	int a = ScoreImage.size();
 
 	for (size_t i = 0; i < ScoreImage.size(); i++)
 	{
@@ -50,7 +50,7 @@ void PlayUI::DebugUIOn()
 		DedugText_.Draw("Stage: " + UpdateText, { 0,40 }, 20, 0);
 	}
 	{
-		std::string UpdateText = std::to_string(TimeOut_);
+		std::string UpdateText = std::to_string(CountTime_);
 		DedugText_.Draw("TimeOut: " + UpdateText, { 0,60 }, 20, 0);
 	}
 	{
@@ -204,7 +204,7 @@ void PlayUI::Start()
 {
 	DedugText_.Load("arial.ttf");
 	GameEngineInput::GetInst()->CreateKey("UIDebug", VK_TAB);
-
+	
 	SetPosition(float4::ZERO);
 	SetScale(GameEngineWindow::GetScale());
 
@@ -344,6 +344,7 @@ void PlayUI::Start()
 
 void PlayUI::Update()
 {
+
 	//NumberUpdate(RestDistance_, RestDistanceImages);
 	UpdateSpeed();
 

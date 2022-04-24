@@ -50,8 +50,8 @@ private:
 	int Score_;
 	int HiScore_;
 	int Stage_;
-	int TimeOut_;
 	int Speed_;
+	int CountTime_;
 
 	GameEngineFont DedugText_;
 	bool VeiledDebuging_;
@@ -71,7 +71,14 @@ public:
 
 	static int RestDistance_;
 
-
+	int GetCountTime()
+	{
+		return CountTime_;
+	}
+	void SetCountTime(int _Count)
+	{
+		CountTime_ = _Count;
+	}
 
 protected:
 

@@ -19,7 +19,8 @@ enum class ORDER
 };
 
 PlayLevel::PlayLevel() 
-	:PlayerInfo_(nullptr)
+	: PlayerInfo_(nullptr)
+	, UnitSecond_(1.0f)
 {
 }
 
@@ -44,7 +45,7 @@ void PlayLevel::Loading()
 	
 	StageInfo_ = CreateActor<RandomStage>(0);
 	PlayerInfo_ = CreateActor<Player>(1);
-	PlayUI* UI = CreateActor<PlayUI>(3);
+	UI_ = CreateActor<PlayUI>(3);
 
 	PlayLevelStage = this;
 
@@ -53,7 +54,7 @@ void PlayLevel::Loading()
 
 	if (nullptr == PlayerInfo_ ||
 		nullptr == StageInfo_ ||
-		nullptr == UI)
+		nullptr == UI_)
 	{
 		MsgBoxAssert("필수 액터 정보가 없습니다.")
 	}
@@ -72,6 +73,22 @@ void PlayLevel::Update()
 	if (GameEngineInput::GetInst()->IsDown("TestTrap"))
 	{
 		CreateActor<HoleTrap>(2);
+	}
+
+	int t = UI_->GetCountTime();
+	if (0 != t)
+	{
+		if (0 < UnitSecond_)
+		{
+			UnitSecond_ -= GameEngineTime::GetInst()->GetDeltaTime();
+		}
+		else
+		{
+			UnitSecond_ = 1.0f;
+			
+			--t;
+			UI_->SetCountTime(t);
+		}
 	}
 
 	float LevelInterTime = PlayLevelStage->GetLevelInterTime();

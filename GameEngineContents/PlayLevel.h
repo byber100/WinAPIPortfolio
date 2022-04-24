@@ -4,6 +4,7 @@
 
 // 설명 :
 class Player;
+class PlayUI;
 class RandomStage;
 class PlayLevel : public GameEngineLevel
 {
@@ -21,12 +22,14 @@ private:
 
 	float CurframeTime_;
 	int FrameUnitCount_; // 게임프레임 최소 단위시간
-	int Distance_;
+
+	float UnitSecond_;
 
 	GameEngineSoundPlayer BgmPlayer;
 
 	Player* PlayerInfo_;
 	RandomStage* StageInfo_;
+	PlayUI* UI_;
 
 public:
 	static PlayLevel* PlayLevelStage;
