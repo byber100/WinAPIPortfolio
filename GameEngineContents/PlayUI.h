@@ -3,6 +3,7 @@
 #include <GameEngine/GameEngineFont.h>
 
 // Ό³Έν :
+class Player;
 class PlayUI : public GameEngineActor
 {
 private:
@@ -55,6 +56,8 @@ private:
 	GameEngineFont DedugText_;
 	bool VeiledDebuging_;
 
+	Player* PlayerInfo_;
+
 public:
 	// constrcuter destructer
 	PlayUI();
@@ -75,6 +78,8 @@ protected:
 private:
 	void NumberUpdate(int _Object, const std::vector<GameEngineRenderer*> ScoreImage);
 	void DebugUIOn();
+
+	void UpdateSpeed();
 
 	void Start() override;
 	void Update() override;
