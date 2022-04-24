@@ -17,16 +17,14 @@ PlayUI::~PlayUI()
 {
 }
 
-void PlayUI::NumberUpdate(int _Object, // 한자리 숫자씩 뽑아낼 대상
-	GameEngineRenderer* _Word1,					// 1의 자리   (랜더링은 SetIndex함수로)
-	GameEngineRenderer* _Word2 /*= nullptr*/,	// 10의 자리 -> null이면 0으로 랜더링
-	GameEngineRenderer* _Word3 /*= nullptr*/,	// 100의 자리
-	GameEngineRenderer* _Word4 /*= nullptr*/,	// 1000의 자리
-	GameEngineRenderer* _Word5 /*= nullptr*/,	// 10000의 자리
-	GameEngineRenderer* _Word6 /*= nullptr*/)	// 100000의 자리
+void PlayUI::NumberUpdate(int _Object, const std::vector<GameEngineRenderer*> ScoreImage)	// 100000의 자리
 {
-	int Object = _Object;
-	int SingleNumber[6] = {};
+	std::string Value = std::to_string(_Object);
+
+	for (size_t i = 0; i < ScoreImage.size(); i++)
+	{
+		ScoreImage[i]->SetIndex(Value[i] - '0');
+	}
 
 	//while (0 != Object)
 	//{
@@ -112,6 +110,11 @@ void PlayUI::Start()
 		RestDistanceTile3_->SetPivot({ StartXPos + (24 * 2), StartYPos });
 		RestDistanceTile4_ = CreateRenderer("InterfaceWords.bmp", 401, RenderPivot::LEFTTOP);
 		RestDistanceTile4_->SetPivot({ StartXPos + (24 * 3), StartYPos });
+
+		RestDistanceImages.push_back(RestDistanceTile1_);
+		RestDistanceImages.push_back(RestDistanceTile2_);
+		RestDistanceImages.push_back(RestDistanceTile3_);
+		RestDistanceImages.push_back(RestDistanceTile4_);
 	}
 	{
 		float StartXPos = 752.0f;
@@ -148,10 +151,12 @@ void PlayUI::Start()
 	TimeOutTile2_->SetIndex(0);
 	TimeOutTile3_->SetIndex(0);
 	TimeOutTile4_->SetIndex(0);
+
 	RestDistanceTile1_->SetIndex(0);
 	RestDistanceTile2_->SetIndex(0);
 	RestDistanceTile3_->SetIndex(0);
 	RestDistanceTile4_->SetIndex(0);
+
 	SpeedTile1_->SetIndex(12);
 	SpeedTile2_->SetIndex(11);
 	SpeedTile3_->SetIndex(10);
@@ -162,11 +167,8 @@ void PlayUI::Start()
 
 void PlayUI::Update()
 {
-	NumberUpdate(RestDistance_,
-		RestDistanceTile1_,
-		RestDistanceTile2_,
-		RestDistanceTile3_,
-		RestDistanceTile4_);
+	NumberUpdate(RestDistance_, RestDistanceImages);
+
 }
 
 void PlayUI::Render()

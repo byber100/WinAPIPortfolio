@@ -28,6 +28,7 @@ private:
 	GameEngineRenderer* TimeOutTile3_;
 	GameEngineRenderer* TimeOutTile4_;
 
+	std::vector<GameEngineRenderer*> RestDistanceImages;
 	GameEngineRenderer* RestDistanceTile1_; // 496 124
 	GameEngineRenderer* RestDistanceTile2_;
 	GameEngineRenderer* RestDistanceTile3_;
@@ -65,13 +66,7 @@ public:
 protected:
 
 private:
-	void NumberUpdate(int _Object,
-		GameEngineRenderer* _Word1,
-		GameEngineRenderer* _Word2 = nullptr,
-		GameEngineRenderer* _Word3 = nullptr,
-		GameEngineRenderer* _Word4 = nullptr,
-		GameEngineRenderer* _Word5 = nullptr,
-		GameEngineRenderer* _Word6 = nullptr);
+	void NumberUpdate(int _Object, const std::vector<GameEngineRenderer*> ScoreImage);
 
 	void Start() override;
 	void Update() override;
