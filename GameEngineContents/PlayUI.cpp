@@ -265,6 +265,9 @@ void PlayUI::Start()
 		StageTile1_->SetPivot({ StartXPos + (24 * 0), StartYPos });
 		StageTile2_ = CreateRenderer("InterfaceWords.bmp", 401, RenderPivot::LEFTTOP);
 		StageTile2_->SetPivot({ StartXPos + (24 * 1), StartYPos });
+
+		StageImages.push_back(StageTile1_);
+		StageImages.push_back(StageTile2_);
 	}
 	{
 		float StartXPos = 288.0f;
