@@ -1,11 +1,13 @@
 #pragma once
 #include <GameEngine/GameEngineActor.h>
+#include <GameEngine/GameEngineFont.h>
 
 // Ό³Έν :
 class PlayUI : public GameEngineActor
 {
 private:
 	// Interface Renderer //////////////////////////////////////////////////////
+	std::vector<GameEngineRenderer*> ScoreImages;
 	GameEngineRenderer* ScoreTile1_; // 240 92
 	GameEngineRenderer* ScoreTile2_;
 	GameEngineRenderer* ScoreTile3_;
@@ -13,6 +15,7 @@ private:
 	GameEngineRenderer* ScoreTile5_;
 	GameEngineRenderer* ScoreTile6_;
 
+	std::vector<GameEngineRenderer*> HiScoreImages;
 	GameEngineRenderer* HiScoreTile1_; // 496 92
 	GameEngineRenderer* HiScoreTile2_;
 	GameEngineRenderer* HiScoreTile3_;
@@ -23,6 +26,7 @@ private:
 	GameEngineRenderer* StageTile1_; // 816 92
 	GameEngineRenderer* StageTile2_;
 
+	std::vector<GameEngineRenderer*> TimeOutImages;
 	GameEngineRenderer* TimeOutTile1_; // 288 124
 	GameEngineRenderer* TimeOutTile2_;
 	GameEngineRenderer* TimeOutTile3_;
@@ -48,6 +52,9 @@ private:
 	int TimeOut_;
 	int Speed_;
 
+	GameEngineFont DedugText_;
+	bool VeiledDebuging_;
+
 public:
 	// constrcuter destructer
 	PlayUI();
@@ -67,6 +74,7 @@ protected:
 
 private:
 	void NumberUpdate(int _Object, const std::vector<GameEngineRenderer*> ScoreImage);
+	void DebugUIOn();
 
 	void Start() override;
 	void Update() override;

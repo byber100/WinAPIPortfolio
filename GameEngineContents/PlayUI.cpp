@@ -1,8 +1,9 @@
 #include "PlayUI.h"
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngineRenderer.h>
+#include <GameEngineBase/GameEngineInput.h>
 
-int PlayUI::RestDistance_ = 1500;
+int PlayUI::RestDistance_ = 1010;
 
 PlayUI::PlayUI()
 	: Score_(0)
@@ -10,6 +11,7 @@ PlayUI::PlayUI()
 	, Stage_(1)
 	, TimeOut_(100)
 	, Speed_(5)
+	, VeiledDebuging_(false)
 {
 }
 
@@ -17,31 +19,54 @@ PlayUI::~PlayUI()
 {
 }
 
-void PlayUI::NumberUpdate(int _Object, const std::vector<GameEngineRenderer*> ScoreImage)	// 100000ÀÇ ÀÚ¸®
+void PlayUI::NumberUpdate(int _Object, const std::vector<GameEngineRenderer*> ScoreImage)
 {
 	std::string Value = std::to_string(_Object);
+	int a = ScoreImage.size();
 
 	for (size_t i = 0; i < ScoreImage.size(); i++)
 	{
+		if (nullptr == &Value[i])
+		{
+			ScoreImage[i]->SetIndex(0);
+		}
 		ScoreImage[i]->SetIndex(Value[i] - '0');
 	}
+}
 
-	//while (0 != Object)
-	//{
-	//	Object % 10;
-	//	Object /= 10;
-	//	
-	//	for (size_t i = 6; i == 0; --i)
-	//	{
-	//		Object % 10;
-	//		Object
-
-	//	}
-	//}
+void PlayUI::DebugUIOn()
+{
+	{
+		std::string UpdateText = std::to_string(Score_);
+		DedugText_.Draw("Score: " + UpdateText, { 0,0 }, 20, 0);
+	}
+	{
+		std::string UpdateText = std::to_string(HiScore_);
+		DedugText_.Draw("HiScore: " + UpdateText, { 0,20 }, 20, 0);
+	}
+	{
+		std::string UpdateText = std::to_string(Stage_);
+		DedugText_.Draw("Stage: " + UpdateText, { 0,40 }, 20, 0);
+	}
+	{
+		std::string UpdateText = std::to_string(TimeOut_);
+		DedugText_.Draw("TimeOut: " + UpdateText, { 0,60 }, 20, 0);
+	}
+	{
+		std::string UpdateText = std::to_string(RestDistance_);
+		DedugText_.Draw("RestDistance: " + UpdateText, { 0,80 }, 20, 0);
+	}
+	{
+		std::string UpdateText = std::to_string(Speed_);
+		DedugText_.Draw("Speed: " + UpdateText, { 0,100 }, 20, 0);
+	}
 }
 
 void PlayUI::Start()
 {
+	DedugText_.Load("arial.ttf");
+	GameEngineInput::GetInst()->CreateKey("UIDebug", VK_TAB);
+
 	SetPosition(float4::ZERO);
 	SetScale(GameEngineWindow::GetScale());
 
@@ -62,6 +87,13 @@ void PlayUI::Start()
 		ScoreTile5_->SetPivot({ StartXPos + (24 * 4), StartYPos });
 		ScoreTile6_ = CreateRenderer("InterfaceWords.bmp", 401, RenderPivot::LEFTTOP);
 		ScoreTile6_->SetPivot({ StartXPos + (24 * 5), StartYPos });
+
+		ScoreImages.push_back(ScoreTile1_);
+		ScoreImages.push_back(ScoreTile2_);
+		ScoreImages.push_back(ScoreTile3_);
+		ScoreImages.push_back(ScoreTile4_);
+		ScoreImages.push_back(ScoreTile5_);
+		ScoreImages.push_back(ScoreTile6_);
 	}
 	{
 		float StartXPos = 496.0f;
@@ -78,6 +110,13 @@ void PlayUI::Start()
 		HiScoreTile5_->SetPivot({ StartXPos + (24 * 4), StartYPos });
 		HiScoreTile6_ = CreateRenderer("InterfaceWords.bmp", 401, RenderPivot::LEFTTOP);
 		HiScoreTile6_->SetPivot({ StartXPos + (24 * 5), StartYPos });
+
+		HiScoreImages.push_back(HiScoreTile1_);
+		HiScoreImages.push_back(HiScoreTile2_);
+		HiScoreImages.push_back(HiScoreTile3_);
+		HiScoreImages.push_back(HiScoreTile4_);
+		HiScoreImages.push_back(HiScoreTile5_);
+		HiScoreImages.push_back(HiScoreTile6_);
 	}
 	{
 		float StartXPos = 816.0f;
@@ -98,6 +137,11 @@ void PlayUI::Start()
 		TimeOutTile3_->SetPivot({ StartXPos + (24 * 2), StartYPos });
 		TimeOutTile4_ = CreateRenderer("InterfaceWords.bmp", 401, RenderPivot::LEFTTOP);
 		TimeOutTile4_->SetPivot({ StartXPos + (24 * 3), StartYPos });
+
+		TimeOutImages.push_back(TimeOutTile1_);
+		TimeOutImages.push_back(TimeOutTile2_);
+		TimeOutImages.push_back(TimeOutTile3_);
+		TimeOutImages.push_back(TimeOutTile4_);
 	}
 	{
 		float StartXPos = 496.0f;
@@ -167,11 +211,25 @@ void PlayUI::Start()
 
 void PlayUI::Update()
 {
-	NumberUpdate(RestDistance_, RestDistanceImages);
+	//NumberUpdate(RestDistance_, RestDistanceImages);
 
 }
 
 void PlayUI::Render()
 {
-	
+	if (GameEngineInput::GetInst()->IsDown("UIDebug"))
+	{
+		if (false == VeiledDebuging_)
+		{
+			VeiledDebuging_ = true;
+		}
+		else
+		{
+			VeiledDebuging_ = false;
+		}
+	}
+	if (true == VeiledDebuging_)
+	{
+		DebugUIOn();
+	}
 }
