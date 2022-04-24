@@ -3,7 +3,7 @@
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngineBase/GameEngineInput.h>
 
-int PlayUI::RestDistance_ = 1010;
+int PlayUI::RestDistance_ = 10;
 
 PlayUI::PlayUI()
 	: Score_(0)
@@ -11,7 +11,7 @@ PlayUI::PlayUI()
 	, Stage_(1)
 	, TimeOut_(100)
 	, Speed_(5)
-	, VeiledDebuging_(false)
+	, VeiledDebuging_(true)
 {
 }
 

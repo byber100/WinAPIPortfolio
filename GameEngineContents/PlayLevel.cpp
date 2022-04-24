@@ -80,7 +80,10 @@ void PlayLevel::Update()
 		++FrameUnitCount_;
 		is2FrameUnit_ = false;
 		CurframeTime_ = LevelInterTime;
-		--PlayUI::RestDistance_;
+		if (0 != PlayUI::RestDistance_)
+		{
+			--PlayUI::RestDistance_;
+		}
 
 		if (2 == FrameUnitCount_)
 		{
