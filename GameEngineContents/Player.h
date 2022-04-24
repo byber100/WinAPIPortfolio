@@ -17,7 +17,7 @@ enum PlayerState
 	JumpR,
 	TakeHit,
 	Clear,
-	Max
+	Pause
 };
 
 // Ό³Έν :
@@ -48,12 +48,18 @@ public:
 	{
 		return ForwardSpeed_;
 	}
+	void SetForwardSpeed(float _Speed)
+	{
+		ForwardSpeed_ = _Speed;
+	}
 
 protected:
 
+public:
+	void ChangeState(PlayerState _State);
+
 private:
 	void JumpLoop();
-	void ChangeState(PlayerState _State);
 	void StateUpdate();
 
 	void Start() override;
@@ -63,11 +69,13 @@ private:
 	void IdleStart();
 	void MoveStart();
 	void JumpStart();
+	void PauseStart();
 
 	void IdleUpdate();
 	void MoveUpdate();
 	void JumpUpdate();
 	void JumpLUpdate();
 	void JumpRUpdate();
+	void PauseUpdate();
 };
 

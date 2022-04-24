@@ -89,31 +89,37 @@ void PlayLevel::Update()
 			--t;
 			UI_->SetCountTime(t);
 		}
+
+		float LevelInterTime = PlayLevelStage->GetLevelInterTime();
+
+		if (0.0f >= CurframeTime_)
+		{
+			++FrameUnitCount_;
+			is2FrameUnit_ = false;
+			CurframeTime_ = LevelInterTime;
+			if (0 != PlayUI::RestDistance_)
+			{
+				--PlayUI::RestDistance_;
+			}
+
+			if (2 == FrameUnitCount_)
+			{
+				--FrameCount;
+				FrameUnitCount_ = 0;
+				is2FrameUnit_ = true;
+
+				StageInfo_->MountainFrame();
+				//CreateActor<HoleTrap>(2);
+			}
+		}
+		CurframeTime_ -= GameEngineTime::GetDeltaTime();
 	}
-
-	float LevelInterTime = PlayLevelStage->GetLevelInterTime();
-
-	if (0.0f >= CurframeTime_)
+	else
 	{
-		++FrameUnitCount_;
-		is2FrameUnit_ = false;
-		CurframeTime_ = LevelInterTime;
-		if (0 != PlayUI::RestDistance_)
-		{
-			--PlayUI::RestDistance_;
-		}
-
-		if (2 == FrameUnitCount_)
-		{
-			--FrameCount;
-			FrameUnitCount_ = 0;
-			is2FrameUnit_ = true;
-
-			StageInfo_->MountainFrame();
-			//CreateActor<HoleTrap>(2);
-		}
+		PlayerInfo_->ChangeState(PlayerState::Pause);
 	}
-	CurframeTime_ -= GameEngineTime::GetDeltaTime();
+
+	
 }
 void PlayLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 {

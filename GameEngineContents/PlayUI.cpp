@@ -349,10 +349,11 @@ void PlayUI::Update()
 		GameEngineRenderer* TimeOut = CreateRenderer("TimeOut.bmp", 400);
 		TimeOut->SetPivot(GetScale().Half());
 	}
-
-	//NumberUpdate(RestDistance_, RestDistanceImages);
-	UpdateSpeed();
-
+	else
+	{
+		//NumberUpdate(RestDistance_, RestDistanceImages);
+		UpdateSpeed();
+	}
 }
 
 void PlayUI::Render()

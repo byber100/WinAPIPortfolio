@@ -56,7 +56,8 @@ void Player::ChangeState(PlayerState _State)
 			break;
 		case Clear:
 			break;
-		case Max:
+		case Pause:
+			PauseStart();
 			break;
 		default:
 			break;
@@ -86,7 +87,8 @@ void Player::StateUpdate()
 		break;
 	case Clear:
 		break;
-	case Max:
+	case Pause:
+		PauseUpdate();
 		break;
 	default:
 		break;

@@ -18,6 +18,12 @@ void Player::JumpStart()
 	JumpDir_ = float4::UP * 200.0f;
 }
 
+void Player::PauseStart()
+{
+	Penguin_->PauseOn();
+	ForwardSpeed_ = 0.0f;
+}
+
 void Player::MoveUpdate()
 {
 	if (true == GameEngineInput::GetInst()->IsDown("Jump"))
@@ -122,4 +128,9 @@ void Player::JumpRUpdate()
 		isJumping_ = false;
 		ChangeState(PlayerState::Move);
 	}
+}
+
+void Player::PauseUpdate()
+{
+
 }
