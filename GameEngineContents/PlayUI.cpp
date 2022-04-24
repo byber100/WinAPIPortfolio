@@ -12,7 +12,7 @@ PlayUI::PlayUI()
 	, HiScore_(0)
 	, Stage_(1)
 	, Speed_(5)
-	, CountTime_(10)
+	, CountTime_(3)
 	, VeiledDebuging_(true)
 {
 }
@@ -344,6 +344,11 @@ void PlayUI::Start()
 
 void PlayUI::Update()
 {
+	if (0 == CountTime_)
+	{
+		GameEngineRenderer* TimeOut = CreateRenderer("TimeOut.bmp", 400);
+		TimeOut->SetPivot(GetScale().Half());
+	}
 
 	//NumberUpdate(RestDistance_, RestDistanceImages);
 	UpdateSpeed();
@@ -367,4 +372,5 @@ void PlayUI::Render()
 	{
 		DebugUIOn();
 	}
+
 }

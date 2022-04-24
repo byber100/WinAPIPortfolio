@@ -24,6 +24,7 @@ private:
 	GameEngineRenderer* HiScoreTile5_;
 	GameEngineRenderer* HiScoreTile6_;
 
+	std::vector<GameEngineRenderer*> StageImages;
 	GameEngineRenderer* StageTile1_; // 816 92
 	GameEngineRenderer* StageTile2_;
 
