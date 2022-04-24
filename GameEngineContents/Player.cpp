@@ -8,7 +8,7 @@
 
 
 Player::Player() 
-	: ForwardSpeed_(8.0f) // 0ø° µµ¥ﬁ«œ∏È æ÷¥œ∏ÿ√„
+	: ForwardSpeed_(7.0f) // 0ø° µµ¥ﬁ«œ∏È æ÷¥œ∏ÿ√„
 	, SideSpeed_(200.0f)
 	, isJumping_(false)
 {
