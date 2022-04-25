@@ -219,22 +219,22 @@ void PlayUI::Start()
 
 	PlayerInfo_ = dynamic_cast<Player*>(GetLevel()->FindActor("Penguin"));
 
-	GameEngineRenderer* Renderer = CreateRenderer("BackInterface.bmp", 400, RenderPivot::LEFTTOP);
+	GameEngineRenderer* Renderer = CreateRenderer("BackInterface.bmp", 500, RenderPivot::LEFTTOP);
 	
 	{
 		float StartXPos = 240.0f;
 		float StartYPos = 92.0f;
-		ScoreTile1_ = CreateRenderer("InterfaceWords.bmp", 401, RenderPivot::LEFTTOP);
+		ScoreTile1_ = CreateRenderer("InterfaceWords.bmp", 501, RenderPivot::LEFTTOP);
 		ScoreTile1_->SetPivot({ StartXPos + (24 * 0), StartYPos });
-		ScoreTile2_ = CreateRenderer("InterfaceWords.bmp", 401, RenderPivot::LEFTTOP);
+		ScoreTile2_ = CreateRenderer("InterfaceWords.bmp", 501, RenderPivot::LEFTTOP);
 		ScoreTile2_->SetPivot({ StartXPos + (24 * 1), StartYPos });
-		ScoreTile3_ = CreateRenderer("InterfaceWords.bmp", 401, RenderPivot::LEFTTOP);
+		ScoreTile3_ = CreateRenderer("InterfaceWords.bmp", 501, RenderPivot::LEFTTOP);
 		ScoreTile3_->SetPivot({ StartXPos + (24 * 2), StartYPos });
-		ScoreTile4_ = CreateRenderer("InterfaceWords.bmp", 401, RenderPivot::LEFTTOP);
+		ScoreTile4_ = CreateRenderer("InterfaceWords.bmp", 501, RenderPivot::LEFTTOP);
 		ScoreTile4_->SetPivot({ StartXPos + (24 * 3), StartYPos });
-		ScoreTile5_ = CreateRenderer("InterfaceWords.bmp", 401, RenderPivot::LEFTTOP);
+		ScoreTile5_ = CreateRenderer("InterfaceWords.bmp", 501, RenderPivot::LEFTTOP);
 		ScoreTile5_->SetPivot({ StartXPos + (24 * 4), StartYPos });
-		ScoreTile6_ = CreateRenderer("InterfaceWords.bmp", 401, RenderPivot::LEFTTOP);
+		ScoreTile6_ = CreateRenderer("InterfaceWords.bmp", 501, RenderPivot::LEFTTOP);
 		ScoreTile6_->SetPivot({ StartXPos + (24 * 5), StartYPos });
 
 		ScoreImages.push_back(ScoreTile1_);
@@ -247,17 +247,17 @@ void PlayUI::Start()
 	{
 		float StartXPos = 496.0f;
 		float StartYPos = 92.0f;
-		HiScoreTile1_ = CreateRenderer("InterfaceWords.bmp", 401, RenderPivot::LEFTTOP);
+		HiScoreTile1_ = CreateRenderer("InterfaceWords.bmp", 501, RenderPivot::LEFTTOP);
 		HiScoreTile1_->SetPivot({ StartXPos + (24 * 0), StartYPos });
-		HiScoreTile2_ = CreateRenderer("InterfaceWords.bmp", 401, RenderPivot::LEFTTOP);
+		HiScoreTile2_ = CreateRenderer("InterfaceWords.bmp", 501, RenderPivot::LEFTTOP);
 		HiScoreTile2_->SetPivot({ StartXPos + (24 * 1), StartYPos });
-		HiScoreTile3_ = CreateRenderer("InterfaceWords.bmp", 401, RenderPivot::LEFTTOP);
+		HiScoreTile3_ = CreateRenderer("InterfaceWords.bmp", 501, RenderPivot::LEFTTOP);
 		HiScoreTile3_->SetPivot({ StartXPos + (24 * 2), StartYPos });
-		HiScoreTile4_ = CreateRenderer("InterfaceWords.bmp", 401, RenderPivot::LEFTTOP);
+		HiScoreTile4_ = CreateRenderer("InterfaceWords.bmp", 501, RenderPivot::LEFTTOP);
 		HiScoreTile4_->SetPivot({ StartXPos + (24 * 3), StartYPos });
-		HiScoreTile5_ = CreateRenderer("InterfaceWords.bmp", 401, RenderPivot::LEFTTOP);
+		HiScoreTile5_ = CreateRenderer("InterfaceWords.bmp", 501, RenderPivot::LEFTTOP);
 		HiScoreTile5_->SetPivot({ StartXPos + (24 * 4), StartYPos });
-		HiScoreTile6_ = CreateRenderer("InterfaceWords.bmp", 401, RenderPivot::LEFTTOP);
+		HiScoreTile6_ = CreateRenderer("InterfaceWords.bmp", 501, RenderPivot::LEFTTOP);
 		HiScoreTile6_->SetPivot({ StartXPos + (24 * 5), StartYPos });
 
 		HiScoreImages.push_back(HiScoreTile1_);
@@ -270,9 +270,9 @@ void PlayUI::Start()
 	{
 		float StartXPos = 816.0f;
 		float StartYPos = 92.0f;
-		StageTile1_ = CreateRenderer("InterfaceWords.bmp", 401, RenderPivot::LEFTTOP);
+		StageTile1_ = CreateRenderer("InterfaceWords.bmp", 501, RenderPivot::LEFTTOP);
 		StageTile1_->SetPivot({ StartXPos + (24 * 0), StartYPos });
-		StageTile2_ = CreateRenderer("InterfaceWords.bmp", 401, RenderPivot::LEFTTOP);
+		StageTile2_ = CreateRenderer("InterfaceWords.bmp", 501, RenderPivot::LEFTTOP);
 		StageTile2_->SetPivot({ StartXPos + (24 * 1), StartYPos });
 
 		StageImages.push_back(StageTile1_);
@@ -281,13 +281,13 @@ void PlayUI::Start()
 	{
 		float StartXPos = 288.0f;
 		float StartYPos = 120.0f;
-		TimeCountTile1_ = CreateRenderer("InterfaceWords.bmp", 401, RenderPivot::LEFTTOP);
+		TimeCountTile1_ = CreateRenderer("InterfaceWords.bmp", 501, RenderPivot::LEFTTOP);
 		TimeCountTile1_->SetPivot({ StartXPos + (24 * 0), StartYPos });
-		TimeCountTile2_ = CreateRenderer("InterfaceWords.bmp", 401, RenderPivot::LEFTTOP);
+		TimeCountTile2_ = CreateRenderer("InterfaceWords.bmp", 501, RenderPivot::LEFTTOP);
 		TimeCountTile2_->SetPivot({ StartXPos + (24 * 1), StartYPos });
-		TimeCountTile3_ = CreateRenderer("InterfaceWords.bmp", 401, RenderPivot::LEFTTOP);
+		TimeCountTile3_ = CreateRenderer("InterfaceWords.bmp", 501, RenderPivot::LEFTTOP);
 		TimeCountTile3_->SetPivot({ StartXPos + (24 * 2), StartYPos });
-		TimeCountTile4_ = CreateRenderer("InterfaceWords.bmp", 401, RenderPivot::LEFTTOP);
+		TimeCountTile4_ = CreateRenderer("InterfaceWords.bmp", 501, RenderPivot::LEFTTOP);
 		TimeCountTile4_->SetPivot({ StartXPos + (24 * 3), StartYPos });
 
 		TimeCountImages.push_back(TimeCountTile1_);
@@ -298,13 +298,13 @@ void PlayUI::Start()
 	{
 		float StartXPos = 496.0f;
 		float StartYPos = 120.0f;
-		RestDistanceTile1_ = CreateRenderer("InterfaceWords.bmp", 401, RenderPivot::LEFTTOP);
+		RestDistanceTile1_ = CreateRenderer("InterfaceWords.bmp", 501, RenderPivot::LEFTTOP);
 		RestDistanceTile1_->SetPivot({ StartXPos + (24 * 0), StartYPos });
-		RestDistanceTile2_ = CreateRenderer("InterfaceWords.bmp", 401, RenderPivot::LEFTTOP);
+		RestDistanceTile2_ = CreateRenderer("InterfaceWords.bmp", 501, RenderPivot::LEFTTOP);
 		RestDistanceTile2_->SetPivot({ StartXPos + (24 * 1), StartYPos });
-		RestDistanceTile3_ = CreateRenderer("InterfaceWords.bmp", 401, RenderPivot::LEFTTOP);
+		RestDistanceTile3_ = CreateRenderer("InterfaceWords.bmp", 501, RenderPivot::LEFTTOP);
 		RestDistanceTile3_->SetPivot({ StartXPos + (24 * 2), StartYPos });
-		RestDistanceTile4_ = CreateRenderer("InterfaceWords.bmp", 401, RenderPivot::LEFTTOP);
+		RestDistanceTile4_ = CreateRenderer("InterfaceWords.bmp", 501, RenderPivot::LEFTTOP);
 		RestDistanceTile4_->SetPivot({ StartXPos + (24 * 3), StartYPos });
 
 		RestDistanceImages.push_back(RestDistanceTile1_);
@@ -315,17 +315,17 @@ void PlayUI::Start()
 	{
 		float StartXPos = 752.0f;
 		float StartYPos = 120.0f;
-		SpeedTile1_ = CreateRenderer("InterfaceWords.bmp", 401, RenderPivot::LEFTTOP);
+		SpeedTile1_ = CreateRenderer("InterfaceWords.bmp", 501, RenderPivot::LEFTTOP);
 		SpeedTile1_->SetPivot({ StartXPos + (24 * 0), StartYPos });
-		SpeedTile2_ = CreateRenderer("InterfaceWords.bmp", 401, RenderPivot::LEFTTOP);
+		SpeedTile2_ = CreateRenderer("InterfaceWords.bmp", 501, RenderPivot::LEFTTOP);
 		SpeedTile2_->SetPivot({ StartXPos + (24 * 1), StartYPos });
-		SpeedTile3_ = CreateRenderer("InterfaceWords.bmp", 401, RenderPivot::LEFTTOP);
+		SpeedTile3_ = CreateRenderer("InterfaceWords.bmp", 501, RenderPivot::LEFTTOP);
 		SpeedTile3_->SetPivot({ StartXPos + (24 * 2), StartYPos });
-		SpeedTile4_ = CreateRenderer("InterfaceWords.bmp", 401, RenderPivot::LEFTTOP);
+		SpeedTile4_ = CreateRenderer("InterfaceWords.bmp", 501, RenderPivot::LEFTTOP);
 		SpeedTile4_->SetPivot({ StartXPos + (24 * 3), StartYPos });
-		SpeedTile5_ = CreateRenderer("InterfaceWords.bmp", 401, RenderPivot::LEFTTOP);
+		SpeedTile5_ = CreateRenderer("InterfaceWords.bmp", 501, RenderPivot::LEFTTOP);
 		SpeedTile5_->SetPivot({ StartXPos + (24 * 4), StartYPos });
-		SpeedTile6_ = CreateRenderer("InterfaceWords.bmp", 401, RenderPivot::LEFTTOP);
+		SpeedTile6_ = CreateRenderer("InterfaceWords.bmp", 501, RenderPivot::LEFTTOP);
 		SpeedTile6_->SetPivot({ StartXPos + (24 * 5), StartYPos });
 	}
 }
@@ -344,7 +344,7 @@ void PlayUI::Update()
 	}
 	else
 	{
-		GameEngineRenderer* TimeOver = CreateRenderer("TimeOver.bmp", 400);
+		GameEngineRenderer* TimeOver = CreateRenderer("TimeOver.bmp", 500);
 		TimeOver->SetPivot(GetScale().Half());
 	}
 }

@@ -2,97 +2,100 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="TitleLevel.cpp">
-      <Filter>Level</Filter>
+      <Filter>Levels</Filter>
     </ClCompile>
     <ClCompile Include="PlayLevel.cpp">
-      <Filter>Level</Filter>
+      <Filter>Levels</Filter>
     </ClCompile>
     <ClCompile Include="Title.cpp">
-      <Filter>Title</Filter>
+      <Filter>OtherActors\Title</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>Play\Global</Filter>
+      <Filter>GlobalActors</Filter>
     </ClCompile>
     <ClCompile Include="Player_State.cpp">
-      <Filter>Play\Global</Filter>
+      <Filter>GlobalActors</Filter>
     </ClCompile>
     <ClCompile Include="AntarcticAdventure.cpp" />
     <ClCompile Include="PlayUI.cpp">
-      <Filter>Play\Global</Filter>
+      <Filter>GlobalActors</Filter>
     </ClCompile>
     <ClCompile Include="RandomStage.cpp">
-      <Filter>Play</Filter>
+      <Filter>OtherActors\Play</Filter>
     </ClCompile>
     <ClCompile Include="HoleTrap.cpp">
-      <Filter>Play</Filter>
+      <Filter>OtherActors\Play</Filter>
     </ClCompile>
     <ClCompile Include="CompanyLevel.cpp">
-      <Filter>Level</Filter>
+      <Filter>Levels</Filter>
     </ClCompile>
     <ClCompile Include="CompanyBack.cpp">
-      <Filter>Company</Filter>
+      <Filter>OtherActors\Company</Filter>
     </ClCompile>
     <ClCompile Include="KonamiLogo.cpp">
-      <Filter>Company</Filter>
+      <Filter>OtherActors\Company</Filter>
     </ClCompile>
     <ClCompile Include="LevelChanger.cpp">
-      <Filter>Play\Global</Filter>
+      <Filter>GlobalActors</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TitleLevel.h">
-      <Filter>Level</Filter>
+      <Filter>Levels</Filter>
     </ClInclude>
     <ClInclude Include="PlayLevel.h">
-      <Filter>Level</Filter>
+      <Filter>Levels</Filter>
     </ClInclude>
     <ClInclude Include="Title.h">
-      <Filter>Title</Filter>
+      <Filter>OtherActors\Title</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>Play\Global</Filter>
+      <Filter>GlobalActors</Filter>
     </ClInclude>
     <ClInclude Include="AntarcticAdventure.h" />
     <ClInclude Include="PlayUI.h">
-      <Filter>Play\Global</Filter>
+      <Filter>GlobalActors</Filter>
     </ClInclude>
     <ClInclude Include="RandomStage.h">
-      <Filter>Play</Filter>
+      <Filter>OtherActors\Play</Filter>
     </ClInclude>
     <ClInclude Include="HoleTrap.h">
-      <Filter>Play</Filter>
+      <Filter>OtherActors\Play</Filter>
     </ClInclude>
     <ClInclude Include="CompanyLevel.h">
-      <Filter>Level</Filter>
+      <Filter>Levels</Filter>
     </ClInclude>
     <ClInclude Include="CompanyBack.h">
-      <Filter>Company</Filter>
+      <Filter>OtherActors\Company</Filter>
     </ClInclude>
     <ClInclude Include="KonamiLogo.h">
-      <Filter>Company</Filter>
+      <Filter>OtherActors\Company</Filter>
     </ClInclude>
     <ClInclude Include="LevelChanger.h">
-      <Filter>Play\Global</Filter>
+      <Filter>GlobalActors</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Level">
-      <UniqueIdentifier>{3fdc01d6-f74f-4c06-8337-fcfead66623d}</UniqueIdentifier>
+    <Filter Include="OtherActors">
+      <UniqueIdentifier>{b6f82cff-de02-4dbe-b95e-4d13e2358064}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Title">
-      <UniqueIdentifier>{cd82154b-1470-4a17-b710-3d828bf9cce3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Play">
+    <Filter Include="OtherActors\Play">
       <UniqueIdentifier>{2b9a7125-e5c4-4740-931d-18dd34a3f8d4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Ending">
-      <UniqueIdentifier>{537a457f-c8d6-4fbf-b505-9a897541433c}</UniqueIdentifier>
+    <Filter Include="OtherActors\Title">
+      <UniqueIdentifier>{cd82154b-1470-4a17-b710-3d828bf9cce3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Play\Global">
+    <Filter Include="OtherActors\Company">
+      <UniqueIdentifier>{9f7b37ba-e4d5-4f95-947a-98aff72a8364}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Levels">
+      <UniqueIdentifier>{3fdc01d6-f74f-4c06-8337-fcfead66623d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GlobalActors">
       <UniqueIdentifier>{d6a178bf-fc85-411e-b93b-0559d30324c4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Company">
-      <UniqueIdentifier>{9f7b37ba-e4d5-4f95-947a-98aff72a8364}</UniqueIdentifier>
+    <Filter Include="OtherActors\Ending">
+      <UniqueIdentifier>{537a457f-c8d6-4fbf-b505-9a897541433c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

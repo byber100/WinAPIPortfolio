@@ -45,7 +45,7 @@ void LevelChanger::Start()
 	SetPosition(GameEngineWindow::GetScale().Half());
 	SetScale(GameEngineWindow::GetScale());
 
-	VeiledRender_ = CreateRenderer("ImageBlinder.bmp", 1000);
+	VeiledRender_ = CreateRenderer("ImageBlinder.bmp", 400);
 	VeiledRender_->SetPivot({ 1000,1000 });
 
 	LevelRegist("LevelChanger");

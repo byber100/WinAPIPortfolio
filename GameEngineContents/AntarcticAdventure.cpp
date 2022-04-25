@@ -10,6 +10,12 @@
 
 AntarcticAdventure::AntarcticAdventure()
 {
+	// 업데이트 오더 범위
+	// ~100: 기타 레벨의 액터
+	// ~200: 플레이 트랩 액터
+	// ~300: 플레이어
+	// ~400: 레벨체인저
+	// ~500: 플레이 UI
 }
 
 AntarcticAdventure::~AntarcticAdventure()
