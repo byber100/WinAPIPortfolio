@@ -12,6 +12,7 @@ Player::Player()
 	, SideSpeed_(200.0f)
 	, isJumping_(false)
 {
+	ChangeState(MAX);
 }
 
 Player::~Player() 
@@ -59,6 +60,8 @@ void Player::ChangeState(PlayerState _State)
 		case Pause:
 			PauseStart();
 			break;
+		case MAX:
+			break;
 		default:
 			break;
 		}
@@ -90,6 +93,8 @@ void Player::StateUpdate()
 	case Pause:
 		PauseUpdate();
 		break;
+	case MAX:
+		break;
 	default:
 		break;
 	}
@@ -120,6 +125,8 @@ void Player::Start()
 		GameEngineInput::GetInst()->CreateKey("Slow", 'S');
 		GameEngineInput::GetInst()->CreateKey("Jump", VK_SPACE);
 	}
+
+	ChangeState(Move);
 }
 
 void Player::Update()

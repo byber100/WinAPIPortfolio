@@ -17,7 +17,8 @@ enum PlayerState
 	JumpR,
 	TakeHit,
 	Clear,
-	Pause
+	Pause,
+	MAX
 };
 
 // Ό³Έν :
