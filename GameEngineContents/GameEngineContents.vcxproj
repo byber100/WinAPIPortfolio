@@ -198,12 +198,8 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="TitleBackGround.h" />
+    <ClInclude Include="Title.h" />
     <ClInclude Include="TitleLevel.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="TitleLogo.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -246,12 +242,8 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="TitleBackGround.cpp" />
+    <ClCompile Include="Title.cpp" />
     <ClCompile Include="TitleLevel.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="TitleLogo.cpp">
       <SubType>
       </SubType>
     </ClCompile>

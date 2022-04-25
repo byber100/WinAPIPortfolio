@@ -7,10 +7,7 @@
     <ClCompile Include="PlayLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
-    <ClCompile Include="TitleLogo.cpp">
-      <Filter>Title</Filter>
-    </ClCompile>
-    <ClCompile Include="TitleBackGround.cpp">
+    <ClCompile Include="Title.cpp">
       <Filter>Title</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
@@ -46,10 +43,7 @@
     <ClInclude Include="PlayLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
-    <ClInclude Include="TitleLogo.h">
-      <Filter>Title</Filter>
-    </ClInclude>
-    <ClInclude Include="TitleBackGround.h">
+    <ClInclude Include="Title.h">
       <Filter>Title</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">

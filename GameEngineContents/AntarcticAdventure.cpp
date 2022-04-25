@@ -48,6 +48,10 @@ void AntarcticAdventure::GameInit()
 	//}
 
 	{
+		GameEngineImage* Image = GameEngineImageManager::GetInst()->Find("Titles.bmp");
+		Image->CutCount(1, 4);
+	}
+	{
 		GameEngineImage* Image = GameEngineImageManager::GetInst()->Find("OceanTiles.bmp");
 		Image->CutCount(4, 2);
 	}
@@ -83,7 +87,7 @@ void AntarcticAdventure::GameInit()
 	CreateLevel<CompanyLevel>("Company");
 	CreateLevel<TitleLevel>("Title");
 	CreateLevel<PlayLevel>("Play");
-	ChangeLevel("Company");
+	ChangeLevel("Title");
 }
 
 void AntarcticAdventure::GameLoop()
