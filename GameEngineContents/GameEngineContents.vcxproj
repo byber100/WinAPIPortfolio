@@ -166,7 +166,19 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="CompanyBack.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="CompanyLevel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="HoleTrap.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="KonamiLogo.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -201,7 +213,19 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="CompanyBack.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="CompanyLevel.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="HoleTrap.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="KonamiLogo.cpp">
       <SubType>
       </SubType>
     </ClCompile>

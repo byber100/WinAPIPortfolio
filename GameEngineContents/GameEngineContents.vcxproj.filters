@@ -29,6 +29,15 @@
     <ClCompile Include="HoleTrap.cpp">
       <Filter>Play</Filter>
     </ClCompile>
+    <ClCompile Include="CompanyLevel.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="CompanyBack.cpp">
+      <Filter>Company</Filter>
+    </ClCompile>
+    <ClCompile Include="KonamiLogo.cpp">
+      <Filter>Company</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TitleLevel.h">
@@ -56,6 +65,15 @@
     <ClInclude Include="HoleTrap.h">
       <Filter>Play</Filter>
     </ClInclude>
+    <ClInclude Include="CompanyLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="CompanyBack.h">
+      <Filter>Company</Filter>
+    </ClInclude>
+    <ClInclude Include="KonamiLogo.h">
+      <Filter>Company</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Level">
@@ -72,6 +90,9 @@
     </Filter>
     <Filter Include="Play\Global">
       <UniqueIdentifier>{d6a178bf-fc85-411e-b93b-0559d30324c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Company">
+      <UniqueIdentifier>{9f7b37ba-e4d5-4f95-947a-98aff72a8364}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

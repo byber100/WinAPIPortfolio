@@ -11,7 +11,7 @@ PlayUI::PlayUI()
 	: Score_(0)
 	, HiScore_(0)
 	, Stage_(1)
-	, CountTime_(1)
+	, CountTime_(1000)
 	, Speed_(5)
 	, VeiledDebuging_(true)
 {

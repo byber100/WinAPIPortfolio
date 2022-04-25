@@ -1,6 +1,7 @@
 #include "AntarcticAdventure.h"
 #include "PlayLevel.h"
 #include "TitleLevel.h"
+#include "CompanyLevel.h"
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngineBase/GameEngineDirectory.h>
 #include <GameEngineBase/GameEngineFile.h>
@@ -79,9 +80,10 @@ void AntarcticAdventure::GameInit()
 		Image->CutCount(1, 9);
 	}
 
+	CreateLevel<CompanyLevel>("Company");
 	CreateLevel<TitleLevel>("Title");
 	CreateLevel<PlayLevel>("Play");
-	ChangeLevel("Play");
+	ChangeLevel("Company");
 }
 
 void AntarcticAdventure::GameLoop()
