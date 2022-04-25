@@ -11,7 +11,7 @@ PlayUI::PlayUI()
 	: Score_(0)
 	, HiScore_(0)
 	, Stage_(1)
-	, CountTime_(1000)
+	, CountTime_(1)
 	, Speed_(5)
 	, VeiledDebuging_(true)
 {
@@ -60,7 +60,7 @@ void PlayUI::DebugUIOn()
 	}
 	{
 		std::string UpdateText = std::to_string(CountTime_);
-		DedugText_.Draw("TimeOut: " + UpdateText, { 0,60 }, 20, 0);
+		DedugText_.Draw("TimeCount: " + UpdateText, { 0,60 }, 20, 0);
 	}
 	{
 		std::string UpdateText = std::to_string(RestDistance_);
@@ -332,20 +332,20 @@ void PlayUI::Start()
 
 void PlayUI::Update()
 {
-	if (0 == CountTime_)
+	NumberUpdate(Score_, ScoreImages);
+	NumberUpdate(HiScore_, HiScoreImages);
+	NumberUpdate(Stage_, StageImages);
+	NumberUpdate(CountTime_, TimeCountImages);
+	NumberUpdate(RestDistance_, RestDistanceImages);
+
+	if (0 != CountTime_)
 	{
-		GameEngineRenderer* TimeOut = CreateRenderer("TimeOut.bmp", 400);
-		TimeOut->SetPivot(GetScale().Half());
+		UpdateSpeed();
 	}
 	else
 	{
-		NumberUpdate(Score_, ScoreImages);
-		NumberUpdate(HiScore_, HiScoreImages);
-		NumberUpdate(Stage_, StageImages);
-		NumberUpdate(CountTime_, TimeCountImages);
-		NumberUpdate(RestDistance_, RestDistanceImages);
-
-		UpdateSpeed();
+		GameEngineRenderer* TimeOver = CreateRenderer("TimeOver.bmp", 400);
+		TimeOver->SetPivot(GetScale().Half());
 	}
 }
 
