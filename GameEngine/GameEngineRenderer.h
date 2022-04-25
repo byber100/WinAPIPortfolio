@@ -250,4 +250,10 @@ public:
 	{
 		CurrentAnimation_->InterTime_ = _InterTime;
 	}
+
+	inline void SetincreasinglyScale(const float4& _Scale)
+	{
+		ScaleMode_ = RenderScaleMode::User;
+		RenderScale_ += _Scale;
+	}
 };

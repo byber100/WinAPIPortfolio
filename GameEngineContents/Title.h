@@ -23,7 +23,11 @@ protected:
 
 private:
 	GameEngineRenderer* MainRender_;
-	GameEngineRenderer* VeiledRender_;
+	GameEngineRenderer* VeiledRender1_;
+	GameEngineRenderer* VeiledRender2_;
 
+	bool ChangeLevel_;
+
+	void LevelChangeAnim();
 };
 
