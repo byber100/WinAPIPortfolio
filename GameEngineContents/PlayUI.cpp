@@ -11,8 +11,8 @@ PlayUI::PlayUI()
 	: Score_(0)
 	, HiScore_(0)
 	, Stage_(1)
+	, CountTime_(1000)
 	, Speed_(5)
-	, CountTime_(100)
 	, VeiledDebuging_(true)
 {
 }
@@ -21,17 +21,26 @@ PlayUI::~PlayUI()
 {
 }
 
-void PlayUI::NumberUpdate(int _Object, const std::vector<GameEngineRenderer*> ScoreImage)
+void PlayUI::NumberUpdate(int _Object, const std::vector<GameEngineRenderer*> NumberImages)
 {
-	std::string Value = std::to_string(_Object);
 
-	for (size_t i = 0; i < ScoreImage.size(); i++)
+	std::string Value = std::to_string(_Object);
+                                                  
+	size_t Count = Value.size() <= NumberImages.size() ? Value.size() : NumberImages.size();
+
+	for (size_t i = 0; i < NumberImages.size(); i++) // 기본 랜더 초기화
 	{
-		if (nullptr == &Value[i])
-		{
-			ScoreImage[i]->SetIndex(0);
-		}
-		ScoreImage[i]->SetIndex(Value[i] - '0');
+		NumberImages[i]->SetIndex(0);
+	}
+
+	//       [9][9][9]
+	// [0][0][0][0][0]  자릿 수 고려하여 랜더
+
+	int OverCount = NumberImages.size() - Count;
+	int StringCount = 0;
+	for (size_t i = OverCount; i < Count + OverCount; i++)
+	{
+		NumberImages[i]->SetIndex(Value[StringCount++] - '0');
 	}
 }
 
@@ -272,19 +281,19 @@ void PlayUI::Start()
 	{
 		float StartXPos = 288.0f;
 		float StartYPos = 120.0f;
-		TimeOutTile1_ = CreateRenderer("InterfaceWords.bmp", 401, RenderPivot::LEFTTOP);
-		TimeOutTile1_->SetPivot({ StartXPos + (24 * 0), StartYPos });
-		TimeOutTile2_ = CreateRenderer("InterfaceWords.bmp", 401, RenderPivot::LEFTTOP);
-		TimeOutTile2_->SetPivot({ StartXPos + (24 * 1), StartYPos });
-		TimeOutTile3_ = CreateRenderer("InterfaceWords.bmp", 401, RenderPivot::LEFTTOP);
-		TimeOutTile3_->SetPivot({ StartXPos + (24 * 2), StartYPos });
-		TimeOutTile4_ = CreateRenderer("InterfaceWords.bmp", 401, RenderPivot::LEFTTOP);
-		TimeOutTile4_->SetPivot({ StartXPos + (24 * 3), StartYPos });
+		TimeCountTile1_ = CreateRenderer("InterfaceWords.bmp", 401, RenderPivot::LEFTTOP);
+		TimeCountTile1_->SetPivot({ StartXPos + (24 * 0), StartYPos });
+		TimeCountTile2_ = CreateRenderer("InterfaceWords.bmp", 401, RenderPivot::LEFTTOP);
+		TimeCountTile2_->SetPivot({ StartXPos + (24 * 1), StartYPos });
+		TimeCountTile3_ = CreateRenderer("InterfaceWords.bmp", 401, RenderPivot::LEFTTOP);
+		TimeCountTile3_->SetPivot({ StartXPos + (24 * 2), StartYPos });
+		TimeCountTile4_ = CreateRenderer("InterfaceWords.bmp", 401, RenderPivot::LEFTTOP);
+		TimeCountTile4_->SetPivot({ StartXPos + (24 * 3), StartYPos });
 
-		TimeOutImages.push_back(TimeOutTile1_);
-		TimeOutImages.push_back(TimeOutTile2_);
-		TimeOutImages.push_back(TimeOutTile3_);
-		TimeOutImages.push_back(TimeOutTile4_);
+		TimeCountImages.push_back(TimeCountTile1_);
+		TimeCountImages.push_back(TimeCountTile2_);
+		TimeCountImages.push_back(TimeCountTile3_);
+		TimeCountImages.push_back(TimeCountTile4_);
 	}
 	{
 		float StartXPos = 496.0f;
@@ -319,30 +328,6 @@ void PlayUI::Start()
 		SpeedTile6_ = CreateRenderer("InterfaceWords.bmp", 401, RenderPivot::LEFTTOP);
 		SpeedTile6_->SetPivot({ StartXPos + (24 * 5), StartYPos });
 	}
-
-	ScoreTile1_->SetIndex(0);
-	ScoreTile2_->SetIndex(1);
-	ScoreTile3_->SetIndex(2);
-	ScoreTile4_->SetIndex(3);
-	ScoreTile5_->SetIndex(4);
-	ScoreTile6_->SetIndex(5);
-	HiScoreTile1_->SetIndex(6);
-	HiScoreTile2_->SetIndex(7);
-	HiScoreTile3_->SetIndex(8);
-	HiScoreTile4_->SetIndex(9);
-	HiScoreTile5_->SetIndex(0);
-	HiScoreTile6_->SetIndex(0);
-	StageTile1_->SetIndex(0);
-	StageTile2_->SetIndex(0);
-	TimeOutTile1_->SetIndex(0);
-	TimeOutTile2_->SetIndex(0);
-	TimeOutTile3_->SetIndex(0);
-	TimeOutTile4_->SetIndex(0);
-
-	RestDistanceTile1_->SetIndex(0);
-	RestDistanceTile2_->SetIndex(0);
-	RestDistanceTile3_->SetIndex(0);
-	RestDistanceTile4_->SetIndex(0);
 }
 
 void PlayUI::Update()
@@ -354,7 +339,12 @@ void PlayUI::Update()
 	}
 	else
 	{
-		//NumberUpdate(RestDistance_, RestDistanceImages);
+		NumberUpdate(Score_, ScoreImages);
+		NumberUpdate(HiScore_, HiScoreImages);
+		NumberUpdate(Stage_, StageImages);
+		NumberUpdate(CountTime_, TimeCountImages);
+		NumberUpdate(RestDistance_, RestDistanceImages);
+
 		UpdateSpeed();
 	}
 }

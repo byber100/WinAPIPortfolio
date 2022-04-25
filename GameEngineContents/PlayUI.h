@@ -28,11 +28,11 @@ private:
 	GameEngineRenderer* StageTile1_; // 816 92
 	GameEngineRenderer* StageTile2_;
 
-	std::vector<GameEngineRenderer*> TimeOutImages;
-	GameEngineRenderer* TimeOutTile1_; // 288 124
-	GameEngineRenderer* TimeOutTile2_;
-	GameEngineRenderer* TimeOutTile3_;
-	GameEngineRenderer* TimeOutTile4_;
+	std::vector<GameEngineRenderer*> TimeCountImages;
+	GameEngineRenderer* TimeCountTile1_; // 288 124
+	GameEngineRenderer* TimeCountTile2_;
+	GameEngineRenderer* TimeCountTile3_;
+	GameEngineRenderer* TimeCountTile4_;
 
 	std::vector<GameEngineRenderer*> RestDistanceImages;
 	GameEngineRenderer* RestDistanceTile1_; // 496 124
