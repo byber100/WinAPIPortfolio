@@ -35,6 +35,9 @@
     <ClCompile Include="KonamiLogo.cpp">
       <Filter>Company</Filter>
     </ClCompile>
+    <ClCompile Include="LevelChanger.cpp">
+      <Filter>Play\Global</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TitleLevel.h">
@@ -67,6 +70,9 @@
     </ClInclude>
     <ClInclude Include="KonamiLogo.h">
       <Filter>Company</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelChanger.h">
+      <Filter>Play\Global</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -3,6 +3,7 @@
 
 // Ό³Έν :
 class GameEngineRenderer;
+class LevelChanger;
 class Title : public GameEngineActor
 {
 public:
@@ -16,18 +17,15 @@ public:
 	Title& operator=(const Title& _Other) = delete;
 	Title& operator=(Title&& _Other) noexcept = delete;
 
-protected:
+private:
 	void Start() override;
 	void Update() override;
 	void Render() override;
 
 private:
 	GameEngineRenderer* MainRender_;
-	GameEngineRenderer* VeiledRender1_;
-	GameEngineRenderer* VeiledRender2_;
+	GameEngineRenderer* VeiledRender_;
 
-	bool ChangeLevel_;
-
-	void LevelChangeAnim();
+	LevelChanger* ChangerInfo_;
 };
 
