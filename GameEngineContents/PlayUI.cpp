@@ -48,28 +48,28 @@ void PlayUI::DebugUIOn()
 {
 	{
 		std::string UpdateText = std::to_string(Score_);
-		DedugText_.Draw("Score: " + UpdateText, { 0,0 }, 20, 0);
+		DedugText_.Draw("Score: " + UpdateText, { 0,0 }, RGB(255,255,255), 20, 0);
 	}
 	{
 		std::string UpdateText = std::to_string(HiScore_);
-		DedugText_.Draw("HiScore: " + UpdateText, { 0,20 }, 20, 0);
+		DedugText_.Draw("HiScore: " + UpdateText, { 0,20 }, RGB(255, 255, 255), 20, 0);
 	}
 	{
 		std::string UpdateText = std::to_string(Stage_);
-		DedugText_.Draw("Stage: " + UpdateText, { 0,40 }, 20, 0);
+		DedugText_.Draw("Stage: " + UpdateText, { 0,40 }, RGB(255, 255, 255), 20, 0);
 	}
 	{
 		std::string UpdateText = std::to_string(CountTime_);
-		DedugText_.Draw("TimeCount: " + UpdateText, { 0,60 }, 20, 0);
+		DedugText_.Draw("TimeCount: " + UpdateText, { 0,60 }, RGB(255, 255, 255), 20, 0);
 	}
 	{
 		std::string UpdateText = std::to_string(RestDistance_);
-		DedugText_.Draw("RestDistance: " + UpdateText, { 0,80 }, 20, 0);
+		DedugText_.Draw("RestDistance: " + UpdateText, { 0,80 }, RGB(255, 255, 255), 20, 0);
 	}
 	{
 		std::string UpdateText = std::to_string(Speed_);
 		std::string SpeedText = std::to_string(PlayerInfo_->GetForwardSpeed());
-		DedugText_.Draw("Speed: " + UpdateText + " ( " + SpeedText + " )", {0,100}, 20, 0);
+		DedugText_.Draw("Speed: " + UpdateText + " ( " + SpeedText + " )", {0,100}, RGB(255, 255, 255), 20, 0);
 	}
 }
 
