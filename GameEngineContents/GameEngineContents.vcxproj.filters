@@ -38,6 +38,12 @@
     <ClCompile Include="LevelChanger.cpp">
       <Filter>GlobalActors</Filter>
     </ClCompile>
+    <ClCompile Include="MapLevel.cpp">
+      <Filter>Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMap.cpp">
+      <Filter>OtherActors\Map</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TitleLevel.h">
@@ -74,6 +80,12 @@
     <ClInclude Include="LevelChanger.h">
       <Filter>GlobalActors</Filter>
     </ClInclude>
+    <ClInclude Include="MapLevel.h">
+      <Filter>Levels</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMap.h">
+      <Filter>OtherActors\Map</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="OtherActors">
@@ -96,6 +108,9 @@
     </Filter>
     <Filter Include="OtherActors\Ending">
       <UniqueIdentifier>{537a457f-c8d6-4fbf-b505-9a897541433c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OtherActors\Map">
+      <UniqueIdentifier>{f8a68641-125d-477c-a45c-87ca5898be5d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

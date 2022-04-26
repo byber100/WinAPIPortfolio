@@ -22,7 +22,7 @@ public:		//delete operator
 	KonamiLogo& operator=(const KonamiLogo& _Other) = delete; // default Copy operator 디폴트 대입 연산자
 	KonamiLogo& operator=(const KonamiLogo&& _Other) noexcept = delete; // default RValue Copy operator 디폴트 RValue 대입연산자
 
-public:		//member Func
+private:		//member Func
 	void Start() override;
 	void Update() override;
 	void Render() override;

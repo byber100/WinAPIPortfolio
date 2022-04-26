@@ -23,7 +23,7 @@ public:		//delete operator
 	CompanyBack& operator=(const CompanyBack& _Other) = delete; // default Copy operator 디폴트 대입 연산자
 	CompanyBack& operator=(const CompanyBack&& _Other) noexcept = delete; // default RValue Copy operator 디폴트 RValue 대입연산자
 
-public:		//member Func
+private:
 	void Start() override;
 	void Update() override;
 	void Render() override;
