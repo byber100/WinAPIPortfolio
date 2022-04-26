@@ -362,3 +362,8 @@ bool GameEngineRenderer::IsAnimationName(const std::string& _Name)
 {
 	return CurrentAnimation_->GetNameConstRef() == _Name;
 }
+
+void GameEngineRenderer::CreateBrush()
+{
+
+}

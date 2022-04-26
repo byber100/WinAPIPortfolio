@@ -67,9 +67,6 @@ public:
 		const float4& _OtherPivot, const float4& _OtherScale, float _Angle, GameEngineImage* _Filter);
 
 
-	void PlgCopy(GameEngineImage* _Other, GameEngineImage* _Filter);
-
-
 	void Cut(const float4& _CutSize);
 
 	void CutCount(int _x, int _y);
