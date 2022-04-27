@@ -4,9 +4,11 @@
 // 분류 :
 // 용도 :
 // 설명 :
+class LevelChanger;
 class MapLevel : public GameEngineLevel
 {
 private:	// member Var
+	LevelChanger* LevelChanger_;
 
 public:		
 	MapLevel(); // default constructor 디폴트 생성자

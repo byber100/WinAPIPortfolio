@@ -2,6 +2,7 @@
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngine.h>
 #include <GameEngine/GameEngineRenderer.h>
+#include <GameEngineBase/GameEngineInput.h>
 
 
 // Static Var
@@ -53,5 +54,5 @@ void LevelChanger::Start()
 
 void LevelChanger::Update()
 {
-
+	
 }

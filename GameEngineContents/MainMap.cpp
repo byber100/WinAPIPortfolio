@@ -21,7 +21,7 @@ void MainMap::Start()
 	SetPosition(GameEngineWindow::GetScale().Half());
 	SetScale(GameEngineWindow::GetScale());
 
-	MapImage_ = CreateRenderer("Map.bmp", 0);
+	MapImage_ = CreateRenderer("Map.bmp", 2);
 }
 void MainMap::Update()
 {

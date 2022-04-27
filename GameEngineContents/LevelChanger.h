@@ -19,6 +19,7 @@ public:
 
 public:		
 	LevelChanger(); // default constructor 디폴트 생성자
+	LevelChanger(int _Key);
 	~LevelChanger(); // default destructor 디폴트 소멸자
 
 public:		// delete constructor
