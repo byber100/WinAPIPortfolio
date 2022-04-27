@@ -121,7 +121,7 @@ GameEngineActor* GameEngineLevel::FindActor(const std::string& _Name)
 	{
 		return nullptr;
 	}
-	
+
 	return FindIter->second;
 }
 
@@ -132,7 +132,7 @@ void GameEngineLevel::RegistActor(const std::string& _Name, GameEngineActor* _Ac
 		MsgBoxAssert("이미 존재하는 이름으로 또 등록하려고 했습니다.");
 	}
 
-	RegistActor_.insert(std::map<std::string, GameEngineActor*>::value_type(_Name,_Actor));
+	RegistActor_.insert(std::map<std::string, GameEngineActor*>::value_type(_Name, _Actor));
 }
 
 void GameEngineLevel::ActorLevelChangeEnd(GameEngineLevel* _NextLevel)
@@ -168,6 +168,10 @@ void GameEngineLevel::ActorLevelChangeEnd(GameEngineLevel* _NextLevel)
 	}
 }
 
+bool SortY(GameEngineRenderer* _Left, GameEngineRenderer* _Right)
+{
+	return _Left->GetSortingPivot().y < _Right->GetSortingPivot().y;
+}
 
 void GameEngineLevel::ActorRender()
 {
@@ -182,6 +186,13 @@ void GameEngineLevel::ActorRender()
 		for (; GroupStart != GroupEnd; ++GroupStart)
 		{
 			std::list<GameEngineRenderer*>& Group = GroupStart->second;
+
+			// 그 그룹간에만 소팅이 됩니다
+			if (IsYSort_.end() != IsYSort_.find(GroupStart->first))
+			{
+				Group.sort(SortY);
+			}
+
 			StartRenderer = Group.begin();
 			EndRenderer = Group.end();
 			for (; StartRenderer != EndRenderer; ++StartRenderer)
@@ -227,7 +238,7 @@ void GameEngineLevel::ActorRender()
 	}
 }
 
-void GameEngineLevel::CollisionDebugRender() 
+void GameEngineLevel::CollisionDebugRender()
 {
 	if (false == IsDebug)
 	{
@@ -360,7 +371,7 @@ void GameEngineLevel::AddRenderer(GameEngineRenderer* _Renderer)
 	AllRenderer_[_Renderer->GetOrder()].push_back(_Renderer);
 }
 
-void GameEngineLevel::ChangeUpdateOrder(GameEngineActor* _Actor, int _NewOreder) 
+void GameEngineLevel::ChangeUpdateOrder(GameEngineActor* _Actor, int _NewOreder)
 {
 	if (_Actor->GetOrder() == _NewOreder)
 	{
@@ -384,7 +395,7 @@ void GameEngineLevel::ChangeRenderOrder(GameEngineRenderer* _Renderer, int _NewO
 }
 
 void GameEngineLevel::AddCollision(const std::string& _GroupName
-	, GameEngineCollision* _Collision) 
+	, GameEngineCollision* _Collision)
 {
 	_Collision->CollisionName_ = _GroupName;
 	// 찾아서 없으면 만드는 것까지.
