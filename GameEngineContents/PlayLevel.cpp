@@ -14,13 +14,6 @@ PlayLevel* PlayLevel::PlayLevelStage = nullptr;
 int PlayLevel::FrameCount = 64; // Start Stage Stay Time
 bool PlayLevel::is2FrameUnit_ = false;
 
-enum class ORDER
-{
-	BACKGROUND,
-	PLAYER,
-	UI
-};
-
 PlayLevel::PlayLevel() 
 	: UnitSecond_(1.0f)
 {
