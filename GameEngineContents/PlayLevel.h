@@ -27,9 +27,7 @@ private:
 
 	GameEngineSoundPlayer BgmPlayer;
 
-	Player* PlayerInfo_;
 	RandomStage* StageInfo_;
-	PlayUI* UI_;
 
 public:
 	static PlayLevel* PlayLevelStage;
@@ -47,7 +45,6 @@ protected:
 	void Update() override;
 
 	void LevelChangeStart(GameEngineLevel* _NextLevel) override;
-
 	void LevelChangeEnd(GameEngineLevel* _PrevLevel) override;
 
 private:

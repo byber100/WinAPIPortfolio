@@ -7,6 +7,7 @@
 #include <GameEngineBase/GameEngineTime.h>
 #include <GameEngineBase/GameEngineDebug.h>
 #include <GameEngineBase/GameEngineInput.h>
+#include <GameEngine/GameEngine.h>
 
 PlayLevel* PlayLevel::PlayLevelStage = nullptr;
 int PlayLevel::FrameCount = 64; // Start Stage Stay Time
@@ -20,8 +21,7 @@ enum class ORDER
 };
 
 PlayLevel::PlayLevel() 
-	: PlayerInfo_(nullptr)
-	, UnitSecond_(1.0f)
+	: UnitSecond_(1.0f)
 {
 }
 
@@ -31,32 +31,35 @@ PlayLevel::~PlayLevel()
 
 float PlayLevel::GetLevelInterTime()
 {
-	if (nullptr == PlayerInfo_)
+	if (nullptr == Player::MainPlayer)
 	{
 		MsgBoxAssert("플레이어 정보가 없습니다.");
 	}
 
-	float PlayerSpeed = PlayerInfo_->GetForwardSpeed();
+	float PlayerSpeed = Player::MainPlayer->GetForwardSpeed();
 	PlayerSpeed = 1 / PlayerSpeed;
 	return PlayerSpeed;
 }
 
 void PlayLevel::Loading()
 {
-	
+	if (nullptr == Player::MainPlayer)
+	{
+		Player::MainPlayer = CreateActor<Player>(3, "MainPlayer");
+	}
+
 	StageInfo_ = CreateActor<RandomStage>(0);
-	PlayerInfo_ = CreateActor<Player>(1);
-	UI_ = CreateActor<PlayUI>(3);
 	CreateActor<PlayBack>(4);
 
 	PlayLevelStage = this;
 
 	// Test///////////////////////////////////////////////////
 	GameEngineInput::GetInst()->CreateKey("TestTrap", 'Q');
+	GameEngineInput::GetInst()->CreateKey("ToPrevLevel", '1');
 
-	if (nullptr == PlayerInfo_ ||
+	if (nullptr == Player::MainPlayer ||
 		nullptr == StageInfo_ ||
-		nullptr == UI_)
+		nullptr == PlayUI::MainUI)
 	{
 		MsgBoxAssert("필수 액터 정보가 없습니다.")
 	}
@@ -72,12 +75,16 @@ void PlayLevel::Update()
 	//}
 
 	// Test///////////////////////////////////////////////////
+	if (GameEngineInput::GetInst()->IsDown("ToPrevLevel"))
+	{
+		GameEngine::GetInst().ChangeLevel("Map");
+	}
 	if (GameEngineInput::GetInst()->IsDown("TestTrap"))
 	{
 		CreateActor<HoleTrap>(2);
 	}
 
-	int t = UI_->GetCountTime();
+	int t = PlayUI::MainUI->GetCountTime();
 	if (0 != t)
 	{
 		if (0 < UnitSecond_)
@@ -89,12 +96,12 @@ void PlayLevel::Update()
 			UnitSecond_ = 1.0f;
 			
 			--t;
-			UI_->SetCountTime(t);
+			PlayUI::MainUI->SetCountTime(t);
 		}
 	}
 	else
 	{
-		PlayerInfo_->ChangeState(PlayerState::Pause);
+		Player::MainPlayer->ChangeState(PlayerState::Pause);
 	}
 
 	float LevelInterTime = PlayLevelStage->GetLevelInterTime();
@@ -122,13 +129,6 @@ void PlayLevel::Update()
 	CurframeTime_ -= GameEngineTime::GetDeltaTime();
 	
 }
-void PlayLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
-{
-	//if (_NextLevel->GetNameCopy() != "Title")
-	//{
-	//	PlayerInfo_->NextLevelOn();
-	//}
-}
 
 void PlayLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
@@ -139,4 +139,14 @@ void PlayLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	//GameEngineSound::SoundPlayOneShot("vo_shk.mp3");
 	//Time = 5.0f;
 
+}
+
+void PlayLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
+{
+	//if (_NextLevel->GetNameCopy() != "Title")
+	//{
+	//	PlayerInfo_->NextLevelOn();
+	//}
+
+	PlayUI::MainUI->NextLevelOn();
 }

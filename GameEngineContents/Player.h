@@ -24,6 +24,9 @@ enum PlayerState
 // Ό³Έν :
 class Player : public GameEngineActor
 {
+public:
+	static Player* MainPlayer;
+
 private:
 	float ForwardSpeed_;
 	float SideSpeed_;

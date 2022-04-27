@@ -6,6 +6,7 @@
 #include <GameEngineBase/GameEngineTime.h>
 #include <GameEngine/GameEngineRenderer.h>
 
+Player* Player::MainPlayer = nullptr;
 
 Player::Player() 
 	: ForwardSpeed_(7.0f) // 0ø° µµ¥ﬁ«œ∏È æ÷¥œ∏ÿ√„

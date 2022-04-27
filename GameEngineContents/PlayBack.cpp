@@ -17,5 +17,5 @@ PlayBack::~PlayBack()
 //member Func
 void PlayBack::Start()
 {
-	GameEngineRenderer* Renderer = CreateRenderer("BackInterface.bmp", 500, RenderPivot::LEFTTOP);
+	GameEngineRenderer* Renderer = CreateRenderer("PlayBack.bmp", 500, RenderPivot::LEFTTOP);
 }

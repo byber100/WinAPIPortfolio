@@ -6,6 +6,9 @@
 class Player;
 class PlayUI : public GameEngineActor
 {
+public:
+	static PlayUI* MainUI;
+
 private:
 	// Interface Renderer //////////////////////////////////////////////////////
 	std::vector<GameEngineRenderer*> ScoreImages;
@@ -57,7 +60,6 @@ private:
 	GameEngineFont DedugText_;
 	bool VeiledDebuging_;
 
-	Player* PlayerInfo_;
 
 public:
 	// constrcuter destructer
@@ -88,6 +90,8 @@ private:
 	void DebugUIOn();
 
 	void UpdateSpeed();
+
+	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
 
 	void Start() override;
 	void Update() override;

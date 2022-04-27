@@ -5,6 +5,7 @@
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngineBase/GameEngineInput.h>
 
+PlayUI* PlayUI::MainUI = nullptr;
 int PlayUI::RestDistance_ = 1500;
 
 PlayUI::PlayUI()
@@ -68,14 +69,22 @@ void PlayUI::DebugUIOn()
 	}
 	{
 		std::string UpdateText = std::to_string(Speed_);
-		std::string SpeedText = std::to_string(PlayerInfo_->GetForwardSpeed());
+		std::string SpeedText = { 7 };
+		if (nullptr != Player::MainPlayer)
+		{
+			SpeedText = std::to_string(Player::MainPlayer->GetForwardSpeed());
+		}
 		DedugText_.Draw("Speed: " + UpdateText + " ( " + SpeedText + " )", {0,100}, RGB(255, 255, 255), 20, 0);
 	}
 }
 
 void PlayUI::UpdateSpeed()
 {
-	float Speed = PlayerInfo_->GetForwardSpeed();
+	float Speed = Speed_;
+	if (nullptr != Player::MainPlayer)
+	{
+		Speed = Player::MainPlayer->GetForwardSpeed();
+	}
 
 	if (1.0f > Speed)
 	{
@@ -209,6 +218,11 @@ void PlayUI::UpdateSpeed()
 	}
 }
 
+void PlayUI::LevelChangeStart(GameEngineLevel* _PrevLevel)
+{
+	MainUI = this;
+}
+
 void PlayUI::Start()
 {
 	DedugText_.Load("arial.ttf");
@@ -216,8 +230,7 @@ void PlayUI::Start()
 	
 	SetPosition(float4::ZERO);
 	SetScale(GameEngineWindow::GetScale());
-
-	PlayerInfo_ = dynamic_cast<Player*>(GetLevel()->FindActor("Penguin"));
+	GameEngineRenderer* Renderer = CreateRenderer("UIBack.bmp", 500, RenderPivot::LEFTTOP);
 	
 	{
 		float StartXPos = 240.0f;
@@ -338,7 +351,10 @@ void PlayUI::Update()
 
 	if (0 != CountTime_)
 	{
-		UpdateSpeed();
+		if (nullptr != Player::MainPlayer)
+		{
+			UpdateSpeed();
+		}
 	}
 	else
 	{

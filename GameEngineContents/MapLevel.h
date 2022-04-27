@@ -25,5 +25,8 @@ public:		//delete operator
 protected:
 	void Loading() override;
 	void Update() override;
+
+	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
+	void LevelChangeEnd(GameEngineLevel* _NextLevel) override;
 };
 

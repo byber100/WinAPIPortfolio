@@ -1,5 +1,6 @@
 #include "MainMap.h"
 #include <GameEngineBase/GameEngineWindow.h>
+#include <GameEngine/GameEngineRenderer.h>
 
 
 // Static Var
@@ -22,6 +23,7 @@ void MainMap::Start()
 	SetScale(GameEngineWindow::GetScale());
 
 	MapImage_ = CreateRenderer("Map.bmp", 2);
+	MapImage_->SetPivot({ 0,35 });
 }
 void MainMap::Update()
 {
