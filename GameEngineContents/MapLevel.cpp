@@ -4,6 +4,7 @@
 #include "LevelChanger.h"
 #include "Player.h"
 #include "PlayUI.h"
+#include "PathPoint.h"
 #include <GameEngineBase/GameEngineInput.h>
 
 
@@ -34,8 +35,7 @@ void MapLevel::Loading()
 
 	LevelChanger_ = CreateActor<LevelChanger>((int)ORDER::UI);
 	CreateActor<MainMap>((int)ORDER::BACKGROUND);
-
-
+	CreateActor<PathPoint>((int)ORDER::BACKGROUND);
 	
 	GameEngineInput::GetInst()->CreateKey("GameStart", VK_SPACE);
 }

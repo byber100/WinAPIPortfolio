@@ -54,6 +54,10 @@ void AntarcticAdventure::GameInit()
 		Image->CutCount(1, 4);
 	}
 	{
+		GameEngineImage* Image = GameEngineImageManager::GetInst()->Find("PathBrushColors.bmp");
+		Image->CutCount(3, 1);
+	}
+	{
 		GameEngineImage* Image = GameEngineImageManager::GetInst()->Find("OceanTiles.bmp");
 		Image->CutCount(4, 2);
 	}

@@ -19,10 +19,11 @@ MainMap::~MainMap()
 //member Func
 void MainMap::Start()
 {
-	SetPosition(GameEngineWindow::GetScale().Half());
+	SetPosition(float4::ZERO);
 	SetScale(GameEngineWindow::GetScale());
 
-	MapImage_ = CreateRenderer("Map.bmp", 2);
+	Map_ = CreateRenderer("Map.bmp", 2, RenderPivot::LEFTTOP);
+	LevelRegist("Map");
 }
 void MainMap::Update()
 {

@@ -4,11 +4,10 @@
 // 분류 :
 // 용도 :
 // 설명 :
-class GameEngineRenderer;
 class MainMap : public GameEngineActor
 {
 private:	// member Var
-	GameEngineRenderer* MapImage_;
+	GameEngineRenderer* Map_;
 
 public:		
 	MainMap(); // default constructor 디폴트 생성자
