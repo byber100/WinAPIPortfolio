@@ -34,6 +34,6 @@ private:
 	void Update() override;
 
 public:
-	void LevelChangeAnim();
+	void LevelChangeAnim(const std::string& _NextLevel);
 };
 

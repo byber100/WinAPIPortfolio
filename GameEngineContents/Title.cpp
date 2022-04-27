@@ -35,7 +35,7 @@ void Title::Update()
 {
 	if (true == ChangerInfo_->GetChanging())
 	{
-		ChangerInfo_->LevelChangeAnim();
+		ChangerInfo_->LevelChangeAnim("Map");
 	}
 
 	if (false == ChangerInfo_->GetChanging() && 1100.f > VeiledRender_->GetPivot().x)
@@ -51,7 +51,7 @@ void Title::Update()
 
 			if (GameEngineInput::GetInst()->IsDown("Select"))
 			{
-				ChangerInfo_->LevelChangeAnim();
+				ChangerInfo_->LevelChangeAnim("Map");
 			}
 		}
 	}

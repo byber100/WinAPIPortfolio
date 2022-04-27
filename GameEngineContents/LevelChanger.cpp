@@ -19,7 +19,7 @@ LevelChanger::~LevelChanger()
 }
 
 //member Func
-void LevelChanger::LevelChangeAnim()
+void LevelChanger::LevelChangeAnim(const std::string& _NextLevel)
 {
 	if (true == Changing_)
 	{
@@ -29,7 +29,7 @@ void LevelChanger::LevelChangeAnim()
 		}
 		else
 		{
-			GameEngine::GetInst().ChangeLevel("Play");
+			GameEngine::GetInst().ChangeLevel(_NextLevel);
 		}
 	}
 	else
