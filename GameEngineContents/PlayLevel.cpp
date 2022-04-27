@@ -1,4 +1,5 @@
 #include "PlayLevel.h"
+#include "ContentsEnum.h"
 #include "Player.h"
 #include "PlayUI.h"
 #include "PlayBack.h"
@@ -45,11 +46,11 @@ void PlayLevel::Loading()
 {
 	if (nullptr == Player::MainPlayer)
 	{
-		Player::MainPlayer = CreateActor<Player>(3, "MainPlayer");
+		Player::MainPlayer = CreateActor<Player>((int)ORDER::PLAYER, "MainPlayer");
 	}
 
-	StageInfo_ = CreateActor<RandomStage>(0);
-	CreateActor<PlayBack>(4);
+	StageInfo_ = CreateActor<RandomStage>((int)ORDER::BACKGROUND);
+	CreateActor<PlayBack>((int)ORDER::BACKGROUND);
 
 	PlayLevelStage = this;
 
@@ -81,7 +82,7 @@ void PlayLevel::Update()
 	}
 	if (GameEngineInput::GetInst()->IsDown("TestTrap"))
 	{
-		CreateActor<HoleTrap>(2);
+		CreateActor<HoleTrap>((int)ORDER::TRAP);
 	}
 
 	int t = PlayUI::MainUI->GetCountTime();
@@ -123,7 +124,7 @@ void PlayLevel::Update()
 			is2FrameUnit_ = true;
 
 			StageInfo_->MountainFrame();
-			//CreateActor<HoleTrap>(2);
+			//CreateActor<HoleTrap>((int)ORDER::TRAP);
 		}
 	}
 	CurframeTime_ -= GameEngineTime::GetDeltaTime();

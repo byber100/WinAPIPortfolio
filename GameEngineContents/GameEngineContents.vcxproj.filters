@@ -92,6 +92,7 @@
     <ClInclude Include="PlayBack.h">
       <Filter>OtherActors\Play</Filter>
     </ClInclude>
+    <ClInclude Include="ContentsEnum.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="OtherActors">

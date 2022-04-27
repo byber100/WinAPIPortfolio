@@ -1,4 +1,5 @@
 #include "MapLevel.h"
+#include "ContentsEnum.h"
 #include "MainMap.h"
 #include "LevelChanger.h"
 #include "Player.h"
@@ -24,11 +25,11 @@ void MapLevel::Loading()
 {
 	if (nullptr == PlayUI::MainUI)
 	{
-		PlayUI::MainUI = CreateActor<PlayUI>(5, "MainUI");
+		PlayUI::MainUI = CreateActor<PlayUI>((int)ORDER::UI, "MainUI");
 	}
 
-	LevelChanger_ = CreateActor<LevelChanger>(0);
-	CreateActor<MainMap>(1);
+	LevelChanger_ = CreateActor<LevelChanger>((int)ORDER::UI);
+	CreateActor<MainMap>((int)ORDER::BACKGROUND);
 	
 	GameEngineInput::GetInst()->CreateKey("GameStart", VK_SPACE);
 }
