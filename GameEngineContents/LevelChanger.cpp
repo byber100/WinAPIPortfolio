@@ -26,7 +26,7 @@ void LevelChanger::LevelChangeAnim(const std::string& _NextLevel)
 	{
 		if (800.f > VeiledRender_->GetScale().x)
 		{
-			VeiledRender_->SetIncreasinglyScale({ 1,0 });
+			VeiledRender_->SetIncreasinglyScale(float4::RIGHT * 1000.f * GameEngineTime::GetInst()->GetDeltaTime());
 		}
 		else
 		{
