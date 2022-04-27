@@ -42,6 +42,7 @@ void MapLevel::Update()
 	}
 	if (GameEngineInput::GetInst()->IsDown("GameStart"))
 	{
+		GameEngineInput::GetInst()->Reset();
 		dynamic_cast<LevelChanger*>(FindActor("LevelChanger"))->LevelChangeAnim("Play");
 	}
 }

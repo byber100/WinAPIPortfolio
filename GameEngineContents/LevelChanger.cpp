@@ -30,6 +30,8 @@ void LevelChanger::LevelChangeAnim(const std::string& _NextLevel)
 		}
 		else
 		{
+			VeiledRender_->SetScale({ 0, GetScale().y });
+			Changing_ = false;
 			GameEngine::GetInst().ChangeLevel(_NextLevel);
 		}
 	}
