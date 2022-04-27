@@ -1,6 +1,7 @@
 #include "PlayLevel.h"
 #include "Player.h"
 #include "PlayUI.h"
+#include "PlayBack.h"
 #include "RandomStage.h"
 #include "HoleTrap.h"
 #include <GameEngineBase/GameEngineTime.h>
@@ -46,6 +47,7 @@ void PlayLevel::Loading()
 	StageInfo_ = CreateActor<RandomStage>(0);
 	PlayerInfo_ = CreateActor<Player>(1);
 	UI_ = CreateActor<PlayUI>(3);
+	CreateActor<PlayBack>(4);
 
 	PlayLevelStage = this;
 

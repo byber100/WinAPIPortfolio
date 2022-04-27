@@ -218,8 +218,6 @@ void PlayUI::Start()
 	SetScale(GameEngineWindow::GetScale());
 
 	PlayerInfo_ = dynamic_cast<Player*>(GetLevel()->FindActor("Penguin"));
-
-	GameEngineRenderer* Renderer = CreateRenderer("BackInterface.bmp", 500, RenderPivot::LEFTTOP);
 	
 	{
 		float StartXPos = 240.0f;
