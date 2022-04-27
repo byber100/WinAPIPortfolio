@@ -36,10 +36,11 @@ public:		//delete operator
 	PathPoint& operator=(const PathPoint& _Other) = delete; // default Copy operator 디폴트 대입 연산자
 	PathPoint& operator=(const PathPoint&& _Other) noexcept = delete; // default RValue Copy operator 디폴트 RValue 대입연산자
 
-private:		//member Func
+public:
 	void DrawPoint(const float4& _Pos);
 	void DrawPath(const float4& _StartPos, const float4& _EndPos, LineColor _Color);
 
+private:
 	void Start() override;
 	void Update() override;
 	void Render() override;

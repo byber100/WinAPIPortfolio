@@ -74,14 +74,18 @@ void PathPoint::Start()
 {
 	SetPosition(float4::ZERO);
 
-	
+	GameEngineRenderer* FirstPath = CreateRenderer("PathBrushColors.bmp", 3);
+	FirstPath->SetIndex(0);
+	FirstPath->SetPivot({ 500,500 });
+	FirstPath->SetScale({ 1,1 });
+	Paths_.push_back(FirstPath);
 }
 void PathPoint::Update()
 {
 	if (false == ResetPath_)
 	{
 		DrawPoint({ 640,575 });
-		DrawPath({ 500,100 }, { 100,10 }, LineColor::GRAY);
+		DrawPath({ 300,300 }, { 100,0 }, LineColor::GRAY);
 	}
 }
 void PathPoint::Render()
