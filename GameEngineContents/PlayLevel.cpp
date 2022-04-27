@@ -71,6 +71,7 @@ void PlayLevel::Update()
 	// Test///////////////////////////////////////////////////
 	if (GameEngineInput::GetInst()->IsDown("ToPrevLevel"))
 	{
+		Player::MainPlayer->SetForwardSpeed(7.f);
 		GameEngine::GetInst().ChangeLevel("Map");
 	}
 	if (GameEngineInput::GetInst()->IsDown("TestTrap"))

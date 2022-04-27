@@ -14,6 +14,10 @@
 // constructor destructor
 MapLevel::MapLevel()
 {
+	//HBRUSH h_brush = CreateSolidBrush(RGB(73, 67, 254));
+	//RECT r = { 0,0,GameEngineWindow::GetScale().ix(),GameEngineWindow::GetScale().iy() };
+	//FillRect(GameEngine::BackBufferDC(), &r, h_brush);
+	//DeleteObject(h_brush);
 }
 
 MapLevel::~MapLevel()
@@ -30,6 +34,8 @@ void MapLevel::Loading()
 
 	LevelChanger_ = CreateActor<LevelChanger>((int)ORDER::UI);
 	CreateActor<MainMap>((int)ORDER::BACKGROUND);
+
+
 	
 	GameEngineInput::GetInst()->CreateKey("GameStart", VK_SPACE);
 }
