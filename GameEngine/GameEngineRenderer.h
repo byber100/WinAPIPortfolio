@@ -256,30 +256,4 @@ public:
 		ScaleMode_ = RenderScaleMode::User;
 		RenderScale_ += _Scale;
 	}
-
-private:
-	class Brush : public GameEngineNameObject
-	{
-	public:
-		RECT PointBrush_;
-		HBRUSH Color_;
-
-		//HBRUSH h_brush = CreateSolidBrush(RGB(73, 67, 254));
-		//RECT r = { 0,0,GameEngineWindow::GetScale().ix(),GameEngineWindow::GetScale().iy() };
-		//FillRect(GameEngine::BackBufferDC(), &r, h_brush);
-		//DeleteObject(h_brush);
-
-	public:
-		Brush()
-			: PointBrush_({0,0,1,1})
-			, Color_(CreateSolidBrush(0))
-		{
-			
-		}
-
-		
-	};
-
-public:
-	void CreateBrush();
 };
