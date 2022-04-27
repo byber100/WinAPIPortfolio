@@ -35,7 +35,7 @@ void MapLevel::Loading()
 
 void MapLevel::Update()
 {
-	//test///////////////////////////////////////
+	//test////////////////////////////////////////
 	if (true == LevelChanger_->GetChanging())
 	{
 		LevelChanger_->LevelChangeAnim("Play");
