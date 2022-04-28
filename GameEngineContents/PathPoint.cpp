@@ -65,7 +65,7 @@ void PathPoint::Render()
 	{
 		if (true != Drawing_)
 		{
-			GameEngineRenderer* Path = CreateRenderer("PathBrushColors.bmp", 3);
+			GameEngineRenderer* Path = CreateRenderer("PathBrushColors.bmp", 4);
 			Path->SetIndex((int)Color_);
 			Path->SetPivot(StartPos_);
 			Drawing_ = true;
@@ -76,32 +76,41 @@ void PathPoint::Render()
 	{
 		if (true == Drawing_)
 		{
-			if (0 < Dir_.x && 0 == Dir_.y)
+			float4 ScaleDir = float4::ZERO;
+			if (0 == DrawSpeed_)
+			{
+				return;
+			}
+			if (0 < Dir_.x && 0 == Dir_.y) // to right
 			{
 				DrawingPath_.back()->SetPivotType(RenderPivot::LEFTCENTER);
+				ScaleDir.x = 1;
 			}
-			else if (0 > Dir_.x && 0 == Dir_.y)
+			else if (0 > Dir_.x && 0 == Dir_.y) // to left
 			{
 				DrawingPath_.back()->SetPivotType(RenderPivot::RIGHTCENTER);
+				ScaleDir.x = 1;
 			}
-			else if (0 == Dir_.x && 0 < Dir_.y)
+			else if (0 == Dir_.x && 0 < Dir_.y) // to bottom
 			{
 				DrawingPath_.back()->SetPivotType(RenderPivot::TOP);
+				ScaleDir.y = 1;
 			}
-			else if (0 == Dir_.x && 0 > Dir_.y)
+			else if (0 == Dir_.x && 0 > Dir_.y) // to top
 			{
 				DrawingPath_.back()->SetPivotType(RenderPivot::BOT);
+				ScaleDir.y = 1;
 			}
 			else
 			{
 				return;
 			}
-
-			DrawingPath_.back()->SetIncreasinglyScale(Dir_ * DrawSpeed_ * GameEngineTime::GetInst()->GetDeltaTime());
+			
+			DrawingPath_.back()->SetIncreasinglyScale(ScaleDir * DrawSpeed_ * GameEngineTime::GetInst()->GetDeltaTime());
 		}
 		else
 		{
-			GameEngineRenderer* Path = CreateRenderer("PathBrushColors.bmp", 4);
+			GameEngineRenderer* Path = CreateRenderer("PathBrushColors.bmp", 3);
 			Path->SetIndex((int)Color_);
 			Path->SetPivot(StartPos_);
 			Path->SetScale({ 7,7 });

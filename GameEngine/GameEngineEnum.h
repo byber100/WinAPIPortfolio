@@ -6,8 +6,8 @@ enum class RenderPivot
 	BOT,
 	TOP,
 	LEFTTOP,
-	LEFTCENTER,
-	RIGHTCENTER
+	RIGHTCENTER,
+	LEFTCENTER
 };
 
 enum class RenderScaleMode
