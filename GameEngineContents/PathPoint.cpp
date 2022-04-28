@@ -10,7 +10,7 @@ PathPoint::PathPoint()
 	: Drawing_(false)
 	, DrawSpeed_(0)
 	, StartPos_(float4::ZERO)
-	, RelativePos_(float4::ZERO)
+	, Dir_(float4::ZERO)
 {
 }
 
@@ -76,29 +76,28 @@ void PathPoint::Render()
 	{
 		if (true == Drawing_)
 		{
-			//StartPos_(float4::ZERO)
-			//RelativePos_(float4::ZERO)
-			
-
-			if (StartPos_.x < RelativePos_.x)
+			if (0 < Dir_.x && 0 == Dir_.y)
 			{
 				DrawingPath_.back()->SetPivotType(RenderPivot::LEFTCENTER);
 			}
-			else if (StartPos_.x > RelativePos_.x)
+			else if (0 > Dir_.x && 0 == Dir_.y)
 			{
 				DrawingPath_.back()->SetPivotType(RenderPivot::RIGHTCENTER);
 			}
-			else if (StartPos_.y > RelativePos_.y)
+			else if (0 == Dir_.x && 0 < Dir_.y)
 			{
 				DrawingPath_.back()->SetPivotType(RenderPivot::TOP);
 			}
-			else if (StartPos_.y < RelativePos_.y)
+			else if (0 == Dir_.x && 0 > Dir_.y)
 			{
 				DrawingPath_.back()->SetPivotType(RenderPivot::BOT);
 			}
+			else
+			{
+				return;
+			}
 
-			DrawingPath_.back()->SetIncreasinglyScale(RelativePos_ * DrawSpeed_ * GameEngineTime::GetInst()->GetDeltaTime());
-			break;
+			DrawingPath_.back()->SetIncreasinglyScale(Dir_ * DrawSpeed_ * GameEngineTime::GetInst()->GetDeltaTime());
 		}
 		else
 		{
@@ -114,6 +113,4 @@ void PathPoint::Render()
 	default:
 		break;
 	}
-	
-	
 }
