@@ -12,6 +12,7 @@ private:	// member Var
 	LevelChanger* LevelChanger_;
 
 	std::list< PathPoint*> PathAll_;
+	int StrockCnt_;
 
 public:		
 	MapLevel(); // default constructor 디폴트 생성자

@@ -14,11 +14,9 @@
 
 // constructor destructor
 MapLevel::MapLevel()
+	: LevelChanger_(nullptr)
+	, StrockCnt_(0)
 {
-	//HBRUSH h_brush = CreateSolidBrush(RGB(73, 67, 254));
-	//RECT r = { 0,0,GameEngineWindow::GetScale().ix(),GameEngineWindow::GetScale().iy() };
-	//FillRect(GameEngine::BackBufferDC(), &r, h_brush);
-	//DeleteObject(h_brush);
 }
 
 MapLevel::~MapLevel()
@@ -52,17 +50,48 @@ void MapLevel::Update()
 		dynamic_cast<LevelChanger*>(FindActor("LevelChanger"))->LevelChangeAnim("Play");
 	}
 	
-	//if (0 == PathAll_.size())
-	//{
-	//	PathPoint* Path = CreateActor<PathPoint>((int)ORDER::BACKGROUND);
-	//	Path->Draw(DrawMode::Point, { 643,575 });
-	//	PathAll_.push_back(Path);
-	//}
-	if (0 == PathAll_.size())
+	float DrawSpeed = 50.f;
+	switch (StrockCnt_)
 	{
-		PathPoint* Path = CreateActor<PathPoint>((int)ORDER::BACKGROUND);
-		Path->Draw(DrawMode::Line, { 0,500 }, float4::DOWN, 4.f, 10.f, LineColor::GRAY);
-		PathAll_.push_back(Path);
+	case 0:
+	{
+		if (0 == PathAll_.size())										// fisrt draw
+		{
+			PathPoint* Path = CreateActor<PathPoint>((int)ORDER::BACKGROUND);
+			Path->Draw(DrawMode::Point, { 643,575 });
+			PathAll_.push_back(Path);
+		}
+		if (true == PathAll_.back()->isClear())
+		{
+			++StrockCnt_;
+			break;
+		}
+		break;
+	}
+	case 1:
+	{
+		if (true == PathAll_.back()->isClear())
+		{
+			PathPoint* Path = CreateActor<PathPoint>((int)ORDER::BACKGROUND);
+			Path->Draw(DrawMode::Line, { 500,500 }, float4::UP, 50.f, DrawSpeed, LineColor::GRAY);
+			PathAll_.push_back(Path);
+			++StrockCnt_;
+		}
+		break;
+	}
+	case 2:
+	{
+		if (true == PathAll_.back()->isClear())
+		{
+			PathPoint* Path = CreateActor<PathPoint>((int)ORDER::BACKGROUND);
+			Path->Draw(DrawMode::Line, { 260-3.5f,500 }, float4::UP, 40.f, DrawSpeed, LineColor::GRAY);
+			PathAll_.push_back(Path);
+			++StrockCnt_;
+		}
+		break;
+	}
+	default:
+		break;
 	}
 }
 
