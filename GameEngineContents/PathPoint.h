@@ -44,7 +44,7 @@ public:
 		DrawMode_ = _Mode;
 		StartPos_ = _StartPos;
 		Dir_ = _Dir;
-		Lengh_ = _Lengh;
+		Lengh_ = _Lengh -3.5f; //처음엔 센터 기점으로 점을 찍음
 		DrawSpeed_ = _DrawSpeed;
 		Color_ = _Color;
 	}

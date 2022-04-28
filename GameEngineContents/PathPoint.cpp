@@ -124,39 +124,11 @@ void PathPoint::Render()
 		}
 		else
 		{
-			if (0 < Dir_.x && 0 == Dir_.y) // to right
-			{
-				GameEngineRenderer* Path = CreateRenderer("PathBrushColors.bmp", 3, RenderPivot::LEFTCENTER);
-				Path->SetIndex((int)Color_);
-				Path->SetPivot(StartPos_);
-				Path->SetScale({ 7,7 });
-				DrawingPath_.push_back(Path);
-			}
-			else if (0 > Dir_.x && 0 == Dir_.y) // to left
-			{
-				GameEngineRenderer* Path = CreateRenderer("PathBrushColors.bmp", 3, RenderPivot::RIGHTCENTER);
-				Path->SetIndex((int)Color_);
-				Path->SetPivot(StartPos_);
-				Path->SetScale({ 7,7 });
-				DrawingPath_.push_back(Path);
-			}
-			else if (0 == Dir_.x && 0 < Dir_.y) // to bottom
-			{
-				GameEngineRenderer* Path = CreateRenderer("PathBrushColors.bmp", 3, RenderPivot::TOP);
-				Path->SetIndex((int)Color_);
-				Path->SetPivot(StartPos_);
-				Path->SetScale({ 7,7 });
-				DrawingPath_.push_back(Path);
-			}
-			else if (0 == Dir_.x && 0 > Dir_.y) // to top
-			{
-				GameEngineRenderer* Path = CreateRenderer("PathBrushColors.bmp", 3, RenderPivot::BOT);
-				Path->SetIndex((int)Color_);
-				Path->SetPivot(StartPos_);
-				Path->SetScale({ 7,7 });
-				DrawingPath_.push_back(Path);
-			}
-
+			GameEngineRenderer* Path = CreateRenderer("PathBrushColors.bmp", 3);
+			Path->SetIndex((int)Color_);
+			Path->SetPivot(StartPos_);
+			Path->SetScale({ 7,7 });
+			DrawingPath_.push_back(Path);
 			Drawing_ = true;
 		}
 		break;
