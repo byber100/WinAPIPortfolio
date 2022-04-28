@@ -29,6 +29,7 @@ private:	// member Var
 
 	float4 StartPos_;
 	float4 Dir_;
+	float Lengh_;
 
 	std::vector< GameEngineRenderer*> DrawingPath_;
 
@@ -36,12 +37,14 @@ public:
 	void Draw(const DrawMode& _Mode, 
 		const float4& _StartPos,
 		const float4& _Dir = {float4::ZERO},
+		const float& _Lengh = 0,
 		const float& _DrawSpeed = 0,
 		const LineColor& _Color = LineColor::BLACK)
 	{
 		DrawMode_ = _Mode;
 		StartPos_ = _StartPos;
 		Dir_ = _Dir;
+		Lengh_ = _Lengh;
 		DrawSpeed_ = _DrawSpeed;
 		Color_ = _Color;
 	}

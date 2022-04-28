@@ -264,4 +264,9 @@ public:
 		ScaleMode_ = RenderScaleMode::User;
 		RenderScale_ += _Scale;
 	}
+	
+	RenderPivot GetPivotType()
+	{
+		return PivotType_;
+	}
 };

@@ -7,10 +7,13 @@
 
 // constructor destructor
 PathPoint::PathPoint()
-	: Drawing_(false)
+	: DrawMode_(DrawMode::None)
+	, Color_(LineColor::BLACK)
+	, Drawing_(false)
 	, DrawSpeed_(0)
 	, StartPos_(float4::ZERO)
 	, Dir_(float4::ZERO)
+	, Lengh_(0)
 {
 }
 
@@ -46,8 +49,6 @@ void PathPoint::DrawPath(const float4& StartPos_, const float4& RelativePos_, Li
 void PathPoint::Start()
 {
 	SetPosition(float4::ZERO);
-	DrawMode_ = DrawMode::None;
-	Color_ = LineColor::BLACK;
 }
 void PathPoint::Update()
 {
@@ -77,6 +78,7 @@ void PathPoint::Render()
 		if (true == Drawing_)
 		{
 			float4 ScaleDir = float4::ZERO;
+			float4 Lengh = float4::ZERO;
 			if (0 == DrawSpeed_)
 			{
 				return;
@@ -85,28 +87,40 @@ void PathPoint::Render()
 			{
 				DrawingPath_.back()->SetPivotType(RenderPivot::LEFTCENTER);
 				ScaleDir.x = 1;
+				Lengh.x = Lengh_;
 			}
 			else if (0 > Dir_.x && 0 == Dir_.y) // to left
 			{
 				DrawingPath_.back()->SetPivotType(RenderPivot::RIGHTCENTER);
 				ScaleDir.x = 1;
+				Lengh.x = Lengh_;
+				if (RenderPivot::RIGHTCENTER != DrawingPath_.back()->GetPivotType())
+				{
+					Lengh_ *= -1;
+				}
 			}
 			else if (0 == Dir_.x && 0 < Dir_.y) // to bottom
 			{
 				DrawingPath_.back()->SetPivotType(RenderPivot::TOP);
 				ScaleDir.y = 1;
+				Lengh.y = Lengh_;
 			}
 			else if (0 == Dir_.x && 0 > Dir_.y) // to top
 			{
 				DrawingPath_.back()->SetPivotType(RenderPivot::BOT);
 				ScaleDir.y = 1;
-			}
-			else
-			{
-				return;
+				Lengh.y = Lengh_;
+				if (RenderPivot::BOT != DrawingPath_.back()->GetPivotType())
+				{
+					Lengh_ *= -1;
+				}
 			}
 			
-			DrawingPath_.back()->SetIncreasinglyScale(ScaleDir * DrawSpeed_ * GameEngineTime::GetInst()->GetDeltaTime());
+			if (Lengh.x > DrawingPath_.back()->GetScale().x ||
+				Lengh.y > DrawingPath_.back()->GetScale().y)
+			{
+				DrawingPath_.back()->SetIncreasinglyScale(ScaleDir * DrawSpeed_ * GameEngineTime::GetInst()->GetDeltaTime());
+			}
 		}
 		else
 		{
