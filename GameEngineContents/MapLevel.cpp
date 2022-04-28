@@ -61,7 +61,7 @@ void MapLevel::Update()
 	if (0 == PathAll_.size())
 	{
 		PathPoint* Path = CreateActor<PathPoint>((int)ORDER::BACKGROUND);
-		Path->Draw(DrawMode::Line, { 500,500 }, float4::DOWN, 1.f, 10.f, LineColor::GRAY);
+		Path->Draw(DrawMode::Line, { 0,500 }, float4::DOWN, 1.f, 10.f, LineColor::GRAY);
 		PathAll_.push_back(Path);
 	}
 }
