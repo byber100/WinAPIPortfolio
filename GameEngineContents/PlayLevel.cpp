@@ -5,6 +5,7 @@
 #include "PlayBack.h"
 #include "RandomStage.h"
 #include "HoleTrap.h"
+#include "House.h"
 #include <GameEngineBase/GameEngineTime.h>
 #include <GameEngineBase/GameEngineDebug.h>
 #include <GameEngineBase/GameEngineInput.h>

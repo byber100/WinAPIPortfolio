@@ -50,6 +50,9 @@
     <ClCompile Include="PathPoint.cpp">
       <Filter>OtherActors\Map</Filter>
     </ClCompile>
+    <ClCompile Include="House.cpp">
+      <Filter>OtherActors\Play</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TitleLevel.h">
@@ -99,6 +102,9 @@
     <ClInclude Include="PathPoint.h">
       <Filter>OtherActors\Map</Filter>
     </ClInclude>
+    <ClInclude Include="House.h">
+      <Filter>OtherActors\Play</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="OtherActors">
@@ -118,9 +124,6 @@
     </Filter>
     <Filter Include="GlobalActors">
       <UniqueIdentifier>{d6a178bf-fc85-411e-b93b-0559d30324c4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="OtherActors\Ending">
-      <UniqueIdentifier>{537a457f-c8d6-4fbf-b505-9a897541433c}</UniqueIdentifier>
     </Filter>
     <Filter Include="OtherActors\Map">
       <UniqueIdentifier>{f8a68641-125d-477c-a45c-87ca5898be5d}</UniqueIdentifier>
