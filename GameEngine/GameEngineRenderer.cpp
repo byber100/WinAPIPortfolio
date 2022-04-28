@@ -132,15 +132,79 @@ void GameEngineRenderer::Render()
 		}
 		break;
 	}
+	case RenderPivot::TOP:
+	{
+		float4 Scale = RenderScale_.Half();
+		Scale.y *= 2;
+
+		if (Alpha_ != 255)
+		{
+			GameEngine::BackBufferImage()->AlphaCopy(Image_, RenderPos + Scale, RenderScale_, RenderImagePivot_, RenderImageScale_, Alpha_);
+		}
+		else if (RotZ_ != 0.0f)
+		{
+			GameEngine::BackBufferImage()->PlgCopy(Image_, RenderPos + Scale, RenderScale_, RenderImagePivot_, RenderImageScale_, RotZ_, RotationFilterImage_);
+		}
+		else
+		{
+			GameEngine::BackBufferImage()->TransCopy(Image_, RenderPos + Scale, RenderScale_, RenderImagePivot_, RenderImageScale_, TransColor_);
+		}
+		break;
+	}
 	case RenderPivot::LEFTTOP:
+	{
 		if (Alpha_ == 255)
 		{
 			GameEngine::BackBufferImage()->TransCopy(Image_, RenderPos, RenderScale_, RenderImagePivot_, RenderImageScale_, TransColor_);
 		}
-		else {
-			GameEngine::BackBufferImage()->AlphaCopy(Image_, RenderPos, RenderScale_, RenderImagePivot_, RenderImageScale_, Alpha_);
+		else if (RotZ_ != 0.0f)
+		{
+			GameEngine::BackBufferImage()->PlgCopy(Image_, RenderPos, RenderScale_, RenderImagePivot_, RenderImageScale_, RotZ_, RotationFilterImage_);
+		}
+		else
+		{
+			GameEngine::BackBufferImage()->TransCopy(Image_, RenderPos, RenderScale_, RenderImagePivot_, RenderImageScale_, TransColor_);
 		}
 		break;
+	}
+	case RenderPivot::LEFTCENTER:
+	{
+		float4 Scale = RenderScale_.Half();
+		Scale.x *= 2;
+
+		if (Alpha_ != 255)
+		{
+			GameEngine::BackBufferImage()->AlphaCopy(Image_, RenderPos - Scale, RenderScale_, RenderImagePivot_, RenderImageScale_, Alpha_);
+		}
+		else if (RotZ_ != 0.0f)
+		{
+			GameEngine::BackBufferImage()->PlgCopy(Image_, RenderPos - Scale, RenderScale_, RenderImagePivot_, RenderImageScale_, RotZ_, RotationFilterImage_);
+		}
+		else
+		{
+			GameEngine::BackBufferImage()->TransCopy(Image_, RenderPos - Scale, RenderScale_, RenderImagePivot_, RenderImageScale_, TransColor_);
+		}
+		break;
+	}
+	case RenderPivot::RIGHTCENTER:
+	{
+		float4 Scale = RenderScale_.Half();
+		Scale.x *= 2;
+
+		if (Alpha_ != 255)
+		{
+			GameEngine::BackBufferImage()->AlphaCopy(Image_, RenderPos + Scale, RenderScale_, RenderImagePivot_, RenderImageScale_, Alpha_);
+		}
+		else if (RotZ_ != 0.0f)
+		{
+			GameEngine::BackBufferImage()->PlgCopy(Image_, RenderPos + Scale, RenderScale_, RenderImagePivot_, RenderImageScale_, RotZ_, RotationFilterImage_);
+		}
+		else
+		{
+			GameEngine::BackBufferImage()->TransCopy(Image_, RenderPos + Scale, RenderScale_, RenderImagePivot_, RenderImageScale_, TransColor_);
+		}
+		break;
+	}
 	default:
 		break;
 	}

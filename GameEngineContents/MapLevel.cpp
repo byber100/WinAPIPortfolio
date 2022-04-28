@@ -35,7 +35,6 @@ void MapLevel::Loading()
 
 	LevelChanger_ = CreateActor<LevelChanger>((int)ORDER::UI);
 	CreateActor<MainMap>((int)ORDER::BACKGROUND);
-	CreateActor<PathPoint>((int)ORDER::BACKGROUND);
 	
 	GameEngineInput::GetInst()->CreateKey("GameStart", VK_SPACE);
 }
@@ -51,6 +50,19 @@ void MapLevel::Update()
 	{
 		GameEngineInput::GetInst()->Reset();
 		dynamic_cast<LevelChanger*>(FindActor("LevelChanger"))->LevelChangeAnim("Play");
+	}
+	
+	//if (0 == PathAll_.size())
+	//{
+	//	PathPoint* Path = CreateActor<PathPoint>((int)ORDER::BACKGROUND);
+	//	Path->Draw(DrawMode::Point, { 643,575 });
+	//	PathAll_.push_back(Path);
+	//}
+	if (0 == PathAll_.size())
+	{
+		PathPoint* Path = CreateActor<PathPoint>((int)ORDER::BACKGROUND);
+		Path->Draw(DrawMode::Line, { 500,500 }, { 10,0 }, 100.f, LineColor::GRAY);
+		PathAll_.push_back(Path);
 	}
 }
 

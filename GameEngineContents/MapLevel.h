@@ -5,10 +5,13 @@
 // 용도 :
 // 설명 :
 class LevelChanger;
+class PathPoint;
 class MapLevel : public GameEngineLevel
 {
 private:	// member Var
 	LevelChanger* LevelChanger_;
+
+	std::list< PathPoint*> PathAll_;
 
 public:		
 	MapLevel(); // default constructor 디폴트 생성자
