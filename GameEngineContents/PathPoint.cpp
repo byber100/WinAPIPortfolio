@@ -81,23 +81,23 @@ void PathPoint::Render()
 		{
 			if (true == Drawing_)
 			{
-				float4 ScaleDir = float4::ZERO;
-				float4 Lengh = float4::ZERO;
 				if (0 >= DrawSpeed_)
 				{
 					Drawing_ = false;
 					DrawClear_ = true;
 					return;
 				}
+
+				// 방향 보정 및 길이 체크
+				float4 ScaleDir = float4::ZERO;
+				float4 Lengh = float4::ZERO;
 				if (0 < Dir_.x && 0 == Dir_.y) // to right
 				{
-					DrawingPath_.back()->SetPivotType(RenderPivot::LEFTCENTER);
 					ScaleDir.x = 1;
 					Lengh.x = Lengh_;
 				}
 				else if (0 > Dir_.x && 0 == Dir_.y) // to left
 				{
-					DrawingPath_.back()->SetPivotType(RenderPivot::RIGHTCENTER);
 					ScaleDir.x = 1;
 					Lengh.x = Lengh_;
 					if (RenderPivot::RIGHTCENTER != DrawingPath_.back()->GetPivotType())
@@ -107,13 +107,11 @@ void PathPoint::Render()
 				}
 				else if (0 == Dir_.x && 0 < Dir_.y) // to bottom
 				{
-					DrawingPath_.back()->SetPivotType(RenderPivot::TOP);
 					ScaleDir.y = 1;
 					Lengh.y = Lengh_;
 				}
 				else if (0 == Dir_.x && 0 > Dir_.y) // to top
 				{
-					DrawingPath_.back()->SetPivotType(RenderPivot::BOT);
 					ScaleDir.y = 1;
 					Lengh.y = Lengh_;
 					if (RenderPivot::BOT != DrawingPath_.back()->GetPivotType())
@@ -135,26 +133,36 @@ void PathPoint::Render()
 			}
 			else
 			{
+				GameEngineRenderer* Point = CreateRenderer("PathBrushColors.bmp", 3); // Path 부들거림 가리기
+				Point->SetIndex((int)Color_);
+				Point->SetPivot(StartPos_);
+				Point->SetScale({ 7,7 });
+
+				GameEngineRenderer* Path = CreateRenderer("PathBrushColors.bmp", 3);
+
 				// alignment
 				if (0 < Dir_.x && 0 == Dir_.y) // to right
 				{
+					Path->SetPivotType(RenderPivot::LEFTCENTER);
 					StartPos_.x -= 3.5f;
 				}
 				else if (0 > Dir_.x && 0 == Dir_.y) // to left
 				{
+					Path->SetPivotType(RenderPivot::RIGHTCENTER);
 					StartPos_.x += 3.5f;
 				}
 				else if (0 == Dir_.x && 0 < Dir_.y) // to bottom
 				{
+					Path->SetPivotType(RenderPivot::TOP);
 					StartPos_.y -= 3.5f;
 				}
 				else if (0 == Dir_.x && 0 > Dir_.y) // to top
 				{
+					Path->SetPivotType(RenderPivot::BOT);
 					StartPos_.y += 3.5f;
 				}
 				Lengh_ += 7.f;
-
-				GameEngineRenderer* Path = CreateRenderer("PathBrushColors.bmp", 3000);
+				
 				Path->SetIndex((int)Color_);
 				Path->SetPivot(StartPos_);
 				Path->SetScale({ 7,7 });

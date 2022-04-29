@@ -82,6 +82,10 @@ public:
 	{
 		CountTime_ = _Count;
 	}
+	int GetStage()
+	{
+		return Stage_;
+	}
 
 protected:
 

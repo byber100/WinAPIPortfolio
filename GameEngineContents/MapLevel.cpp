@@ -16,6 +16,7 @@
 MapLevel::MapLevel()
 	: LevelChanger_(nullptr)
 	, StrockCnt_(0)
+	, BrushPos_{ 640,580 }
 {
 }
 
@@ -24,6 +25,24 @@ MapLevel::~MapLevel()
 }
 
 //member Func
+void  MapLevel::ContinuousDrawing(const float4& _Dir, const float& _Lengh, const float& _DrawSpeed, const int& _PassStage)
+{
+	PathPoint* Path = CreateActor<PathPoint>((int)ORDER::BACKGROUND);
+
+	if (_PassStage >= PlayUI::MainUI->GetStage())
+	{
+		Path->Draw(DrawMode::Line, BrushPos_, _Dir, _Lengh, _DrawSpeed, LineColor::GRAY);
+	}
+	else
+	{
+		Path->Draw(DrawMode::Line, BrushPos_, _Dir, _Lengh, _DrawSpeed, LineColor::OCHER);
+	}
+
+	PathAll_.push_back(Path);
+	++StrockCnt_;
+	BrushPos_ += _Dir * _Lengh;
+}
+
 void MapLevel::Loading()
 {
 	if (nullptr == PlayUI::MainUI)
@@ -50,7 +69,7 @@ void MapLevel::Update()
 		dynamic_cast<LevelChanger*>(FindActor("LevelChanger"))->LevelChangeAnim("Play");
 	}
 	
-	float DrawSpeed = 50.f;
+	float DrawSpeed = 500.f;
 	switch (StrockCnt_)
 	{
 	case 0:
@@ -58,13 +77,9 @@ void MapLevel::Update()
 		if (0 == PathAll_.size())										// fisrt draw
 		{
 			PathPoint* Path = CreateActor<PathPoint>((int)ORDER::BACKGROUND);
-			Path->Draw(DrawMode::Point, { 643,575 });
+			Path->Draw(DrawMode::Point, BrushPos_);
 			PathAll_.push_back(Path);
-		}
-		if (true == PathAll_.back()->isClear())
-		{
 			++StrockCnt_;
-			break;
 		}
 		break;
 	}
@@ -72,10 +87,7 @@ void MapLevel::Update()
 	{
 		if (true == PathAll_.back()->isClear())
 		{
-			PathPoint* Path = CreateActor<PathPoint>((int)ORDER::BACKGROUND);
-			Path->Draw(DrawMode::Line, { 500,500 }, float4::UP, 50.f, DrawSpeed, LineColor::GRAY);
-			PathAll_.push_back(Path);
-			++StrockCnt_;
+			ContinuousDrawing(float4::LEFT, 90.f, DrawSpeed, 1);
 		}
 		break;
 	}
@@ -83,10 +95,154 @@ void MapLevel::Update()
 	{
 		if (true == PathAll_.back()->isClear())
 		{
+			ContinuousDrawing(float4::UP, 120.f, DrawSpeed, 1);
+		}
+		break;
+	}
+	case 3:
+	{
+		if (true == PathAll_.back()->isClear())
+		{
+			ContinuousDrawing(float4::LEFT, 30.f, DrawSpeed, 1);
+		}
+		break;
+	}
+	case 4:
+	{
+		if (true == PathAll_.back()->isClear())
+		{
+			ContinuousDrawing(float4::UP, 30.f, DrawSpeed, 1);
+		}
+		break;
+	}
+	case 5:
+	{
+		if (true == PathAll_.back()->isClear())
+		{
+			ContinuousDrawing(float4::LEFT, 70.f, DrawSpeed, 1);
+		}
+		break;
+	}
+	case 6:
+	{
+		if (true == PathAll_.back()->isClear())
+		{
+			ContinuousDrawing(float4::DOWN, 60.f, DrawSpeed, 1);
+		}
+		break;
+	}
+	case 7:
+	{
+		if (true == PathAll_.back()->isClear())
+		{
+			ContinuousDrawing(float4::LEFT, 60.f, DrawSpeed, 1);
+		}
+		break;
+	}
+	case 8:
+	{
+		if (true == PathAll_.back()->isClear())
+		{
+			ContinuousDrawing(float4::UP, 130.f, DrawSpeed, 1);
+		}
+		break;
+	}
+	case 9:
+	{
+		if (true == PathAll_.back()->isClear())
+		{
+			ContinuousDrawing(float4::RIGHT, 60.f, DrawSpeed, 1);
+		}
+		break;
+	}
+	case 10:
+	{
+		if (true == PathAll_.back()->isClear())
+		{
+			ContinuousDrawing(float4::UP, 60.f, DrawSpeed, 1);
+		}
+		break;
+	}
+	case 11:
+	{
+		if (true == PathAll_.back()->isClear())
+		{
 			PathPoint* Path = CreateActor<PathPoint>((int)ORDER::BACKGROUND);
-			Path->Draw(DrawMode::Line, { 260-3.5f,500 }, float4::UP, 40.f, DrawSpeed, LineColor::GRAY);
+			Path->Draw(DrawMode::Point, BrushPos_);
 			PathAll_.push_back(Path);
 			++StrockCnt_;
+		}
+		break;
+	}
+	case 12:
+	{
+		if (true == PathAll_.back()->isClear())
+		{
+			ContinuousDrawing(float4::UP, 30.f, DrawSpeed, 2);
+		}
+		break;
+	}
+	case 13:
+	{
+		if (true == PathAll_.back()->isClear())
+		{
+			ContinuousDrawing(float4::RIGHT, 125.f, DrawSpeed, 2);
+		}
+		break;
+	}
+	case 14:
+	{
+		if (true == PathAll_.back()->isClear())
+		{
+			ContinuousDrawing(float4::DOWN, 30.f, DrawSpeed, 2);
+		}
+		break;
+	}
+	case 15:
+	{
+		if (true == PathAll_.back()->isClear())
+		{
+			ContinuousDrawing(float4::RIGHT, 65.f, DrawSpeed, 2);
+		}
+		break;
+	}
+	case 16:
+	{
+		if (true == PathAll_.back()->isClear())
+		{
+			ContinuousDrawing(float4::DOWN, 100.f, DrawSpeed, 2);
+		}
+		break;
+	}
+	case 17:
+	{
+		if (true == PathAll_.back()->isClear())
+		{
+			ContinuousDrawing(float4::RIGHT, 35.f, DrawSpeed, 2);
+		}
+		break;
+	}
+	case 18:
+	{
+		if (true == PathAll_.back()->isClear())
+		{
+			ContinuousDrawing(float4::DOWN, 120.f, DrawSpeed, 2);
+		}
+		break;
+	}
+	case 19:
+	{
+		if (true == PathAll_.back()->isClear())
+		{
+			ContinuousDrawing(float4::LEFT, 35.f, DrawSpeed, 2);
+		}
+		break;
+	}
+	case 20:
+	{
+		if (true == PathAll_.back()->isClear())
+		{
+			ContinuousDrawing(float4::DOWN, 60.f, DrawSpeed, 2);
 		}
 		break;
 	}
@@ -103,4 +259,17 @@ void MapLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 void MapLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 {
 	PlayUI::MainUI->NextLevelOn();
+	//PathAll_.clear();
+
+	//std::list<PathPoint*>::iterator StartIter = PathAll_.begin();
+	//std::list<PathPoint*>::iterator EndIter = PathAll_.end();
+
+	//for (; StartIter != EndIter; ++StartIter)
+	//{
+	//	if (nullptr == *StartIter)
+	//	{
+	//		continue;
+	//	}
+	//	delete *StartIter;
+	//}
 }
