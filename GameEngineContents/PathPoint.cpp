@@ -23,6 +23,7 @@ PathPoint::~PathPoint()
 }
 
 //member Func
+
 void PathPoint::DrawPoint(const float4& StartPos_)
 {
 	GameEngineRenderer* Point = CreateRenderer("PathBrushColors.bmp", 4);
@@ -124,6 +125,12 @@ void PathPoint::Render()
 					Lengh.y > DrawingPath_.back()->GetScale().y)
 				{
 					DrawingPath_.back()->SetIncreasinglyScale(ScaleDir * DrawSpeed_ * GameEngineTime::GetInst()->GetDeltaTime());
+
+					//float4 ScaleRange;
+					//ScaleRange.x = DrawingPath_.back()->GetScale().x + 1;
+					//ScaleRange.y = DrawingPath_.back()->GetScale().y + 1;
+					//DrawingPath_.back()->SetScale() = { 0,0 }; Lerp2D(DrawingPath_.back()->GetScale(), ScaleRange, 0.1f);
+					//float4 a = DrawingPath_.back()->GetScale();
 				}
 				else
 				{
@@ -144,22 +151,22 @@ void PathPoint::Render()
 				if (0 < Dir_.x && 0 == Dir_.y) // to right
 				{
 					Path->SetPivotType(RenderPivot::LEFTCENTER);
-					StartPos_.x -= 4.f;
+					StartPos_.x -= 3.5f;
 				}
 				else if (0 > Dir_.x && 0 == Dir_.y) // to left
 				{
 					Path->SetPivotType(RenderPivot::RIGHTCENTER);
-					StartPos_.x += 4.f;
+					StartPos_.x += 3.5f;
 				}
 				else if (0 == Dir_.x && 0 < Dir_.y) // to bottom
 				{
 					Path->SetPivotType(RenderPivot::TOP);
-					StartPos_.y -= 4.f;
+					StartPos_.y -= 3.5f;
 				}
 				else if (0 == Dir_.x && 0 > Dir_.y) // to top
 				{
 					Path->SetPivotType(RenderPivot::BOT);
-					StartPos_.y += 4.f;
+					StartPos_.y += 3.5f;
 				}
 				Lengh_ += 7.f;
 				

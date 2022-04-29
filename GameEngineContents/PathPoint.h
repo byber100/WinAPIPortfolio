@@ -34,6 +34,14 @@ private:	// member Var
 	std::vector< GameEngineRenderer*> DrawingPath_;
 	bool DrawClear_;
 
+	float4 Lerp2D(float4 _A, float4 _B, float _Time)
+	{
+		float4 NewFloat4;
+		NewFloat4.x = _A.x + _Time * (_B.x - _A.x);
+		NewFloat4.y = _A.y + _Time * (_B.y - _A.y);
+		return NewFloat4;
+	}
+
 public:
 	void Draw(const DrawMode& _Mode, 
 		const float4& _StartPos,
