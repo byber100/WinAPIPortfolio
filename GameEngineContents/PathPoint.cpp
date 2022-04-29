@@ -144,22 +144,22 @@ void PathPoint::Render()
 				if (0 < Dir_.x && 0 == Dir_.y) // to right
 				{
 					Path->SetPivotType(RenderPivot::LEFTCENTER);
-					StartPos_.x -= 3.5f;
+					StartPos_.x -= 4.f;
 				}
 				else if (0 > Dir_.x && 0 == Dir_.y) // to left
 				{
 					Path->SetPivotType(RenderPivot::RIGHTCENTER);
-					StartPos_.x += 3.5f;
+					StartPos_.x += 4.f;
 				}
 				else if (0 == Dir_.x && 0 < Dir_.y) // to bottom
 				{
 					Path->SetPivotType(RenderPivot::TOP);
-					StartPos_.y -= 3.5f;
+					StartPos_.y -= 4.f;
 				}
 				else if (0 == Dir_.x && 0 > Dir_.y) // to top
 				{
 					Path->SetPivotType(RenderPivot::BOT);
-					StartPos_.y += 3.5f;
+					StartPos_.y += 4.f;
 				}
 				Lengh_ += 7.f;
 				
