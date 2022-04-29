@@ -109,7 +109,7 @@ void PlayUI::DebugUIOn()
 
 void PlayUI::UpdateSpeed()
 {
-	float Speed = Speed_;
+	float Speed = static_cast<float>(Speed_);
 	if (nullptr != Player::MainPlayer)
 	{
 		Speed = Player::MainPlayer->GetForwardSpeed();

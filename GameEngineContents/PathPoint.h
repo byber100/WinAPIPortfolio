@@ -30,23 +30,17 @@ private:	// member Var
 	float4 StartPos_;
 	float4 Dir_;
 	float Lengh_;
+	float LerpAlpha_; // 선형보간 알파값 -> 0 에 가까울 수록 정밀
 
 	std::vector< GameEngineRenderer*> DrawingPath_;
 	bool DrawClear_;
-
-	float4 Lerp2D(float4 _A, float4 _B, float _Time)
-	{
-		float4 NewFloat4;
-		NewFloat4.x = _A.x + _Time * (_B.x - _A.x);
-		NewFloat4.y = _A.y + _Time * (_B.y - _A.y);
-		return NewFloat4;
-	}
 
 public:
 	void Draw(const DrawMode& _Mode, 
 		const float4& _StartPos,
 		const float4& _Dir = {float4::ZERO},
 		const float& _Lengh = 0,
+		const float& _LenghAlpha = 0,
 		const float& _DrawSpeed = 0,
 		const LineColor& _Color = LineColor::BLACK)
 	{
@@ -54,6 +48,7 @@ public:
 		StartPos_ = _StartPos;
 		Dir_ = _Dir;
 		Lengh_ = _Lengh;
+		LerpAlpha_ = _LenghAlpha;
 		DrawSpeed_ = _DrawSpeed;
 		Color_ = _Color;
 	}

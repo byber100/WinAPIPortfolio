@@ -31,11 +31,11 @@ void  MapLevel::ContinuousDrawing(const float4& _Dir, const float& _Lengh, const
 
 	if (_PassStage >= PlayUI::MainUI->GetStage())
 	{
-		Path->Draw(DrawMode::Line, BrushPos_, _Dir, _Lengh, _DrawSpeed, LineColor::GRAY);
+		Path->Draw(DrawMode::Line, BrushPos_, _Dir, _Lengh, 0.001f, _DrawSpeed, LineColor::GRAY);
 	}
 	else
 	{
-		Path->Draw(DrawMode::Line, BrushPos_, _Dir, _Lengh, _DrawSpeed, LineColor::OCHER);
+		Path->Draw(DrawMode::Line, BrushPos_, _Dir, _Lengh, 0.001f, _DrawSpeed, LineColor::OCHER);
 	}
 
 	PathAll_.push_back(Path);

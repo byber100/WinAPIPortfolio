@@ -1,6 +1,7 @@
 #include "PathPoint.h"
 #include <GameEngine/GameEngineRenderer.h>
 
+
 // Static Var
 
 // Static Func
@@ -14,6 +15,7 @@ PathPoint::PathPoint()
 	, StartPos_(float4::ZERO)
 	, Dir_(float4::ZERO)
 	, Lengh_(0)
+	, LerpAlpha_(0)
 	, DrawClear_(false)
 {
 }
@@ -92,15 +94,19 @@ void PathPoint::Render()
 				// 방향 보정 및 길이 체크
 				float4 ScaleDir = float4::ZERO;
 				float4 Lengh = float4::ZERO;
+				float4 LenghLimit = float4::ZERO;
+				float test = -1.f;
 				if (0 < Dir_.x && 0 == Dir_.y) // to right
 				{
 					ScaleDir.x = 1;
 					Lengh.x = Lengh_;
+					LenghLimit.x = DrawingPath_.back()->GetScale().x + test;
 				}
 				else if (0 > Dir_.x && 0 == Dir_.y) // to left
 				{
 					ScaleDir.x = 1;
 					Lengh.x = Lengh_;
+					LenghLimit.x = DrawingPath_.back()->GetScale().x + test;
 					if (RenderPivot::RIGHTCENTER != DrawingPath_.back()->GetPivotType())
 					{
 						Lengh_ *= -1;
@@ -110,27 +116,32 @@ void PathPoint::Render()
 				{
 					ScaleDir.y = 1;
 					Lengh.y = Lengh_;
+					LenghLimit.y = DrawingPath_.back()->GetScale().y + test;
 				}
 				else if (0 == Dir_.x && 0 > Dir_.y) // to top
 				{
 					ScaleDir.y = 1;
 					Lengh.y = Lengh_;
+					LenghLimit.y = DrawingPath_.back()->GetScale().y + test;
 					if (RenderPivot::BOT != DrawingPath_.back()->GetPivotType())
 					{
 						Lengh_ *= -1;
 					}
 				}
 
-				if (Lengh.x > DrawingPath_.back()->GetScale().x ||
-					Lengh.y > DrawingPath_.back()->GetScale().y)
+				// 선형보간
+				float4 a = float4::ZERO;
+				float4 b = float4::ZERO;
+				a = ScaleDir * DrawSpeed_;
+				b.x = a.x * LerpAlpha_;
+				b.y = a.y * LerpAlpha_;
+				a = float4::LerpLimit(a, b, GameEngineTime::GetInst()->GetDeltaTime());
+				a *= GameEngineTime::GetInst()->GetDeltaTime();
+
+				if (Lengh.x - a.x > DrawingPath_.back()->GetScale().x ||
+					Lengh.y - a.y > DrawingPath_.back()->GetScale().y)
 				{
 					DrawingPath_.back()->SetIncreasinglyScale(ScaleDir * DrawSpeed_ * GameEngineTime::GetInst()->GetDeltaTime());
-
-					//float4 ScaleRange;
-					//ScaleRange.x = DrawingPath_.back()->GetScale().x + 1;
-					//ScaleRange.y = DrawingPath_.back()->GetScale().y + 1;
-					//DrawingPath_.back()->SetScale() = { 0,0 }; Lerp2D(DrawingPath_.back()->GetScale(), ScaleRange, 0.1f);
-					//float4 a = DrawingPath_.back()->GetScale();
 				}
 				else
 				{
