@@ -69,7 +69,7 @@ void MapLevel::Update()
 		dynamic_cast<LevelChanger*>(FindActor("LevelChanger"))->LevelChangeAnim("Play");
 	}
 	
-	float DrawSpeed = 1000.f;
+	float DrawSpeed = 1500.f;
 	switch (StrockCnt_)
 	{
 	case 0:
