@@ -40,8 +40,8 @@ HoleTrap::~HoleTrap()
 //member Func
 void HoleTrap::Start()
 {
-	float x = static_cast<int>(GameEngineWindow::GetScale().Half().ix());
-	float y = static_cast<int>(GameEngineWindow::GetScale().Half().iy());
+	float x = GameEngineWindow::GetScale().Half().x;
+	float y = GameEngineWindow::GetScale().Half().y;
 
 	SetPosition({ x , y + 32 });
 	SetScale(GameEngineWindow::GetScale());
