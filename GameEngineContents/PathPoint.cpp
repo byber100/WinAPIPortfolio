@@ -132,16 +132,17 @@ void PathPoint::Render()
 				// 선형보간
 				float4 a = float4::ZERO;
 				float4 b = float4::ZERO;
-				a = ScaleDir * DrawSpeed_;
+				a = ScaleDir * DrawSpeed_; // 어느 방향의 어느 속도로
 				b.x = a.x * LerpAlpha_;
 				b.y = a.y * LerpAlpha_;
 				a = float4::LerpLimit(a, b, GameEngineTime::GetInst()->GetDeltaTime());
-				a *= GameEngineTime::GetInst()->GetDeltaTime();
+				a *= GameEngineTime::GetInst()->GetDeltaTime(); // 델타 시간에 따라
 
-				if (Lengh.x - a.x > DrawingPath_.back()->GetScale().x ||
+				if (Lengh.x - a.x > DrawingPath_.back()->GetScale().x || // (그릴려는 길이 - 보간) > 그려진 길이
 					Lengh.y - a.y > DrawingPath_.back()->GetScale().y)
 				{
-					DrawingPath_.back()->SetIncreasinglyScale(ScaleDir * DrawSpeed_ * GameEngineTime::GetInst()->GetDeltaTime());
+					DrawingPath_.back()->SetIncreasinglyScale(
+						ScaleDir * DrawSpeed_ * GameEngineTime::GetInst()->GetDeltaTime()); // 그린다.
 				}
 				else
 				{
