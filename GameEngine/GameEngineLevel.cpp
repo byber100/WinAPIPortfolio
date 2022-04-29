@@ -8,6 +8,7 @@ bool GameEngineLevel::IsDebug = false;
 
 GameEngineLevel::GameEngineLevel()
 	: CameraPos_(float4::ZERO)
+	, IsReset(false)
 {
 }
 
