@@ -36,7 +36,7 @@ void AntarcticAdventure::GameInit()
 		}
 	}
 	//{
-	//	GameEngineDirectory ResourcesDir;
+	//	GameEngineDirectory ResourcesDir; 
 	//	ResourcesDir.MoveParent("WinAPIPortfolio");
 	//	ResourcesDir.Move("Resources");
 	//	ResourcesDir.Move("Sound");
