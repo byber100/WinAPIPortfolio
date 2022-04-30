@@ -15,7 +15,7 @@ PathPoint::PathPoint()
 	, StartPos_(float4::ZERO)
 	, Dir_(float4::ZERO)
 	, Lengh_(0)
-	, LerpAlpha_(0)
+	, Time_(0)
 	, DrawClear_(false)
 {
 }
@@ -67,6 +67,7 @@ void PathPoint::Render()
 		{
 		case DrawMode::None:
 		{
+			DrawClear_ = true;
 			return;
 		}
 		case DrawMode::Point:
@@ -91,60 +92,28 @@ void PathPoint::Render()
 					return;
 				}
 
-				// 방향 보정 및 길이 체크
-				float4 ScaleDir = float4::ZERO;
-				float4 Lengh = float4::ZERO;
-				float4 LenghLimit = float4::ZERO;
-				float test = -1.f;
+				// 선형보간
+				Time_ += DrawSpeed_ * GameEngineTime::GetInst()->GetDeltaTime();
+				float LerpLengh = GameEngineMath::LerpLimit(0, Lengh_, Time_);
+
 				if (0 < Dir_.x && 0 == Dir_.y) // to right
 				{
-					ScaleDir.x = 1;
-					Lengh.x = Lengh_;
-					LenghLimit.x = DrawingPath_.back()->GetScale().x + test;
+					DrawingPath_.back()->SetScale({ LerpLengh, 7 });
 				}
 				else if (0 > Dir_.x && 0 == Dir_.y) // to left
 				{
-					ScaleDir.x = 1;
-					Lengh.x = Lengh_;
-					LenghLimit.x = DrawingPath_.back()->GetScale().x + test;
-					if (RenderPivot::RIGHTCENTER != DrawingPath_.back()->GetPivotType())
-					{
-						Lengh_ *= -1;
-					}
+					DrawingPath_.back()->SetScale({ LerpLengh, 7 });
 				}
 				else if (0 == Dir_.x && 0 < Dir_.y) // to bottom
 				{
-					ScaleDir.y = 1;
-					Lengh.y = Lengh_;
-					LenghLimit.y = DrawingPath_.back()->GetScale().y + test;
+					DrawingPath_.back()->SetScale({ 7, LerpLengh });
 				}
 				else if (0 == Dir_.x && 0 > Dir_.y) // to top
 				{
-					ScaleDir.y = 1;
-					Lengh.y = Lengh_;
-					LenghLimit.y = DrawingPath_.back()->GetScale().y + test;
-					if (RenderPivot::BOT != DrawingPath_.back()->GetPivotType())
-					{
-						Lengh_ *= -1;
-					}
+					DrawingPath_.back()->SetScale({ 7, LerpLengh });
 				}
 
-				// 선형보간
-				float4 a = float4::ZERO;
-				float4 b = float4::ZERO;
-				a = ScaleDir * DrawSpeed_; // 어느 방향의 어느 속도로
-				b.x = a.x * LerpAlpha_;
-				b.y = a.y * LerpAlpha_;
-				a = float4::LerpLimit(a, b, GameEngineTime::GetInst()->GetDeltaTime());
-				a *= GameEngineTime::GetInst()->GetDeltaTime(); // 델타 시간에 따라
-
-				if (Lengh.x - a.x > DrawingPath_.back()->GetScale().x || // (그릴려는 길이 - 보간) > 그려진 길이
-					Lengh.y - a.y > DrawingPath_.back()->GetScale().y)
-				{
-					DrawingPath_.back()->SetIncreasinglyScale(
-						ScaleDir * DrawSpeed_ * GameEngineTime::GetInst()->GetDeltaTime()); // 그린다.
-				}
-				else
+				if (LerpLengh >= Lengh_) // 그리려는 길이 이상이면 끝낸다.
 				{
 					Drawing_ = false;
 					DrawClear_ = true;
@@ -152,11 +121,6 @@ void PathPoint::Render()
 			}
 			else
 			{
-				GameEngineRenderer* Point = CreateRenderer("PathBrushColors.bmp", 3); // Path 부들거림 가리기
-				Point->SetIndex((int)Color_);
-				Point->SetPivot(StartPos_);
-				Point->SetScale({ 7,7 });
-
 				GameEngineRenderer* Path = CreateRenderer("PathBrushColors.bmp", 3);
 
 				// alignment
@@ -184,7 +148,6 @@ void PathPoint::Render()
 				
 				Path->SetIndex((int)Color_);
 				Path->SetPivot(StartPos_);
-				Path->SetScale({ 7,7 });
 				DrawingPath_.push_back(Path);
 				Drawing_ = true;
 			}

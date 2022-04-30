@@ -30,7 +30,7 @@ private:	// member Var
 	float4 StartPos_;
 	float4 Dir_;
 	float Lengh_;
-	float LerpAlpha_; // 선형보간 알파값 -> 0 에 가까울 수록 정밀
+	float Time_;
 
 	std::vector< GameEngineRenderer*> DrawingPath_;
 	bool DrawClear_;
@@ -40,7 +40,6 @@ public:
 		const float4& _StartPos,
 		const float4& _Dir = {float4::ZERO},
 		const float& _Lengh = 0,
-		const float& _LenghAlpha = 0,
 		const float& _DrawSpeed = 0,
 		const LineColor& _Color = LineColor::BLACK)
 	{
@@ -48,7 +47,6 @@ public:
 		StartPos_ = _StartPos;
 		Dir_ = _Dir;
 		Lengh_ = _Lengh;
-		LerpAlpha_ = _LenghAlpha;
 		DrawSpeed_ = _DrawSpeed;
 		Color_ = _Color;
 	}

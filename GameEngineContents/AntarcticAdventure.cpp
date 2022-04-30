@@ -20,7 +20,7 @@ AntarcticAdventure::~AntarcticAdventure()
 
 void AntarcticAdventure::GameInit()
 {
-	GameEngineWindow::GetInst().SetWindowScaleAndPosition({ 100, 100 }, { 1024, 768 });
+	GameEngineWindow::GetInst().SetWindowScaleAndPosition({ 0, 0 }, { 1024, 768 });
 
 	{
 		GameEngineDirectory ResourcesDir;

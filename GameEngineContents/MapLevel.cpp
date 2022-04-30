@@ -28,15 +28,14 @@ MapLevel::~MapLevel()
 void  MapLevel::ContinuousDrawing(const float4& _Dir, const float& _Lengh, const float& _DrawSpeed, const int& _PassStage)
 {
 	PathPoint* Path = CreateActor<PathPoint>((int)ORDER::BACKGROUND);
-	float Alpha = 1.f;
 
 	if (_PassStage >= PlayUI::MainUI->GetStage())
 	{
-		Path->Draw(DrawMode::Line, BrushPos_, _Dir, _Lengh, Alpha, _DrawSpeed, LineColor::GRAY);
+		Path->Draw(DrawMode::Line, BrushPos_, _Dir, _Lengh, _DrawSpeed, LineColor::GRAY);
 	}
 	else
 	{
-		Path->Draw(DrawMode::Line, BrushPos_, _Dir, _Lengh, Alpha, _DrawSpeed, LineColor::OCHER);
+		Path->Draw(DrawMode::Line, BrushPos_, _Dir, _Lengh, _DrawSpeed, LineColor::OCHER);
 	}
 
 	PathAll_.push_back(Path);
@@ -59,18 +58,7 @@ void MapLevel::Loading()
 
 void MapLevel::Update()
 {
-	//test////////////////////////////////////////
-	if (true == LevelChanger_->GetChanging())
-	{
-		LevelChanger_->LevelChangeAnim("Play");
-	}
-	if (GameEngineInput::GetInst()->IsDown("GameStart"))
-	{
-		GameEngineInput::GetInst()->Reset();
-		dynamic_cast<LevelChanger*>(FindActor("LevelChanger"))->LevelChangeAnim("Play");
-	}
-	
-	float DrawSpeed = 1500.f;
+	float DrawSpeed = 15.f;
 	switch (StrockCnt_)
 	{
 	case 0:
@@ -248,29 +236,42 @@ void MapLevel::Update()
 		break;
 	}
 	default:
+	{
+		if (true == LevelChanger_->GetChanging())
+		{
+			LevelChanger_->LevelChangeAnim("Play");
+		}
+		if (GameEngineInput::GetInst()->IsDown("GameStart"))
+		{
+			GameEngineInput::GetInst()->Reset();
+			dynamic_cast<LevelChanger*>(FindActor("LevelChanger"))->LevelChangeAnim("Play");
+		}
 		break;
+	}
 	}
 }
 
 void MapLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
-	
+	BrushPos_ = { 640,580 };
+	StrockCnt_ = 0;
 }
 
 void MapLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 {
 	PlayUI::MainUI->NextLevelOn();
-	//PathAll_.clear();
+	
+	std::list<PathPoint*>::iterator StartIter = PathAll_.begin();
+	std::list<PathPoint*>::iterator EndIter = PathAll_.end();
 
-	//std::list<PathPoint*>::iterator StartIter = PathAll_.begin();
-	//std::list<PathPoint*>::iterator EndIter = PathAll_.end();
+	for (; StartIter != EndIter; ++StartIter)
+	{
+		if (nullptr == *StartIter)
+		{
+			continue;
+		}
+		(*StartIter)->Death();
+	}
 
-	//for (; StartIter != EndIter; ++StartIter)
-	//{
-	//	if (nullptr == *StartIter)
-	//	{
-	//		continue;
-	//	}
-	//	delete *StartIter;
-	//}
+	PathAll_.clear();
 }
