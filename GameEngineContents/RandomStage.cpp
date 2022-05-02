@@ -309,8 +309,10 @@ void RandomStage::Update()
 	}
 	else if (0 == PlayUI::RestDistance_)
 	{
-		LeftGround_->SetInterTime(99999999);
-		RightGround_->SetInterTime(99999999);
+		LeftGround_->SetImageAnimationReset("GroundTiles.bmp");
+		LeftGround_->SetIndex(0);
+		RightGround_->SetImageAnimationReset("GroundTiles.bmp");
+		RightGround_->SetIndex(2);
 		return;
 	}
 
@@ -341,4 +343,11 @@ void RandomStage::Render()
 	Mountain2_->SetOrder(101);
 	ResetOrder();
 	StageRender();
+}
+
+void RandomStage::LevelChangeStart(GameEngineLevel* _PrevLevel)
+{
+	LeftGround_->ChangeAnimation("LeftGround");
+	RightGround_->ChangeAnimation("RightGround");
+
 }

@@ -159,7 +159,8 @@ void PlayLevel::Update()
 
 void PlayLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
-	
+	ArriveOn_ = false;
+	CurframeTime_ = 0;
 }
 
 void PlayLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
