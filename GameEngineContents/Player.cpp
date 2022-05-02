@@ -14,6 +14,7 @@ Player::Player()
 	, SideSpeed_(200.0f)
 	, isJumping_(false)
 	, isClear_(false)
+	, ClearSoundOn_(false)
 	, ClearTime_(0)
 {
 	ChangeState(MAX);
@@ -62,6 +63,9 @@ void Player::ChangeState(PlayerState _State)
 		case Clear:
 			ClearStart();
 			break;
+		case Ceremony:
+			CeremonyStart();
+			break;
 		case Pause:
 			PauseStart();
 			break;
@@ -96,6 +100,9 @@ void Player::StateUpdate()
 	case Clear:
 		ClearUpdate();
 		break;
+	case Ceremony:
+		CeremonyUpdate();
+		break;
 	case Pause:
 		PauseUpdate();
 		break;
@@ -117,6 +124,7 @@ void Player::Start()
 	Penguin_->CreateAnimation("Player.bmp", "ClearWalk", 2, 5, 0.05f);
 	Penguin_->CreateAnimation("Player.bmp", "Jump", 9, 10, 0.1f);
 	Penguin_->CreateAnimation("Player.bmp", "Clear", 11, 12, 0.5f);
+	Penguin_->CreateAnimation("Player.bmp", "Ceremony", 13, 13, 0, false);
 	Penguin_->ChangeAnimation("Walk");
 
 	Shadow_ = CreateRenderer("PlayerShadow.bmp",300);

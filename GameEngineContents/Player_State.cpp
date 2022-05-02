@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "PlayUI.h"
+#include "House.h"
 #include <GameEngine/GameEngine.h>
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngineImageManager.h>
@@ -31,6 +32,12 @@ void Player::ClearStart()
 	ForwardSpeed_ = 0.0f;
 	Penguin_->SetPivot(float4::ZERO);
 	Penguin_->ChangeAnimation("ClearWalk");
+}
+
+void Player::CeremonyStart()
+{
+	Penguin_->ChangeAnimation("Ceremony");
+	ClearTime_ = 1.4f;
 }
 
 void Player::MoveUpdate()
@@ -153,7 +160,7 @@ void Player::JumpRUpdate()
 		Shadow_->SetIndex(0);
 		isJumping_ = false;
 		ChangeState(PlayerState::Move);
-	}
+	} 
 }
 
 void Player::PauseUpdate()
@@ -169,11 +176,34 @@ void Player::ClearUpdate()
 		y - 8 < GetPosition().y && y + 8 > GetPosition().y)
 	{
 		Penguin_->ChangeAnimation("Clear");
+		House::isFlagUp_ = true;
 
+		if (false == ClearSoundOn_)
+		{
+			PlayBGM_.Stop();
+			GameEngineSound::SoundPlayOneShot("ClearBGM.mp3");
+			ClearSoundOn_ = true;
+			ClearTime_ = 4.6f;
+		}
+
+		ClearTime_ -= GameEngineTime::GetInst()->GetDeltaTime();
+		if (0 > ClearTime_)
+		{
+			ChangeState(PlayerState::Ceremony);
+		}
 		return;
 	}
 
 	ClearTime_ += 0.02f * GameEngineTime::GetInst()->GetDeltaTime();
 	float4 ClearMove = float4::LerpLimit(GetPosition(), { 512 , y }, ClearTime_);
 	SetPosition(ClearMove);
+}
+
+void Player::CeremonyUpdate()
+{
+	ClearTime_ -= GameEngineTime::GetInst()->GetDeltaTime();
+	if (0 > ClearTime_)
+	{
+		PlayUI::MainUI->StartTimeScore();
+	}
 }

@@ -17,6 +17,7 @@ bool PlayLevel::is2FrameUnit_ = false;
 
 PlayLevel::PlayLevel() 
 	: UnitSecond_(1.0f)
+	, ArriveOn_(false)
 {
 }
 
@@ -38,9 +39,13 @@ float PlayLevel::GetLevelInterTime()
 
 void PlayLevel::Arrive()
 {
-	if (false == Player::MainPlayer->IsClear())
+	if (false == ArriveOn_)
 	{
-		Player::MainPlayer->ChangeState(Clear);
+		if (false == Player::MainPlayer->IsClear())
+		{
+			Player::MainPlayer->ChangeState(Clear);
+		}
+		ArriveOn_ = true;
 	}
 }
 

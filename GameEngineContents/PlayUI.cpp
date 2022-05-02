@@ -12,8 +12,10 @@ PlayUI::PlayUI()
 	: Score_(0)
 	, HiScore_(0)
 	, Stage_(1)
-	, CountTime_(1000)
 	, Speed_(5)
+	, CountTime_(20)
+	, CountMode_(TimeScoreCount::OFF)
+	, CalTime_(0)
 	, VeiledDebuging_(true)
 	, ScoreTile1_ (nullptr)
 	, ScoreTile2_ (nullptr)
@@ -372,15 +374,30 @@ void PlayUI::Start()
 
 void PlayUI::Update()
 {
-	NumberUpdate(Score_, ScoreImages);
-	NumberUpdate(HiScore_, HiScoreImages);
-	NumberUpdate(Stage_, StageImages);
-	NumberUpdate(CountTime_, TimeCountImages);
-	NumberUpdate(RestDistance_, RestDistanceImages);
+	if (CountMode_ == TimeScoreCount::ON)
+	{
+		if (0.08f < CalTime_)
+		{
+			CalTime_ = 0;
+
+			if (0 != CountTime_)
+			{
+				--CountTime_;
+				Score_ += 100;
+				GameEngineSound::SoundPlayOneShot("SFX1.mp3");
+			}
+			else
+			{
+				return;
+			}
+		}
+		CalTime_ += GameEngineTime::GetInst()->GetDeltaTime();
+		return;
+	}
 
 	if (0 != CountTime_)
 	{
-		if (nullptr != Player::MainPlayer)
+		if (nullptr != Player::MainPlayer && 0 != RestDistance_)
 		{
 			UpdateSpeed();
 		}
@@ -394,6 +411,12 @@ void PlayUI::Update()
 
 void PlayUI::Render()
 {
+	NumberUpdate(Score_, ScoreImages);
+	NumberUpdate(HiScore_, HiScoreImages);
+	NumberUpdate(Stage_, StageImages);
+	NumberUpdate(CountTime_, TimeCountImages);
+	NumberUpdate(RestDistance_, RestDistanceImages);
+
 	if (GameEngineInput::GetInst()->IsDown("UIDebug"))
 	{
 		if (false == VeiledDebuging_)
@@ -409,5 +432,9 @@ void PlayUI::Render()
 	{
 		DebugUIOn();
 	}
+}
 
+void PlayUI::LevelChangeEnd(GameEngineLevel* _NextLevel)
+{
+	CountMode_ = TimeScoreCount::OFF;
 }

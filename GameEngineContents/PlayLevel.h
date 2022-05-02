@@ -24,6 +24,7 @@ private:
 	int FrameUnitCount_; // 게임프레임 최소 단위시간
 
 	float UnitSecond_;
+	bool ArriveOn_;
 
 	GameEngineSoundPlayer BgmPlayer;
 

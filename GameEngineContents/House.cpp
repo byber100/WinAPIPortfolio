@@ -5,13 +5,15 @@
 
 
 // Static Var
-
+bool House::isFlagUp_ = false;
 // Static Func
 
 // constructor destructor
 House::House()
 	: LOD_(0)
+	, FlagFrameTime_(0)
 	, House_(nullptr)
+	, Flag_(nullptr)
 {
 }
 
@@ -23,12 +25,30 @@ House::~House()
 void House::Start()
 {
 	SetPosition(GameEngineWindow::GetScale().Half());
+	Flag_ = CreateRenderer("Flag.bmp", 0, RenderPivot::LEFTTOP);
+	Flag_->SetPivot({ 0,-56 });
 
 	LevelRegist("House");
 }
 
 void House::Update()
 {
+	if (true == isFlagUp_)
+	{
+		Flag_->SetOrder(200);
+
+		FlagFrameTime_ += GameEngineTime::GetInst()->GetDeltaTime();
+		if (0.3f < FlagFrameTime_)
+		{
+			if (-130 < Flag_->GetPivot().y)
+			{
+				float Up = Flag_->GetPivot().y;
+				Flag_->SetPivot({ 0,Up - 12 });
+			}
+			FlagFrameTime_ = 0;
+		}
+	}
+
 	if (45 == PlayUI::RestDistance_)
 	{
 		LOD_ = 1;
@@ -45,34 +65,32 @@ void House::Update()
 	{
 		LOD_ = 4;
 	}
-
-	switch (LOD_)
-	{
-	case 0:
-		House_ = CreateRenderer("House1.bmp", 200);
-		break;
-	case 1:
-		House_->SetOrder(0);
-		House_ = CreateRenderer("House2.bmp", 200);
-		break;
-	case 2:
-		House_->SetOrder(0);
-		House_ = CreateRenderer("House3.bmp", 200);
-		break;
-	case 3:
-		House_->SetOrder(0);
-		House_ = CreateRenderer("House4.bmp", 200);
-		break;
-	case 4:
-		House_->SetOrder(0);
-		House_ = CreateRenderer("House5.bmp", 200);
-		break;
-	default:
-		break;
-	}
 }
 
 void House::Render()
 {
-
+	switch (LOD_)
+	{
+	case 0:
+		House_ = CreateRenderer("House1.bmp", 201);
+		break;
+	case 1:
+		House_->SetOrder(0);
+		House_ = CreateRenderer("House2.bmp", 201);
+		break;
+	case 2:
+		House_->SetOrder(0);
+		House_ = CreateRenderer("House3.bmp", 201);
+		break;
+	case 3:
+		House_->SetOrder(0);
+		House_ = CreateRenderer("House4.bmp", 201);
+		break;
+	case 4:
+		House_->SetOrder(0);
+		House_ = CreateRenderer("House5.bmp", 201);
+		break;
+	default:
+		break;
+	}
 }

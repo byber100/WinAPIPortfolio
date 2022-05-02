@@ -17,6 +17,7 @@ enum PlayerState
 	JumpR,
 	TakeHit,
 	Clear,
+	Ceremony,
 	Pause,
 	MAX
 };
@@ -41,6 +42,7 @@ private:
 	GameEngineSoundPlayer PlayBGM_;
 
 	bool isClear_;
+	bool ClearSoundOn_;
 	float ClearTime_;
 
 public:
@@ -83,18 +85,18 @@ private:
 	void LevelChangeEnd(GameEngineLevel* _NextLevel) override;
 
 
-	void IdleStart();
 	void MoveStart();
 	void JumpStart();
 	void PauseStart();
 	void ClearStart();
+	void CeremonyStart();
 
-	void IdleUpdate();
 	void MoveUpdate();
 	void JumpUpdate();
 	void JumpLUpdate();
 	void JumpRUpdate();
 	void PauseUpdate();
 	void ClearUpdate();
+	void CeremonyUpdate();
 };
 

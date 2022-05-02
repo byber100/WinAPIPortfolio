@@ -2,7 +2,12 @@
 #include <GameEngine/GameEngineActor.h>
 #include <GameEngine/GameEngineFont.h>
 
-// Ό³Έν :
+enum class TimeScoreCount
+{
+	OFF,
+	ON
+};
+
 class Player;
 class PlayUI : public GameEngineActor
 {
@@ -56,10 +61,11 @@ private:
 	int Stage_;
 	int Speed_;
 	int CountTime_;
+	TimeScoreCount CountMode_;
+	float CalTime_;
 
 	GameEngineFont DedugText_;
 	bool VeiledDebuging_;
-
 
 public:
 	// constrcuter destructer
@@ -86,6 +92,10 @@ public:
 	{
 		return Stage_;
 	}
+	void StartTimeScore()
+	{
+		CountMode_ = TimeScoreCount::ON;
+	}
 
 protected:
 
@@ -100,5 +110,6 @@ private:
 	void Start() override;
 	void Update() override;
 	void Render() override;
+	void LevelChangeEnd(GameEngineLevel* _NextLevel) override;
 };
 

@@ -9,8 +9,13 @@ class House : public GameEngineActor
 {
 private:	// member Var
 	int LOD_;
+	float FlagFrameTime_;
 
 	GameEngineRenderer* House_;
+	GameEngineRenderer* Flag_;
+
+public:
+	static bool isFlagUp_;
 
 public:		
 	House(); // default constructor 디폴트 생성자
