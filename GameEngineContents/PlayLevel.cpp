@@ -80,7 +80,7 @@ void PlayLevel::Update()
 		CreateActor<HoleTrap>((int)ORDER::TRAP);
 	}
 
-	if (50 == PlayUI::RestDistance_)
+	if (60 == PlayUI::RestDistance_)
 	{
 		if (nullptr == FindActor("House"))
 		{
@@ -122,11 +122,6 @@ void PlayLevel::Update()
 
 		if (2 == FrameUnitCount_)
 		{
-			if (nullptr != FindActor("House"))
-			{
-				++House::LOD_;
-			}
-			
 			--FrameCount;
 			FrameUnitCount_ = 0;
 			is2FrameUnit_ = true;

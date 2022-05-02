@@ -8,12 +8,9 @@ class GameEngineRenderer;
 class House : public GameEngineActor
 {
 private:	// member Var
-	float DownTime_;
+	int LOD_;
 
 	GameEngineRenderer* House_;
-
-public:
-	static int LOD_;
 
 public:		
 	House(); // default constructor 디폴트 생성자
