@@ -25,6 +25,8 @@ private:	// member Var
 	unsigned int MountainDirectionValue_; // 산 이동 방향 값 0==stay, 1==right, 2==left
 	bool isCurve_;
 
+	int AlmostArrived_;
+
 
 public:
 	RandomStage(); // default constructor 디폴트 생성자

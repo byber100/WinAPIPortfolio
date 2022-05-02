@@ -70,6 +70,17 @@ void Player::MoveUpdate()
 			ForwardSpeed_ = (ForwardSpeed_ - 10.0f * GameEngineTime::GetDeltaTime());
 		}
 	}
+	if (true == GameEngineInput::GetInst()->IsDown("DebugingFast"))
+	{
+		if (99 > ForwardSpeed_)
+		{
+			ForwardSpeed_ = 200;
+		}
+		else
+		{
+			ForwardSpeed_ = 7;
+		}
+	}
 }
 
 void Player::JumpUpdate()

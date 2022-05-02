@@ -1,6 +1,7 @@
 #include "RandomStage.h"
 #include "Player.h"
 #include "PlayLevel.h"
+#include "PlayUI.h"
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngineBase/GameEngineDebug.h>
@@ -25,6 +26,7 @@ RandomStage::RandomStage()
 	, Mountain2_(nullptr)
 	, LeftGlacier_(nullptr)
 	, RightGlacier_(nullptr)
+	, AlmostArrived_(100)
 {
 }
 
@@ -129,7 +131,7 @@ void RandomStage::StageChange()
 
 	if (true == PlayLevel::is2FrameUnit_)
 	{
-		PlayLevel::FrameCount = 64 * RandomValue_.RandomInt(1, 3); // Stay Time
+		PlayLevel::FrameCount = 64 * RandomValue_.RandomInt(1, 2); // Stay Time
 
 		switch (RoundStateValue_)
 		{
@@ -184,7 +186,11 @@ void RandomStage::StageChange()
 		case 3: // L Ground, R Ground
 			if (false == isCurve_)
 			{
-				RoundStateValue_ = RandomValue_.RandomInt(0, 3);
+				if (AlmostArrived_ < PlayUI::RestDistance_)
+				{
+					RoundStateValue_ = RandomValue_.RandomInt(0, 3);
+				}
+
 				if (3 == RoundStateValue_) // Turn Right
 				{
 					isCurve_ = true;
@@ -288,9 +294,27 @@ void RandomStage::StageRender()
 
 void RandomStage::Update()
 {
+	if (AlmostArrived_ + 150 == PlayUI::RestDistance_)
+	{
+		if (0 == RoundStateValue_)
+		{
+			PlayLevel::FrameCount = 0;
+			RoundStateValue_ = 1;
+		}
+	}
+	if (AlmostArrived_ == PlayUI::RestDistance_)
+	{
+		PlayLevel::FrameCount = 0;
+		RoundStateValue_ = 3;
+	}
 	if (0 == PlayLevel::FrameCount)
 	{
 		StageChange();
+
+		if (AlmostArrived_ + 150 > PlayUI::RestDistance_)
+		{
+			isCurve_ = false;
+		}
 	}
 
 	if (false == PlayLevel::is2FrameUnit_)
@@ -302,8 +326,6 @@ void RandomStage::Update()
 		LeftGround_->SetInterTime(FrameTime);
 		RightGround_->SetInterTime(FrameTime);
 	}
-
-	
 }
 
 void RandomStage::Render()

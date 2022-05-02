@@ -121,10 +121,11 @@ void Player::Start()
 
 	if (false == GameEngineInput::GetInst()->IsKey("MoveLeft"))
 	{
-		GameEngineInput::GetInst()->CreateKey("MoveLeft", 'A');
-		GameEngineInput::GetInst()->CreateKey("MoveRight", 'D');
-		GameEngineInput::GetInst()->CreateKey("Fast", 'W');
-		GameEngineInput::GetInst()->CreateKey("Slow", 'S');
+		GameEngineInput::GetInst()->CreateKey("MoveLeft", VK_LEFT);
+		GameEngineInput::GetInst()->CreateKey("MoveRight", VK_RIGHT);
+		GameEngineInput::GetInst()->CreateKey("Fast", VK_UP);
+		GameEngineInput::GetInst()->CreateKey("DebugingFast", 'w');
+		GameEngineInput::GetInst()->CreateKey("Slow", VK_DOWN);
 		GameEngineInput::GetInst()->CreateKey("Jump", VK_SPACE);
 	}
 
