@@ -29,6 +29,7 @@ void Player::PauseStart()
 
 void Player::ClearStart()
 {
+	ClearTime_ = 0;
 	ForwardSpeed_ = 0.0f;
 	Penguin_->SetPivot(float4::ZERO);
 	Penguin_->ChangeAnimation("ClearWalk");

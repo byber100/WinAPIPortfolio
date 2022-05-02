@@ -101,3 +101,8 @@ void House::Render()
 		break;
 	}
 }
+
+void House::LevelChangeStart(GameEngineLevel* _PrevLevel)
+{
+	isFlagUp_ = false;
+}

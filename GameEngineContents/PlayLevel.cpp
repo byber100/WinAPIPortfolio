@@ -100,6 +100,7 @@ void PlayLevel::Update()
 		if (nullptr == HouseInfo_)
 		{
  			HouseInfo_ = CreateActor<House>((int)ORDER::OBJECT);
+			HouseInfo_->isFlagUp_ = false;
 		}
 	}
 
