@@ -6,14 +6,14 @@
 #include <GameEngineBase/GameEngineInput.h>
 
 PlayUI* PlayUI::MainUI = nullptr;
-int PlayUI::RestDistance_ = 110;
+int PlayUI::Stage_ = 1;
+int PlayUI::RestDistance_ = 0; // MapLevelø°º≠ ¡§«ÿ¡‹
 
 PlayUI::PlayUI()
 	: Score_(0)
 	, HiScore_(0)
-	, Stage_(1)
 	, Speed_(5)
-	, CountTime_(20)
+	, CountTime_(0) // MapLevelø°º≠ ¡§«ÿ¡‹
 	, CountMode_(TimeScoreCount::OFF)
 	, CalTime_(0)
 	, VeiledDebuging_(true)
@@ -388,6 +388,7 @@ void PlayUI::Update()
 			}
 			else
 			{
+				PlayLevel::LevelChangeOn_ = true;
 				return;
 			}
 		}

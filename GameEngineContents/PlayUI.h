@@ -58,7 +58,6 @@ private:
 
 	int Score_;
 	int HiScore_;
-	int Stage_;
 	int Speed_;
 	int CountTime_;
 	TimeScoreCount CountMode_;
@@ -78,6 +77,7 @@ public:
 	PlayUI& operator=(const PlayUI& _Other) = delete;
 	PlayUI& operator=(PlayUI&& _Other) noexcept = delete;
 
+	static int Stage_;
 	static int RestDistance_;
 
 	int GetCountTime()
@@ -87,10 +87,6 @@ public:
 	void SetCountTime(int _Count)
 	{
 		CountTime_ = _Count;
-	}
-	int GetStage()
-	{
-		return Stage_;
 	}
 	void StartTimeScore()
 	{

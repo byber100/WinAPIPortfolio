@@ -6,6 +6,8 @@
 class Player;
 class PlayUI;
 class RandomStage;
+class LevelChanger;
+class House;
 class PlayLevel : public GameEngineLevel
 {
 public:
@@ -28,12 +30,16 @@ private:
 
 	GameEngineSoundPlayer BgmPlayer;
 
+	LevelChanger* LevelChanger_;
 	RandomStage* StageInfo_;
+	House* HouseInfo_;
 
 public:
 	static PlayLevel* PlayLevelStage;
 	static int FrameCount;
 	static bool is2FrameUnit_; // 2번째 단위시간
+
+	static bool LevelChangeOn_;
 
 	float GetLevelInterTime();
 	float GetCurframeTime()

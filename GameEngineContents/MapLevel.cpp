@@ -29,7 +29,7 @@ void  MapLevel::ContinuousDrawing(const float4& _Dir, const float& _Lengh, const
 {
 	PathPoint* Path = CreateActor<PathPoint>((int)ORDER::BACKGROUND);
 
-	if (_PassStage >= PlayUI::MainUI->GetStage())
+	if (_PassStage >= PlayUI::Stage_)
 	{
 		Path->Draw(DrawMode::Line, BrushPos_, _Dir, _Lengh, _DrawSpeed, LineColor::GRAY);
 	}
@@ -249,7 +249,7 @@ void MapLevel::Update()
 	}
 	default:
 	{
-		if (true == LevelChanger_->GetChanging())
+		if (true == LevelChanger_->GetChanging()) // 키를 Down 하는 순간 시간이 길어 여러번 이뤄지는 현상 방지
 		{
 			LevelChanger_->LevelChangeAnim("Play");
 		}
@@ -267,6 +267,29 @@ void MapLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
 	BrushPos_ = { 640,580 };
 	StrockCnt_ = 0;
+
+	if (2 < PlayUI::Stage_)
+	{
+		PlayUI::Stage_ = 1;
+	}
+
+	switch (PlayUI::Stage_)
+	{
+	case 1:
+	{
+		PlayUI::MainUI->SetCountTime(10);
+		PlayUI::RestDistance_ = 150;
+	}
+	break;
+	case 2:
+	{
+		PlayUI::MainUI->SetCountTime(12);
+		PlayUI::RestDistance_ = 170;
+	}
+	break;
+	default:
+		break;
+	}
 }
 
 void MapLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)

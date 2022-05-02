@@ -6,6 +6,7 @@
 #include "RandomStage.h"
 #include "HoleTrap.h"
 #include "House.h"
+#include "LevelChanger.h"
 #include <GameEngineBase/GameEngineTime.h>
 #include <GameEngineBase/GameEngineDebug.h>
 #include <GameEngineBase/GameEngineInput.h>
@@ -14,10 +15,14 @@
 PlayLevel* PlayLevel::PlayLevelStage = nullptr;
 int PlayLevel::FrameCount = 64; // Start Stage Stay Time
 bool PlayLevel::is2FrameUnit_ = false;
+bool PlayLevel::LevelChangeOn_ = false;
 
 PlayLevel::PlayLevel() 
 	: UnitSecond_(1.0f)
 	, ArriveOn_(false)
+	, LevelChanger_(nullptr)
+	, StageInfo_(nullptr)
+	, HouseInfo_ (nullptr)
 {
 }
 
@@ -56,6 +61,7 @@ void PlayLevel::Loading()
 		Player::MainPlayer = CreateActor<Player>((int)ORDER::PLAYER, "MainPlayer");
 	}
 
+	LevelChanger_ = CreateActor<LevelChanger>((int)ORDER::UI);
 	StageInfo_ = CreateActor<RandomStage>((int)ORDER::BACKGROUND);
 	CreateActor<PlayBack>((int)ORDER::BACKGROUND);
 
@@ -75,14 +81,6 @@ void PlayLevel::Loading()
 
 void PlayLevel::Update() 
 {
-	//Time -= GameEngineTime::GetDeltaTime();
-
-	//if (0 >= Time)
-	//{
-	//	BgmPlayer.Stop();
-	//}
-
-	// Test///////////////////////////////////////////////////
 	if (GameEngineInput::GetInst()->IsDown("ToPrevLevel"))
 	{
 		GameEngine::GetInst().ChangeLevel("Map");
@@ -92,11 +90,16 @@ void PlayLevel::Update()
 		CreateActor<HoleTrap>((int)ORDER::TRAP);
 	}
 
+	if (true == LevelChangeOn_)
+	{
+		LevelChanger_->LevelChangeAnim("Map");
+	}
+
 	if (60 == PlayUI::RestDistance_)
 	{
-		if (nullptr == FindActor("House"))
+		if (nullptr == HouseInfo_)
 		{
-			CreateActor<House>((int)ORDER::OBJECT);
+ 			HouseInfo_ = CreateActor<House>((int)ORDER::OBJECT);
 		}
 	}
 
@@ -156,21 +159,19 @@ void PlayLevel::Update()
 
 void PlayLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
-	// Player->SetPosition();
-
-	// BgmPlayer = GameEngineSound::SoundPlayControl("BGM.MP3");
-
-	//GameEngineSound::SoundPlayOneShot("vo_shk.mp3");
-	//Time = 5.0f;
-
+	
 }
 
 void PlayLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 {
-	//if (_NextLevel->GetNameCopy() != "Title")
-	//{
-	//	PlayerInfo_->NextLevelOn();
-	//}
+	if (nullptr != HouseInfo_)
+	{
+		HouseInfo_->Death();
+		HouseInfo_ = nullptr;
+	}
+
+	LevelChangeOn_ = false;
 
 	PlayUI::MainUI->NextLevelOn();
+	++PlayUI::Stage_;
 }

@@ -25,10 +25,9 @@ House::~House()
 void House::Start()
 {
 	SetPosition(GameEngineWindow::GetScale().Half());
+
 	Flag_ = CreateRenderer("Flag.bmp", 0, RenderPivot::LEFTTOP);
 	Flag_->SetPivot({ 0,-56 });
-
-	LevelRegist("House");
 }
 
 void House::Update()
@@ -49,6 +48,10 @@ void House::Update()
 		}
 	}
 
+	if (60 == PlayUI::RestDistance_)
+	{
+		LOD_ = 0;
+	}
 	if (45 == PlayUI::RestDistance_)
 	{
 		LOD_ = 1;
@@ -64,6 +67,10 @@ void House::Update()
 	else if (0 == PlayUI::RestDistance_)
 	{
 		LOD_ = 4;
+	}
+	else if (60 < PlayUI::RestDistance_)
+	{
+		LOD_ = 5;
 	}
 }
 
