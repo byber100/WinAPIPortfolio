@@ -80,6 +80,14 @@ void PlayLevel::Update()
 		CreateActor<HoleTrap>((int)ORDER::TRAP);
 	}
 
+	if (60 == PlayUI::RestDistance_)
+	{
+		if (nullptr == FindActor("House"))
+		{
+			CreateActor<House>((int)ORDER::OBJECT);
+		}
+	}
+
 	int t = PlayUI::MainUI->GetCountTime();
 	if (0 != t)
 	{

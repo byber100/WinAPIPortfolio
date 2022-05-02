@@ -58,6 +58,18 @@ void MapLevel::Loading()
 
 void MapLevel::Update()
 {
+	{// test///////////////////////////////////////////////////////////////////
+		if (true == LevelChanger_->GetChanging())
+		{
+			LevelChanger_->LevelChangeAnim("Play");
+		}
+		if (GameEngineInput::GetInst()->IsDown("GameStart"))
+		{
+			GameEngineInput::GetInst()->Reset();
+			dynamic_cast<LevelChanger*>(FindActor("LevelChanger"))->LevelChangeAnim("Play");
+		}
+	}
+	
 	float DrawSpeed = 15.f;
 	switch (StrockCnt_)
 	{

@@ -4,9 +4,14 @@
 // 분류 :
 // 용도 :
 // 설명 :
+class GameEngineRenderer;
 class House : public GameEngineActor
 {
 private:	// member Var
+	int LOD_;
+	float DownTime_;
+
+	GameEngineRenderer* House_;
 
 public:		
 	House(); // default constructor 디폴트 생성자

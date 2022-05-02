@@ -5,5 +5,6 @@ enum class ORDER
 	BACKGROUND,
 	PLAYER,
 	UI,
-	TRAP
+	TRAP,
+	OBJECT
 };
