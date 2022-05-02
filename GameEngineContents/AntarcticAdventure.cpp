@@ -35,19 +35,19 @@ void AntarcticAdventure::GameInit()
 			GameEngineImageManager::GetInst()->Load(AllImageFileList[i].GetFullPath());
 		}
 	}
-	//{
-	//	GameEngineDirectory ResourcesDir; 
-	//	ResourcesDir.MoveParent("WinAPIPortfolio");
-	//	ResourcesDir.Move("Resources");
-	//	ResourcesDir.Move("Sound");
+	{
+		GameEngineDirectory ResourcesDir; 
+		ResourcesDir.MoveParent("WinAPIPortfolio");
+		ResourcesDir.Move("Resources");
+		ResourcesDir.Move("Sound");
 
-	//	std::vector<GameEngineFile> AllImageFileList = ResourcesDir.GetAllFile();
+		std::vector<GameEngineFile> AllImageFileList = ResourcesDir.GetAllFile();
 
-	//	for (size_t i = 0; i < AllImageFileList.size(); i++)
-	//	{
-	//		GameEngineSound::LoadRes(AllImageFileList[i].GetFullPath());
-	//	}
-	//}
+		for (size_t i = 0; i < AllImageFileList.size(); i++)
+		{
+			GameEngineSound::LoadRes(AllImageFileList[i].GetFullPath());
+		}
+	}
 
 	{
 		GameEngineImage* Image = GameEngineImageManager::GetInst()->Find("Titles.bmp");
@@ -94,7 +94,7 @@ void AntarcticAdventure::GameInit()
 	CreateLevel<TitleLevel>("Title");
 	CreateLevel<MapLevel>("Map");
 	CreateLevel<PlayLevel>("Play");
-	ChangeLevel("Map");
+	ChangeLevel("Play");
 }
 
 void AntarcticAdventure::GameLoop()

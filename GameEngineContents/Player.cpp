@@ -5,6 +5,7 @@
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngineBase/GameEngineTime.h>
 #include <GameEngine/GameEngineRenderer.h>
+#include <GameEngineBase/GameEngineSound.h>
 
 Player* Player::MainPlayer = nullptr;
 
@@ -138,4 +139,18 @@ void Player::Update()
 void Player::Render()
 {
 	//DebugRectRender();
+}
+
+void Player::LevelChangeStart(GameEngineLevel* _PrevLevel)
+{
+	PlayBGM_ = GameEngineSound::SoundPlayControl("PlayBGM.mp3");
+	ForwardSpeed_ = 7.f;
+	SetPosition({ 512 , 619 });
+	Penguin_->SetPivot({ 0, 0 });
+	ChangeState(Move);
+}
+
+void Player::LevelChangeEnd(GameEngineLevel* _NextLevel)
+{
+	PlayBGM_.Stop();
 }

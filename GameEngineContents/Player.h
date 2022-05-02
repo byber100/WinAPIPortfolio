@@ -22,6 +22,7 @@ enum PlayerState
 };
 
 // Ό³Έν :
+class GameEngineSound;
 class Player : public GameEngineActor
 {
 public:
@@ -36,6 +37,8 @@ private:
 	PlayerState CurState_;
 	GameEngineRenderer* Penguin_;
 	GameEngineRenderer* Shadow_;
+
+	GameEngineSoundPlayer PlayBGM_;
 
 public:
 	// constrcuter destructer
@@ -69,6 +72,9 @@ private:
 	void Start() override;
 	void Update() override;
 	void Render() override;
+	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
+	void LevelChangeEnd(GameEngineLevel* _NextLevel) override;
+
 
 	void IdleStart();
 	void MoveStart();
