@@ -6,7 +6,7 @@
 #include <GameEngineBase/GameEngineInput.h>
 
 PlayUI* PlayUI::MainUI = nullptr;
-int PlayUI::RestDistance_ = 1500;
+int PlayUI::RestDistance_ = 110;
 
 PlayUI::PlayUI()
 	: Score_(0)

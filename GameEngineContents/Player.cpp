@@ -13,6 +13,8 @@ Player::Player()
 	: ForwardSpeed_(7.0f) // 0¿¡ µµ´ÞÇÏ¸é ¾Ö´Ï¸ØÃã
 	, SideSpeed_(200.0f)
 	, isJumping_(false)
+	, isClear_(false)
+	, ClearTime_(0)
 {
 	ChangeState(MAX);
 }
@@ -58,6 +60,7 @@ void Player::ChangeState(PlayerState _State)
 		case TakeHit:
 			break;
 		case Clear:
+			ClearStart();
 			break;
 		case Pause:
 			PauseStart();
@@ -91,6 +94,7 @@ void Player::StateUpdate()
 	case TakeHit:
 		break;
 	case Clear:
+		ClearUpdate();
 		break;
 	case Pause:
 		PauseUpdate();
@@ -110,7 +114,9 @@ void Player::Start()
 	Penguin_ = CreateRenderer(301);
 	Penguin_->SetPivot({ 0, 0 });
 	Penguin_->CreateAnimation("Player.bmp", "Walk", 2, 5, 0.13f);
+	Penguin_->CreateAnimation("Player.bmp", "ClearWalk", 2, 5, 0.05f);
 	Penguin_->CreateAnimation("Player.bmp", "Jump", 9, 10, 0.1f);
+	Penguin_->CreateAnimation("Player.bmp", "Clear", 11, 12, 0.5f);
 	Penguin_->ChangeAnimation("Walk");
 
 	Shadow_ = CreateRenderer("PlayerShadow.bmp",300);

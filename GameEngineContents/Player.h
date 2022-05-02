@@ -40,6 +40,9 @@ private:
 
 	GameEngineSoundPlayer PlayBGM_;
 
+	bool isClear_;
+	float ClearTime_;
+
 public:
 	// constrcuter destructer
 	Player();
@@ -58,6 +61,10 @@ public:
 	void SetForwardSpeed(float _Speed)
 	{
 		ForwardSpeed_ = _Speed;
+	}
+	bool IsClear()
+	{
+		return isClear_;
 	}
 
 protected:
@@ -80,6 +87,7 @@ private:
 	void MoveStart();
 	void JumpStart();
 	void PauseStart();
+	void ClearStart();
 
 	void IdleUpdate();
 	void MoveUpdate();
@@ -87,5 +95,6 @@ private:
 	void JumpLUpdate();
 	void JumpRUpdate();
 	void PauseUpdate();
+	void ClearUpdate();
 };
 

@@ -48,5 +48,5 @@ protected:
 	void LevelChangeEnd(GameEngineLevel* _PrevLevel) override;
 
 private:
-
+	void Arrive();
 };

@@ -302,11 +302,18 @@ void RandomStage::Update()
 			RoundStateValue_ = 1;
 		}
 	}
-	if (AlmostArrived_ == PlayUI::RestDistance_)
+	else if (AlmostArrived_ == PlayUI::RestDistance_)
 	{
 		PlayLevel::FrameCount = 0;
 		RoundStateValue_ = 3;
 	}
+	else if (0 == PlayUI::RestDistance_)
+	{
+		LeftGround_->SetInterTime(99999999);
+		RightGround_->SetInterTime(99999999);
+		return;
+	}
+
 	if (0 == PlayLevel::FrameCount)
 	{
 		StageChange();
@@ -321,7 +328,7 @@ void RandomStage::Update()
 	{
 		float FrameTime = 2 * PlayLevel::PlayLevelStage->GetLevelInterTime(); // 전진 정밀도
 
-		LeftOcean_->SetInterTime(FrameTime);
+		LeftOcean_->SetInterTime(FrameTime); // 스테이지 애니 프레임 변경
 		RightOcean_->SetInterTime(FrameTime);
 		LeftGround_->SetInterTime(FrameTime);
 		RightGround_->SetInterTime(FrameTime);

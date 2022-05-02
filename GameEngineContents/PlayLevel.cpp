@@ -36,6 +36,14 @@ float PlayLevel::GetLevelInterTime()
 	return PlayerSpeed;
 }
 
+void PlayLevel::Arrive()
+{
+	if (false == Player::MainPlayer->IsClear())
+	{
+		Player::MainPlayer->ChangeState(Clear);
+	}
+}
+
 void PlayLevel::Loading()
 {
 	if (nullptr == Player::MainPlayer)
@@ -72,7 +80,6 @@ void PlayLevel::Update()
 	// Test///////////////////////////////////////////////////
 	if (GameEngineInput::GetInst()->IsDown("ToPrevLevel"))
 	{
-		Player::MainPlayer->SetForwardSpeed(7.f);
 		GameEngine::GetInst().ChangeLevel("Map");
 	}
 	if (GameEngineInput::GetInst()->IsDown("TestTrap"))
@@ -91,21 +98,30 @@ void PlayLevel::Update()
 	int t = PlayUI::MainUI->GetCountTime();
 	if (0 != t)
 	{
-		if (0 < UnitSecond_)
+		if (0 < PlayUI::RestDistance_)
 		{
-			UnitSecond_ -= GameEngineTime::GetInst()->GetDeltaTime();
+			if (0 < UnitSecond_)
+			{
+				UnitSecond_ -= GameEngineTime::GetInst()->GetDeltaTime();
+			}
+			else
+			{
+				UnitSecond_ = 1.0f;
+
+				--t;
+				PlayUI::MainUI->SetCountTime(t);
+			}
 		}
 		else
 		{
-			UnitSecond_ = 1.0f;
-			
-			--t;
-			PlayUI::MainUI->SetCountTime(t);
+			Arrive();
+			return;
 		}
 	}
 	else
 	{
 		Player::MainPlayer->ChangeState(PlayerState::Pause);
+		return;
 	}
 
 	float LevelInterTime = PlayLevelStage->GetLevelInterTime();
@@ -131,7 +147,6 @@ void PlayLevel::Update()
 		}
 	}
 	CurframeTime_ -= GameEngineTime::GetDeltaTime();
-	
 }
 
 void PlayLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)

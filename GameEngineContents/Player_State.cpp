@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "PlayUI.h"
 #include <GameEngine/GameEngine.h>
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngineImageManager.h>
@@ -20,12 +21,26 @@ void Player::JumpStart()
 
 void Player::PauseStart()
 {
+	isClear_ = true;
 	Penguin_->PauseOn();
 	ForwardSpeed_ = 0.0f;
 }
 
+void Player::ClearStart()
+{
+	ForwardSpeed_ = 0.0f;
+	Penguin_->SetPivot(float4::ZERO);
+	Penguin_->ChangeAnimation("ClearWalk");
+}
+
 void Player::MoveUpdate()
 {
+	if (0 >= PlayUI::RestDistance_)
+	{
+		ForwardSpeed_ = 0.0f;
+		return;
+	}
+
 	if (true == GameEngineInput::GetInst()->IsDown("Jump"))
 	{
 		if (true == GameEngineInput::GetInst()->IsPress("MoveLeft"))
@@ -144,4 +159,21 @@ void Player::JumpRUpdate()
 void Player::PauseUpdate()
 {
 
+}
+
+void Player::ClearUpdate()
+{
+	float y = 564;
+
+	if (512 - 8 < GetPosition().x && 512 + 8 > GetPosition().x &&
+		y - 8 < GetPosition().y && y + 8 > GetPosition().y)
+	{
+		Penguin_->ChangeAnimation("Clear");
+
+		return;
+	}
+
+	ClearTime_ += 0.02f * GameEngineTime::GetInst()->GetDeltaTime();
+	float4 ClearMove = float4::LerpLimit(GetPosition(), { 512 , y }, ClearTime_);
+	SetPosition(ClearMove);
 }
