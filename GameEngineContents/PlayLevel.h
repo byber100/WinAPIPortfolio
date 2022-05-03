@@ -31,7 +31,6 @@ private:
 	GameEngineSoundPlayer BgmPlayer;
 
 	LevelChanger* LevelChanger_;
-	RandomStage* StageInfo_;
 	House* HouseInfo_;
 
 public:

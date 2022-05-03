@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "PlayUI.h"
 #include "PathPoint.h"
+#include "RandomStage.h"
 #include <GameEngineBase/GameEngineInput.h>
 
 
@@ -273,18 +274,28 @@ void MapLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 		PlayUI::Stage_ = 1;
 	}
 
-	switch (PlayUI::Stage_) // 스테이지 난이도 설정
+	switch (PlayUI::Stage_) // 스테이지 설정
 	{
 	case 1:
 	{
 		PlayUI::MainUI->SetCountTime(1);
 		PlayUI::RestDistance_ = 150;
+
+		if (nullptr != RandomStage::MainStage)
+		{
+			RandomStage::MainStage->StageSetting(0, 0);
+		}
 	}
 	break;
 	case 2:
 	{
 		PlayUI::MainUI->SetCountTime(12);
 		PlayUI::RestDistance_ = 170;
+
+		if (nullptr != RandomStage::MainStage)
+		{
+			RandomStage::MainStage->StageSetting(1, 0);
+		}
 	}
 	break;
 	default:

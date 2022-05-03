@@ -20,9 +20,6 @@
     <ClCompile Include="PlayUI.cpp">
       <Filter>GlobalActors</Filter>
     </ClCompile>
-    <ClCompile Include="RandomStage.cpp">
-      <Filter>OtherActors\Play</Filter>
-    </ClCompile>
     <ClCompile Include="HoleTrap.cpp">
       <Filter>OtherActors\Play</Filter>
     </ClCompile>
@@ -53,6 +50,9 @@
     <ClCompile Include="House.cpp">
       <Filter>OtherActors\Play</Filter>
     </ClCompile>
+    <ClCompile Include="RandomStage.cpp">
+      <Filter>GlobalActors</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TitleLevel.h">
@@ -70,9 +70,6 @@
     <ClInclude Include="AntarcticAdventure.h" />
     <ClInclude Include="PlayUI.h">
       <Filter>GlobalActors</Filter>
-    </ClInclude>
-    <ClInclude Include="RandomStage.h">
-      <Filter>OtherActors\Play</Filter>
     </ClInclude>
     <ClInclude Include="HoleTrap.h">
       <Filter>OtherActors\Play</Filter>
@@ -104,6 +101,9 @@
     </ClInclude>
     <ClInclude Include="House.h">
       <Filter>OtherActors\Play</Filter>
+    </ClInclude>
+    <ClInclude Include="RandomStage.h">
+      <Filter>GlobalActors</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

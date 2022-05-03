@@ -21,7 +21,6 @@ PlayLevel::PlayLevel()
 	: UnitSecond_(1.0f)
 	, ArriveOn_(false)
 	, LevelChanger_(nullptr)
-	, StageInfo_(nullptr)
 	, HouseInfo_ (nullptr)
 {
 }
@@ -60,9 +59,12 @@ void PlayLevel::Loading()
 	{
 		Player::MainPlayer = CreateActor<Player>((int)ORDER::PLAYER, "MainPlayer");
 	}
+	if (nullptr == RandomStage::MainStage)
+	{
+		RandomStage::MainStage = CreateActor<RandomStage>((int)ORDER::BACKGROUND, "MainStage");
+	}
 
 	LevelChanger_ = CreateActor<LevelChanger>((int)ORDER::UI);
-	StageInfo_ = CreateActor<RandomStage>((int)ORDER::BACKGROUND);
 	CreateActor<PlayBack>((int)ORDER::BACKGROUND);
 
 	PlayLevelStage = this;
@@ -72,7 +74,7 @@ void PlayLevel::Loading()
 	GameEngineInput::GetInst()->CreateKey("ToPrevLevel", '1');
 
 	if (nullptr == Player::MainPlayer ||
-		nullptr == StageInfo_ ||
+		nullptr == RandomStage::MainStage ||
 		nullptr == PlayUI::MainUI)
 	{
 		MsgBoxAssert("필수 액터 정보가 없습니다.")
@@ -160,7 +162,7 @@ void PlayLevel::Update()
 			FrameUnitCount_ = 0;
 			is2FrameUnit_ = true;
 
-			StageInfo_->MountainFrame();
+			RandomStage::MainStage->MountainFrame();
 			//CreateActor<HoleTrap>((int)ORDER::TRAP);
 		}
 	}

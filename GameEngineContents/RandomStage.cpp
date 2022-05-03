@@ -8,7 +8,7 @@
 #include <GameEngine/GameEngineImage.h>
 
 // Static Var
-
+RandomStage* RandomStage::MainStage = nullptr;
 // Static Func
 
 // constructor destructor
@@ -35,6 +35,17 @@ RandomStage::~RandomStage()
 }
 
 //member Func
+void RandomStage::StageSetting(const int& _RoundStateValue, const int& _MountainDirectionValue)
+{
+	RoundStateValue_ = _RoundStateValue;
+	MountainDirectionValue_ = _MountainDirectionValue;
+
+	LeftOcean_->PauseOff();
+	RightOcean_->PauseOff();
+	LeftGround_->PauseOff();
+	RightGround_->PauseOff();
+}
+
 void RandomStage::Start()
 {
 	SetPosition(GameEngineWindow::GetScale().Half());
@@ -326,7 +337,7 @@ void RandomStage::Update()
 
 	if (0 == PlayUI::MainUI->GetCountTime())
 	{
-		LeftOcean_->PauseOn();
+ 		LeftOcean_->PauseOn();
 		RightOcean_->PauseOn();
 		LeftGround_->PauseOn();
 		RightGround_->PauseOn();
@@ -350,14 +361,4 @@ void RandomStage::Render()
 	Mountain2_->SetOrder(101);
 	ResetOrder();
 	StageRender();
-}
-
-void RandomStage::LevelChangeStart(GameEngineLevel* _PrevLevel)
-{
-	LeftOcean_->PauseOff();
-	RightOcean_->PauseOff();
-	LeftGround_->PauseOff();
-	RightGround_->PauseOff();
-
-
 }

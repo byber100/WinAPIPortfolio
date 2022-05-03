@@ -27,6 +27,8 @@ private:	// member Var
 
 	int AlmostArrived_;
 
+public:
+	static RandomStage* MainStage;
 
 public:
 	RandomStage(); // default constructor 디폴트 생성자
@@ -40,7 +42,10 @@ public:		//delete operator
 	RandomStage& operator=(const RandomStage& _Other) = delete; // default Copy operator 디폴트 대입 연산자
 	RandomStage& operator=(const RandomStage&& _Other) noexcept = delete; // default RValue Copy operator 디폴트 RValue 대입연산자
 
-private: //member Func
+public:
+	void StageSetting(const int& _RoundStateValue, const int& _MountainDirectionValue);
+
+private:
 	void MountainMove(GameEngineRenderer* _Mountain);
 	void CurveFrameCount();
 	void StageChange();
@@ -50,8 +55,6 @@ private: //member Func
 	void Start() override;
 	void Update() override;
 	void Render() override;
-
-	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
 
 public:
 	void MountainFrame();
