@@ -131,7 +131,7 @@ void Player::Start()
 	Shadow_->SetPivot({ 0,45 });
 	Shadow_->SetIndex(0);
 
-	PlayerCol_ = CreateCollision("PlayerCol", { 100,30 }, { 0,40 });
+	PlayerCol_ = CreateCollision("PlayerCol", { 100,20 }, { 0,45 });
 
 	LevelRegist("Penguin");
 
