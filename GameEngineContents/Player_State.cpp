@@ -17,6 +17,7 @@ void Player::MoveStart()
 
 void Player::JumpStart()
 {
+	GameEngineSound::SoundPlayOneShot("SFX2.mp3");
 	Penguin_->ChangeAnimation("Jump");
 	JumpDir_ = float4::UP * 200.0f;
 }
