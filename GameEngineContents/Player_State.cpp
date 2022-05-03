@@ -12,6 +12,7 @@
 void Player::MoveStart()
 {
 	Penguin_->ChangeAnimation("Walk");
+	Penguin_->PauseOff();
 }
 
 void Player::JumpStart()
