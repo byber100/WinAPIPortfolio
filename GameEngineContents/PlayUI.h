@@ -66,7 +66,7 @@ private:
 	GameEngineRenderer* TimeOverRender_;
 
 	GameEngineFont DedugText_;
-	bool VeiledDebuging_;
+	bool DebugModeOn_;
 
 public:
 	// constrcuter destructer
@@ -97,6 +97,10 @@ public:
 	bool IsTimeOver()
 	{
 		return TimeOver_;
+	}
+	bool IsDebugMode()
+	{
+		return DebugModeOn_;
 	}
 
 protected:

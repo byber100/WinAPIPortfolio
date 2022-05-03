@@ -18,7 +18,7 @@ PlayUI::PlayUI()
 	, CalTime_(0)
 	, TimeOver_(false)
 	, TimeOverRender_(nullptr)
-	, VeiledDebuging_(false)
+	, DebugModeOn_(false)
 	, ScoreTile1_ (nullptr)
 	, ScoreTile2_ (nullptr)
 	, ScoreTile3_ (nullptr)
@@ -80,6 +80,8 @@ void PlayUI::NumberUpdate(int _Object, const std::vector<GameEngineRenderer*> Nu
 
 void PlayUI::DebugUIOn()
 {
+	DedugText_.Draw("Debuging Mode", { 400,0 }, RGB(255, 255, 0), 40, 0);
+
 	{
 		std::string UpdateText = std::to_string(Score_);
 		DedugText_.Draw("Score: " + UpdateText, { 0,0 }, RGB(255,255,255), 20, 0);
@@ -420,16 +422,16 @@ void PlayUI::Render()
 
 	if (GameEngineInput::GetInst()->IsDown("UIDebug"))
 	{
-		if (false == VeiledDebuging_)
+		if (false == DebugModeOn_)
 		{
-			VeiledDebuging_ = true;
+			DebugModeOn_ = true;
 		}
 		else
 		{
-			VeiledDebuging_ = false;
+			DebugModeOn_ = false;
 		}
 	}
-	if (true == VeiledDebuging_)
+	if (true == DebugModeOn_)
 	{
 		DebugUIOn();
 	}
