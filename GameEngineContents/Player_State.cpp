@@ -26,12 +26,19 @@ void Player::PauseStart()
 {
 	Penguin_->PauseOn();
 	ForwardSpeed_ = 0.0f;
+	TriggerTime_ = 0;
+
+	if (0 == PlayUI::MainUI->GetCountTime())
+	{
+		PlayBGM_.Stop();
+		PlayBGM_= GameEngineSound::SoundPlayControl("TimeoverBGM.mp3");
+	}
 }
 
 void Player::ClearStart()
 {
 	isClear_ = true;
-	ClearTime_ = 0;
+	TriggerTime_ = 0;
 	ForwardSpeed_ = 0.0f;
 	Penguin_->SetPivot(float4::ZERO);
 	Penguin_->ChangeAnimation("ClearWalk");
@@ -40,7 +47,7 @@ void Player::ClearStart()
 void Player::CeremonyStart()
 {
 	Penguin_->ChangeAnimation("Ceremony");
-	ClearTime_ = 1.4f;
+	TriggerTime_ = 1.4f;
 }
 
 void Player::MoveUpdate()
@@ -168,7 +175,14 @@ void Player::JumpRUpdate()
 
 void Player::PauseUpdate()
 {
-
+	if (0 == PlayUI::MainUI->GetCountTime())
+	{
+		TriggerTime_ += GameEngineTime::GetInst()->GetDeltaTime();
+		if (5 < TriggerTime_)
+		{
+			PlayBGM_.Stop();
+		}
+	}
 }
 
 void Player::ClearUpdate()
@@ -186,26 +200,26 @@ void Player::ClearUpdate()
 			PlayBGM_.Stop();
 			GameEngineSound::SoundPlayOneShot("ClearBGM.mp3");
 			ClearSoundOn_ = true;
-			ClearTime_ = 4.6f;
+			TriggerTime_ = 4.6f;
 		}
 
-		ClearTime_ -= GameEngineTime::GetInst()->GetDeltaTime();
-		if (0 > ClearTime_)
+		TriggerTime_ -= GameEngineTime::GetInst()->GetDeltaTime();
+		if (0 > TriggerTime_)
 		{
 			ChangeState(PlayerState::Ceremony);
 		}
 		return;
 	}
 
-	ClearTime_ += 0.02f * GameEngineTime::GetInst()->GetDeltaTime();
-	float4 ClearMove = float4::LerpLimit(GetPosition(), { 512 , y }, ClearTime_);
+	TriggerTime_ += 0.02f * GameEngineTime::GetInst()->GetDeltaTime();
+	float4 ClearMove = float4::LerpLimit(GetPosition(), { 512 , y }, TriggerTime_);
 	SetPosition(ClearMove);
 }
 
 void Player::CeremonyUpdate()
 {
-	ClearTime_ -= GameEngineTime::GetInst()->GetDeltaTime();
-	if (0 > ClearTime_)
+	TriggerTime_ -= GameEngineTime::GetInst()->GetDeltaTime();
+	if (0 > TriggerTime_)
 	{
 		PlayUI::MainUI->StartTimeScore();
 	}

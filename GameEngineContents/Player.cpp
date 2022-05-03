@@ -15,7 +15,7 @@ Player::Player()
 	, isJumping_(false)
 	, isClear_(false)
 	, ClearSoundOn_(false)
-	, ClearTime_(0)
+	, TriggerTime_(0)
 {
 	ChangeState(MAX);
 }

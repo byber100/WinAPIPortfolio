@@ -43,7 +43,7 @@ private:
 
 	bool isClear_;
 	bool ClearSoundOn_;
-	float ClearTime_;
+	float TriggerTime_; // 각종 플레이어 이벤트를 위한 값
 
 public:
 	// constrcuter destructer
