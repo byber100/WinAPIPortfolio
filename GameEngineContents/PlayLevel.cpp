@@ -4,7 +4,7 @@
 #include "PlayUI.h"
 #include "PlayBack.h"
 #include "RandomStage.h"
-#include "HoleTrap.h"
+#include "Trap.h"
 #include "House.h"
 #include "LevelChanger.h"
 #include <GameEngineBase/GameEngineTime.h>
@@ -91,7 +91,7 @@ void PlayLevel::Update()
 	}
 	if (GameEngineInput::GetInst()->IsDown("TestTrap"))
 	{
-		CreateActor<HoleTrap>((int)ORDER::TRAP);
+		CreateActor<Trap>((int)ORDER::TRAP);
 	}
 	if (GameEngineInput::GetInst()->IsDown("DebugCol"))
 	{
@@ -169,7 +169,7 @@ void PlayLevel::Update()
 			is2FrameUnit_ = true;
 
 			RandomStage::MainStage->MountainFrame();
-			//CreateActor<HoleTrap>((int)ORDER::TRAP);
+			//CreateActor<Trap>((int)ORDER::TRAP);
 		}
 	}
 	CurframeTime_ -= GameEngineTime::GetDeltaTime();

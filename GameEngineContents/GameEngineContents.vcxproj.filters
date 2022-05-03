@@ -20,7 +20,7 @@
     <ClCompile Include="PlayUI.cpp">
       <Filter>GlobalActors</Filter>
     </ClCompile>
-    <ClCompile Include="HoleTrap.cpp">
+    <ClCompile Include="Trap.cpp">
       <Filter>OtherActors\Play</Filter>
     </ClCompile>
     <ClCompile Include="CompanyLevel.cpp">
@@ -74,7 +74,7 @@
     <ClInclude Include="PlayUI.h">
       <Filter>GlobalActors</Filter>
     </ClInclude>
-    <ClInclude Include="HoleTrap.h">
+    <ClInclude Include="Trap.h">
       <Filter>OtherActors\Play</Filter>
     </ClInclude>
     <ClInclude Include="CompanyLevel.h">

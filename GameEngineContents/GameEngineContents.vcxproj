@@ -179,7 +179,7 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="HoleTrap.h">
+    <ClInclude Include="Trap.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -250,7 +250,7 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="HoleTrap.cpp">
+    <ClCompile Include="Trap.cpp">
       <SubType>
       </SubType>
     </ClCompile>

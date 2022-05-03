@@ -1,4 +1,4 @@
-#include "HoleTrap.h"
+#include "Trap.h"
 #include "PlayLevel.h"
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngineRenderer.h>
@@ -9,9 +9,14 @@
 // Static Func
 
 // constructor destructor
-HoleTrap::HoleTrap()
+Trap::Trap()
 	: LOD_(0)
+	, Spawn_(SpawnLoc::CENTER)
 	, Hole_(nullptr)
+	, HoleCol_(nullptr)
+	, L_FishCol_(nullptr)
+	, R_FishCol_(nullptr)
+
 {
 	GameEngineRandom NewRandom;
 	float yDown = 38;
@@ -20,12 +25,15 @@ HoleTrap::HoleTrap()
 	{
 	case 0:
 		DirVector_ = { 0, yDown };
+		Spawn_ = SpawnLoc::CENTER;
 		break;
 	case 1:
 		DirVector_ = { 32, yDown };
+		Spawn_ = SpawnLoc::RIGHT;
 		break;
 	case 2:
 		DirVector_ = { -32, yDown };
+		Spawn_ = SpawnLoc::LEFT;
 		break;
 	default:
 		Death();
@@ -33,12 +41,12 @@ HoleTrap::HoleTrap()
 	}
 }
 
-HoleTrap::~HoleTrap()
+Trap::~Trap()
 {
 }
 
 //member Func
-void HoleTrap::Start()
+void Trap::Start()
 {
 	float x = GameEngineWindow::GetScale().Half().x;
 	float y = GameEngineWindow::GetScale().Half().y;
@@ -50,7 +58,7 @@ void HoleTrap::Start()
 	Hole_->SetIndex(LOD_);
 }
 
-void HoleTrap::Update()
+void Trap::Update()
 {
 	float DownTime = PlayLevel::PlayLevelStage->GetCurframeTime();
 	if (0.0f >= DownTime)
@@ -113,6 +121,7 @@ void HoleTrap::Update()
 
 	case 9:
 		Hole_->SetIndex(LOD_);
+
 		break;
 
 	default:
@@ -126,7 +135,7 @@ void HoleTrap::Update()
 	}
 }
 
-void HoleTrap::Render()
+void Trap::Render()
 {
 	
 }

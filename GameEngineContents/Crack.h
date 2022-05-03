@@ -7,10 +7,10 @@
 class Crack : public GameEngineActor
 {
 private:	// member Var
-	GameEngineRenderer* Crack_;
-
 	float4 DirVector_;
 	int LOD_;
+
+	GameEngineRenderer* Crack_;
 
 public:		
 	Crack(); // default constructor 디폴트 생성자
