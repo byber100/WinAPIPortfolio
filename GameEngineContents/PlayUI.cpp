@@ -82,25 +82,26 @@ void PlayUI::DebugUIOn()
 {
 	DedugText_.Draw("Debuging Mode", { 400,0 }, RGB(255, 255, 0), 40, 0);
 
+	DedugText_.Draw("Play UI", { 0,0 }, RGB(0, 255, 255), 20, 0);
 	{
 		std::string UpdateText = std::to_string(Score_);
-		DedugText_.Draw("Score: " + UpdateText, { 0,0 }, RGB(255,255,255), 20, 0);
+		DedugText_.Draw("Score: " + UpdateText, { 0,20 }, RGB(255,255,255), 20, 0);
 	}
 	{
 		std::string UpdateText = std::to_string(HiScore_);
-		DedugText_.Draw("HiScore: " + UpdateText, { 0,20 }, RGB(255, 255, 255), 20, 0);
+		DedugText_.Draw("HiScore: " + UpdateText, { 0,40 }, RGB(255, 255, 255), 20, 0);
 	}
 	{
 		std::string UpdateText = std::to_string(Stage_);
-		DedugText_.Draw("Stage: " + UpdateText, { 0,40 }, RGB(255, 255, 255), 20, 0);
+		DedugText_.Draw("Stage: " + UpdateText, { 0,60 }, RGB(255, 255, 255), 20, 0);
 	}
 	{
 		std::string UpdateText = std::to_string(CountTime_);
-		DedugText_.Draw("TimeCount: " + UpdateText, { 0,60 }, RGB(255, 255, 255), 20, 0);
+		DedugText_.Draw("TimeCount: " + UpdateText, { 0,80 }, RGB(255, 255, 255), 20, 0);
 	}
 	{
 		std::string UpdateText = std::to_string(RestDistance_);
-		DedugText_.Draw("RestDistance: " + UpdateText, { 0,80 }, RGB(255, 255, 255), 20, 0);
+		DedugText_.Draw("RestDistance: " + UpdateText, { 0,100 }, RGB(255, 255, 255), 20, 0);
 	}
 	{
 		std::string UpdateText = std::to_string(Speed_);
@@ -109,7 +110,7 @@ void PlayUI::DebugUIOn()
 		{
 			SpeedText = std::to_string(Player::MainPlayer->GetForwardSpeed());
 		}
-		DedugText_.Draw("Speed: " + UpdateText + " ( " + SpeedText + " )", {0,100}, RGB(255, 255, 255), 20, 0);
+		DedugText_.Draw("Speed: " + UpdateText + " ( " + SpeedText + " )", {0,120}, RGB(255, 255, 255), 20, 0);
 	}
 }
 
