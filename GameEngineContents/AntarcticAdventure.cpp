@@ -86,8 +86,8 @@ void AntarcticAdventure::GameInit()
 		Image->CutCount(13, 1);
 	}
 	{
-		GameEngineImage* Image = GameEngineImageManager::GetInst()->Find("HoleTraps.bmp");
-		Image->CutCount(1, 9);
+		GameEngineImage* Image = GameEngineImageManager::GetInst()->Find("Traps.bmp");
+		Image->CutCount(1, 8);
 	}
 
 	CreateLevel<CompanyLevel>("Company");

@@ -74,8 +74,10 @@ void Trap::Start()
 		break;
 	}
 
-	Hole_ = CreateRenderer("HoleTraps.bmp", 200);
+	Hole_ = CreateRenderer("Traps.bmp", 200);
+
 	Hole_->SetIndex(LOD_);
+	//HoleCol_=CreateCollision("TrapCol",)
 }
 
 void Trap::Update()
@@ -97,14 +99,25 @@ void Trap::Update()
 		{
 			if (LODInterval < GetPosition().y)
 			{
-				SetMove({ DirVector_.x , DirVector_.y - 14 });
-				++LOD_;
+				SetMove({ DirVector_.x , DirVector_.y - 18 });
+
+				if (680 < GetPosition().y)
+				{
+					++LOD_;
+				}
 			}
 		}
-
 		DownTime -= GameEngineTime::GetDeltaTime();
 	}
 
+	if (768 < GetPosition().y)
+	{
+		Death();
+	}
+}
+
+void Trap::Render()
+{
 	switch (LOD_)
 	{
 	case 0:
@@ -139,23 +152,8 @@ void Trap::Update()
 		Hole_->SetIndex(LOD_);
 		break;
 
-	case 9:
-		Hole_->SetIndex(LOD_);
-
-		break;
-
 	default:
 		LOD_ = 0;
 		break;
 	}
-
-	if (768 < GetPosition().y)
-	{
-		Death();
-	}
-}
-
-void Trap::Render()
-{
-	
 }
