@@ -309,10 +309,8 @@ void RandomStage::Update()
 	}
 	else if (0 == PlayUI::RestDistance_)
 	{
-		LeftGround_->SetImageAnimationReset("GroundTiles.bmp");
-		LeftGround_->SetIndex(0);
-		RightGround_->SetImageAnimationReset("GroundTiles.bmp");
-		RightGround_->SetIndex(2);
+		LeftGround_->PauseOn();
+		RightGround_->PauseOn();
 		return;
 	}
 
@@ -324,6 +322,15 @@ void RandomStage::Update()
 		{
 			isCurve_ = false;
 		}
+	}
+
+	if (0 == PlayUI::MainUI->GetCountTime())
+	{
+		LeftOcean_->PauseOn();
+		RightOcean_->PauseOn();
+		LeftGround_->PauseOn();
+		RightGround_->PauseOn();
+
 	}
 
 	if (false == PlayLevel::is2FrameUnit_)
@@ -347,7 +354,10 @@ void RandomStage::Render()
 
 void RandomStage::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
-	LeftGround_->ChangeAnimation("LeftGround");
-	RightGround_->ChangeAnimation("RightGround");
+	LeftOcean_->PauseOff();
+	RightOcean_->PauseOff();
+	LeftGround_->PauseOff();
+	RightGround_->PauseOff();
+
 
 }
