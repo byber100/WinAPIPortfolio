@@ -56,6 +56,8 @@ private:
 	void Update() override;
 	void Render() override;
 
+	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
+
 public:
 	void MountainFrame();
 };

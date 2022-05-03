@@ -337,11 +337,10 @@ void RandomStage::Update()
 
 	if (0 == PlayUI::MainUI->GetCountTime())
 	{
- 		LeftOcean_->PauseOn();
-		RightOcean_->PauseOn();
-		LeftGround_->PauseOn();
-		RightGround_->PauseOn();
-
+ 		LeftOcean_->	PauseOn();
+		RightOcean_->	PauseOn();
+		LeftGround_->	PauseOn();
+		RightGround_->	PauseOn();
 	}
 
 	if (false == PlayLevel::is2FrameUnit_)
@@ -361,4 +360,12 @@ void RandomStage::Render()
 	Mountain2_->SetOrder(101);
 	ResetOrder();
 	StageRender();
+}
+
+void RandomStage::LevelChangeStart(GameEngineLevel* _PrevLevel)
+{
+	LeftOcean_->	PauseOff();
+	RightOcean_->	PauseOff();
+	LeftGround_->	PauseOff();
+	RightGround_->	PauseOff();
 }
