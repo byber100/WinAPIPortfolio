@@ -13,8 +13,8 @@ Trap::Trap()
 	: Event_(TrapEvent::None)
 	, Spawn_(SpawnLoc::CENTER)
 	, LOD_(0)
-	, Hole_(nullptr)
-	, HoleCol_(nullptr)
+	, Trap_(nullptr)
+	, TrapCol_(nullptr)
 	, L_FishCol_(nullptr)
 	, R_FishCol_(nullptr)
 
@@ -74,10 +74,10 @@ void Trap::Start()
 		break;
 	}
 
-	Hole_ = CreateRenderer("Traps.bmp", 200);
+	Trap_ = CreateRenderer("Traps.bmp", 200);
 
-	Hole_->SetIndex(LOD_);
-	//HoleCol_=CreateCollision("TrapCol",)
+	Trap_->SetIndex(LOD_);
+	//TrapCol_=CreateCollision("TrapCol",)
 }
 
 void Trap::Update()
@@ -121,35 +121,35 @@ void Trap::Render()
 	switch (LOD_)
 	{
 	case 0:
-		Hole_->SetIndex(LOD_);
+		Trap_->SetIndex(LOD_);
 		break;
 
 	case 1:
-		Hole_->SetIndex(LOD_);
+		Trap_->SetIndex(LOD_);
 		break;
 
 	case 2:
-		Hole_->SetIndex(LOD_);
+		Trap_->SetIndex(LOD_);
 		break;
 
 	case 3:
-		Hole_->SetIndex(LOD_);
+		Trap_->SetIndex(LOD_);
 		break;
 
 	case 4:
-		Hole_->SetIndex(LOD_);
+		Trap_->SetIndex(LOD_);
 		break;
 
 	case 5:
-		Hole_->SetIndex(LOD_);
+		Trap_->SetIndex(LOD_);
 		break;
 
 	case 6:
-		Hole_->SetIndex(LOD_);
+		Trap_->SetIndex(LOD_);
 		break;
 
 	case 7:
-		Hole_->SetIndex(LOD_);
+		Trap_->SetIndex(LOD_);
 		break;
 
 	default:

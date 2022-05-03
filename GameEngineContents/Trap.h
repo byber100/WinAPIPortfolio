@@ -27,9 +27,9 @@ private:	// member Var
 	float4 DirVector_;
 	int LOD_;
 
-	GameEngineRenderer* Hole_;
+	GameEngineRenderer* Trap_;
 
-	GameEngineCollision* HoleCol_;
+	GameEngineCollision* TrapCol_;
 	GameEngineCollision* L_FishCol_;
 	GameEngineCollision* R_FishCol_;
 
