@@ -364,8 +364,8 @@ void RandomStage::Render()
 
 void RandomStage::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
-	LeftOcean_->	PauseOff();
-	RightOcean_->	PauseOff();
-	LeftGround_->	PauseOff();
-	RightGround_->	PauseOff();
+	LeftOcean_->SetInterTime(0.2f);
+	RightOcean_->SetInterTime(0.2f);
+	LeftGround_->SetInterTime(0.2f);
+	RightGround_->SetInterTime(0.2f);
 }

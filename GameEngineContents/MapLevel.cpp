@@ -278,7 +278,7 @@ void MapLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	{
 	case 1:
 	{
-		PlayUI::MainUI->SetCountTime(1);
+		PlayUI::MainUI->SetCountTime(3);
 		PlayUI::RestDistance_ = 150;
 
 		if (nullptr != RandomStage::MainStage)
@@ -294,7 +294,7 @@ void MapLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 
 		if (nullptr != RandomStage::MainStage)
 		{
-			RandomStage::MainStage->StageSetting(1, 0);
+			RandomStage::MainStage->StageSetting(3, 0);
 		}
 	}
 	break;
