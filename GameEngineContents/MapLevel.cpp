@@ -278,8 +278,8 @@ void MapLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	{
 	case 1:
 	{
-		PlayUI::MainUI->SetCountTime(3);
-		PlayUI::RestDistance_ = 150;
+		PlayUI::MainUI->SetCountTime(1000);
+		PlayUI::RestDistance_ = 15000;
 
 		if (nullptr != RandomStage::MainStage)
 		{
@@ -289,8 +289,8 @@ void MapLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	break;
 	case 2:
 	{
-		PlayUI::MainUI->SetCountTime(3);
-		PlayUI::RestDistance_ = 170;
+		PlayUI::MainUI->SetCountTime(120);
+		PlayUI::RestDistance_ = 1700;
 
 		if (nullptr != RandomStage::MainStage)
 		{
@@ -307,8 +307,8 @@ void MapLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 {
 	PlayUI::MainUI->NextLevelOn();
 	
-	std::list<PathPoint*>::iterator StartIter = PathAll_.begin();
-	std::list<PathPoint*>::iterator EndIter = PathAll_.end();
+	std::vector<PathPoint*>::iterator StartIter = PathAll_.begin();
+	std::vector<PathPoint*>::iterator EndIter = PathAll_.end();
 
 	for (; StartIter != EndIter; ++StartIter)
 	{

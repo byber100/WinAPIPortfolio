@@ -22,6 +22,7 @@ PlayLevel::PlayLevel()
 	, ArriveOn_(false)
 	, LevelChanger_(nullptr)
 	, HouseInfo_ (nullptr)
+	, isColDebug_(false)
 {
 }
 
@@ -72,6 +73,7 @@ void PlayLevel::Loading()
 	// Test///////////////////////////////////////////////////
 	GameEngineInput::GetInst()->CreateKey("TestTrap", 'Q');
 	GameEngineInput::GetInst()->CreateKey("ToPrevLevel", '1');
+	GameEngineInput::GetInst()->CreateKey("DebugCol", VK_TAB);
 
 	if (nullptr == Player::MainPlayer ||
 		nullptr == RandomStage::MainStage ||
@@ -90,6 +92,10 @@ void PlayLevel::Update()
 	if (GameEngineInput::GetInst()->IsDown("TestTrap"))
 	{
 		CreateActor<HoleTrap>((int)ORDER::TRAP);
+	}
+	if (GameEngineInput::GetInst()->IsDown("DebugCol"))
+	{
+		IsDebugModeSwitch();
 	}
 
 	if (true == LevelChangeOn_)

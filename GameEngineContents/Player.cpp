@@ -131,6 +131,8 @@ void Player::Start()
 	Shadow_->SetPivot({ 0,45 });
 	Shadow_->SetIndex(0);
 
+	PlayerCol_ = CreateCollision("PlayerCol", { 100,30 }, { 0,40 });
+
 	LevelRegist("Penguin");
 
 	if (false == GameEngineInput::GetInst()->IsKey("MoveLeft"))

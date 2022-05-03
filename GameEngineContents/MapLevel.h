@@ -11,7 +11,7 @@ class MapLevel : public GameEngineLevel
 private:	// member Var
 	LevelChanger* LevelChanger_;
 
-	std::list< PathPoint*> PathAll_;
+	std::vector< PathPoint*> PathAll_;
 	int StrockCnt_;
 	float4 BrushPos_;
 

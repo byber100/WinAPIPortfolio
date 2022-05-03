@@ -38,6 +38,7 @@ private:
 	PlayerState CurState_;
 	GameEngineRenderer* Penguin_;
 	GameEngineRenderer* Shadow_;
+	GameEngineCollision* PlayerCol_;
 
 	GameEngineSoundPlayer PlayBGM_;
 
@@ -83,8 +84,7 @@ private:
 	void Render() override;
 	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
 	void LevelChangeEnd(GameEngineLevel* _NextLevel) override;
-
-
+	
 	void MoveStart();
 	void JumpStart();
 	void PauseStart();

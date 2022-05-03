@@ -33,6 +33,8 @@ private:
 	LevelChanger* LevelChanger_;
 	House* HouseInfo_;
 
+	bool isColDebug_;
+
 public:
 	static PlayLevel* PlayLevelStage;
 	static int FrameCount;
