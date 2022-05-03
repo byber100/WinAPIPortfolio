@@ -163,6 +163,7 @@ void Player::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	SetPosition({ 512 , 619 });
 	Penguin_->SetPivot({ 0, 0 });
 	ChangeState(Move);
+	isClear_ = false;
 }
 
 void Player::LevelChangeEnd(GameEngineLevel* _NextLevel)

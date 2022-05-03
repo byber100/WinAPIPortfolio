@@ -22,13 +22,13 @@ void Player::JumpStart()
 
 void Player::PauseStart()
 {
-	isClear_ = true;
 	Penguin_->PauseOn();
 	ForwardSpeed_ = 0.0f;
 }
 
 void Player::ClearStart()
 {
+	isClear_ = true;
 	ClearTime_ = 0;
 	ForwardSpeed_ = 0.0f;
 	Penguin_->SetPivot(float4::ZERO);
