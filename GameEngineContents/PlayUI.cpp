@@ -11,6 +11,7 @@ int PlayUI::RestDistance_ = 0; // MapLevel에서 정해줌
 
 PlayUI::PlayUI()
 	: Score_(0)
+	, PrevScore_(0)
 	, HiScore_(0)
 	, Speed_(5)
 	, CountTime_(0) // MapLevel에서 정해줌
@@ -377,7 +378,12 @@ void PlayUI::Start()
 
 void PlayUI::Update()
 {
-	if (CountMode_ == TimeScoreCount::ON)
+	if (Score_ > HiScore_) // 신기록
+	{
+		HiScore_ = Score_;
+	}
+
+	if (CountMode_ == TimeScoreCount::ON) // 클리어 후 점수
 	{
 		if (0.08f < CalTime_)
 		{
@@ -399,7 +405,7 @@ void PlayUI::Update()
 		return;
 	}
 
-	if (0 != CountTime_)
+	if (0 != CountTime_) // 속도 및 타임이벤트
 	{
 		if (nullptr != Player::MainPlayer && 0 != RestDistance_)
 		{
@@ -441,11 +447,17 @@ void PlayUI::Render()
 void PlayUI::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
 	MainUI = this;
+	PrevScore_ = Score_;
 	TimeOver_ = false;
 }
 
 void PlayUI::LevelChangeEnd(GameEngineLevel* _NextLevel)
 {
+	if (true == TimeOver_)
+	{
+		Score_ = PrevScore_;
+	}
+
 	CountMode_ = TimeScoreCount::OFF;
 	TimeOverRender_->SetOrder(0);
 }

@@ -289,7 +289,7 @@ void MapLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	break;
 	case 2:
 	{
-		PlayUI::MainUI->SetCountTime(12);
+		PlayUI::MainUI->SetCountTime(3);
 		PlayUI::RestDistance_ = 170;
 
 		if (nullptr != RandomStage::MainStage)
