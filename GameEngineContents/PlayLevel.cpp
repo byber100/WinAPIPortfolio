@@ -184,5 +184,8 @@ void PlayLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 	LevelChangeOn_ = false;
 
 	PlayUI::MainUI->NextLevelOn();
-	++PlayUI::Stage_;
+	if (false == PlayUI::MainUI->IsTimeOver())
+	{
+		++PlayUI::Stage_;
+	}
 }

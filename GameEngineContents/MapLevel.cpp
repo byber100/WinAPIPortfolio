@@ -273,11 +273,11 @@ void MapLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 		PlayUI::Stage_ = 1;
 	}
 
-	switch (PlayUI::Stage_)
+	switch (PlayUI::Stage_) // 스테이지 난이도 설정
 	{
 	case 1:
 	{
-		PlayUI::MainUI->SetCountTime(10);
+		PlayUI::MainUI->SetCountTime(1);
 		PlayUI::RestDistance_ = 150;
 	}
 	break;

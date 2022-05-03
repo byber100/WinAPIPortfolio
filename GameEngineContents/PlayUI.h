@@ -63,6 +63,7 @@ private:
 	TimeScoreCount CountMode_;
 	float CalTime_;
 	bool TimeOver_;
+	GameEngineRenderer* TimeOverRender_;
 
 	GameEngineFont DedugText_;
 	bool VeiledDebuging_;
@@ -106,11 +107,11 @@ private:
 
 	void UpdateSpeed();
 
-	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
-
 	void Start() override;
 	void Update() override;
 	void Render() override;
+
+	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
 	void LevelChangeEnd(GameEngineLevel* _NextLevel) override;
 };
 

@@ -17,7 +17,8 @@ PlayUI::PlayUI()
 	, CountMode_(TimeScoreCount::OFF)
 	, CalTime_(0)
 	, TimeOver_(false)
-	, VeiledDebuging_(true)
+	, TimeOverRender_(nullptr)
+	, VeiledDebuging_(false)
 	, ScoreTile1_ (nullptr)
 	, ScoreTile2_ (nullptr)
 	, ScoreTile3_ (nullptr)
@@ -250,11 +251,6 @@ void PlayUI::UpdateSpeed()
 	}
 }
 
-void PlayUI::LevelChangeStart(GameEngineLevel* _PrevLevel)
-{
-	MainUI = this;
-}
-
 void PlayUI::Start()
 {
 	DedugText_.Load("arial.ttf");
@@ -263,6 +259,9 @@ void PlayUI::Start()
 	SetPosition(float4::ZERO);
 	SetScale(GameEngineWindow::GetScale());
 	GameEngineRenderer* Renderer = CreateRenderer("UIBack.bmp", 500, RenderPivot::LEFTTOP);
+
+	TimeOverRender_ = CreateRenderer("TimeOver.bmp", 0);
+	TimeOverRender_->SetPivot(GetScale().Half());
 	
 	{
 		float StartXPos = 240.0f;
@@ -407,8 +406,7 @@ void PlayUI::Update()
 	else
 	{
 		TimeOver_=true;
-		GameEngineRenderer* TimeOver = CreateRenderer("TimeOver.bmp", 500);
-		TimeOver->SetPivot(GetScale().Half());
+		TimeOverRender_->SetOrder(500);
 	}
 }
 
@@ -437,8 +435,14 @@ void PlayUI::Render()
 	}
 }
 
+void PlayUI::LevelChangeStart(GameEngineLevel* _PrevLevel)
+{
+	MainUI = this;
+	TimeOver_ = false;
+}
+
 void PlayUI::LevelChangeEnd(GameEngineLevel* _NextLevel)
 {
 	CountMode_ = TimeScoreCount::OFF;
-	TimeOver_ = false;
+	TimeOverRender_->SetOrder(0);
 }
