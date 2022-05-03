@@ -10,17 +10,51 @@
 
 // constructor destructor
 Trap::Trap()
-	: LOD_(0)
+	: Event_(TrapEvent::None)
 	, Spawn_(SpawnLoc::CENTER)
+	, LOD_(0)
 	, Hole_(nullptr)
 	, HoleCol_(nullptr)
 	, L_FishCol_(nullptr)
 	, R_FishCol_(nullptr)
 
 {
-	GameEngineRandom NewRandom;
-	float yDown = 38;
+}
 
+Trap::~Trap()
+{
+}
+
+//member Func
+void Trap::Start()
+{
+	float x = GameEngineWindow::GetScale().Half().x;
+	float y = GameEngineWindow::GetScale().Half().y;
+
+	SetPosition({ x , y + 32 });
+	SetScale(GameEngineWindow::GetScale());
+
+	GameEngineRandom NewRandom;
+
+	switch (NewRandom.RandomInt(0, 0)) // 임시로 None으로
+	{
+	case 0:
+		Event_ = TrapEvent::None;
+		break;
+	case 1:
+		Event_ = TrapEvent::Seal;
+		break;
+	case 2:
+		Event_ = TrapEvent::Fish;
+		break;
+	case 3:
+		Event_ = TrapEvent::Flag;
+		break;
+	default:
+		break;
+	}
+
+	float yDown = 38;
 	switch (NewRandom.RandomInt(0, 2))
 	{
 	case 0:
@@ -39,20 +73,6 @@ Trap::Trap()
 		Death();
 		break;
 	}
-}
-
-Trap::~Trap()
-{
-}
-
-//member Func
-void Trap::Start()
-{
-	float x = GameEngineWindow::GetScale().Half().x;
-	float y = GameEngineWindow::GetScale().Half().y;
-
-	SetPosition({ x , y + 32 });
-	SetScale(GameEngineWindow::GetScale());
 
 	Hole_ = CreateRenderer("HoleTraps.bmp", 200);
 	Hole_->SetIndex(LOD_);

@@ -22,9 +22,10 @@ enum class TrapEvent
 class Trap : public GameEngineActor
 {
 private:	// member Var
+	TrapEvent Event_;
+	SpawnLoc Spawn_;
 	float4 DirVector_;
 	int LOD_;
-	SpawnLoc Spawn_;
 
 	GameEngineRenderer* Hole_;
 
