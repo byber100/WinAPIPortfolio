@@ -115,6 +115,11 @@ void PlayLevel::Update()
 			}
 			else
 			{
+				if (11 >= PlayUI::MainUI->GetCountTime()) // 시간 10초 알람
+				{
+					GameEngineSound::SoundPlayOneShot("SFX9.mp3");
+				}
+				
 				UnitSecond_ = 1.0f;
 
 				--t;
