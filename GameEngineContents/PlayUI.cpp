@@ -16,6 +16,7 @@ PlayUI::PlayUI()
 	, CountTime_(0) // MapLevel¿¡¼­ Á¤ÇØÁÜ
 	, CountMode_(TimeScoreCount::OFF)
 	, CalTime_(0)
+	, TimeOver_(false)
 	, VeiledDebuging_(true)
 	, ScoreTile1_ (nullptr)
 	, ScoreTile2_ (nullptr)
@@ -405,6 +406,7 @@ void PlayUI::Update()
 	}
 	else
 	{
+		TimeOver_=true;
 		GameEngineRenderer* TimeOver = CreateRenderer("TimeOver.bmp", 500);
 		TimeOver->SetPivot(GetScale().Half());
 	}
@@ -438,4 +440,5 @@ void PlayUI::Render()
 void PlayUI::LevelChangeEnd(GameEngineLevel* _NextLevel)
 {
 	CountMode_ = TimeScoreCount::OFF;
+	TimeOver_ = false;
 }

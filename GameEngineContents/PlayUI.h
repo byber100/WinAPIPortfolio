@@ -62,6 +62,7 @@ private:
 	int CountTime_;
 	TimeScoreCount CountMode_;
 	float CalTime_;
+	bool TimeOver_;
 
 	GameEngineFont DedugText_;
 	bool VeiledDebuging_;
@@ -91,6 +92,10 @@ public:
 	void StartTimeScore()
 	{
 		CountMode_ = TimeScoreCount::ON;
+	}
+	bool IsTimeOver()
+	{
+		return TimeOver_;
 	}
 
 protected:

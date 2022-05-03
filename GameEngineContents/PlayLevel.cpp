@@ -115,7 +115,8 @@ void PlayLevel::Update()
 			}
 			else
 			{
-				if (11 >= PlayUI::MainUI->GetCountTime()) // 시간 10초 알람
+				if (11 >= PlayUI::MainUI->GetCountTime() &&
+					1 < PlayUI::MainUI->GetCountTime()) // 시간 10초 알람
 				{
 					GameEngineSound::SoundPlayOneShot("SFX9.mp3");
 				}
@@ -134,7 +135,10 @@ void PlayLevel::Update()
 	}
 	else
 	{
-		Player::MainPlayer->ChangeState(PlayerState::Pause);
+		if (true== PlayUI::MainUI->IsTimeOver())
+		{
+			Player::MainPlayer->ChangeState(PlayerState::Pause);
+		}
 		return;
 	}
 
