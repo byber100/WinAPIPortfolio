@@ -53,6 +53,9 @@
     <ClCompile Include="RandomStage.cpp">
       <Filter>GlobalActors</Filter>
     </ClCompile>
+    <ClCompile Include="Crack.cpp">
+      <Filter>OtherActors\Play</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TitleLevel.h">
@@ -104,6 +107,9 @@
     </ClInclude>
     <ClInclude Include="RandomStage.h">
       <Filter>GlobalActors</Filter>
+    </ClInclude>
+    <ClInclude Include="Crack.h">
+      <Filter>OtherActors\Play</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

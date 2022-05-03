@@ -10,8 +10,7 @@ private:	// member Var
 	GameEngineRenderer* Hole_;
 
 	float4 DirVector_;
-	int TrapLOD_;
-
+	int LOD_;
 
 public:		
 	HoleTrap(); // default constructor 디폴트 생성자
@@ -26,8 +25,6 @@ public:		//delete operator
 	HoleTrap& operator=(const HoleTrap&& _Other) noexcept = delete; // default RValue Copy operator 디폴트 RValue 대입연산자
 
 protected:
-
-private:
 	void Start() override;
 	void Update() override;
 	void Render() override;

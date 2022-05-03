@@ -10,7 +10,7 @@
 
 // constructor destructor
 HoleTrap::HoleTrap()
-	: TrapLOD_(0)
+	: LOD_(0)
 	, Hole_(nullptr)
 {
 	GameEngineRandom NewRandom;
@@ -47,7 +47,7 @@ void HoleTrap::Start()
 	SetScale(GameEngineWindow::GetScale());
 
 	Hole_ = CreateRenderer("HoleTraps.bmp", 200);
-	Hole_->SetIndex(TrapLOD_);
+	Hole_->SetIndex(LOD_);
 }
 
 void HoleTrap::Update()
@@ -62,7 +62,7 @@ void HoleTrap::Update()
 			if (LODInterval > GetPosition().y)
 			{
 				SetMove(DirVector_);
-				++TrapLOD_;
+				++LOD_;
 			}
 		}
 		else
@@ -70,53 +70,53 @@ void HoleTrap::Update()
 			if (LODInterval < GetPosition().y)
 			{
 				SetMove({ DirVector_.x , DirVector_.y - 14 });
-				++TrapLOD_;
+				++LOD_;
 			}
 		}
 
 		DownTime -= GameEngineTime::GetDeltaTime();
 	}
 
-	switch (TrapLOD_)
+	switch (LOD_)
 	{
 	case 0:
-		Hole_->SetIndex(TrapLOD_);
+		Hole_->SetIndex(LOD_);
 		break;
 
 	case 1:
-		Hole_->SetIndex(TrapLOD_);
+		Hole_->SetIndex(LOD_);
 		break;
 
 	case 2:
-		Hole_->SetIndex(TrapLOD_);
+		Hole_->SetIndex(LOD_);
 		break;
 
 	case 3:
-		Hole_->SetIndex(TrapLOD_);
+		Hole_->SetIndex(LOD_);
 		break;
 
 	case 4:
-		Hole_->SetIndex(TrapLOD_);
+		Hole_->SetIndex(LOD_);
 		break;
 
 	case 5:
-		Hole_->SetIndex(TrapLOD_);
+		Hole_->SetIndex(LOD_);
 		break;
 
 	case 6:
-		Hole_->SetIndex(TrapLOD_);
+		Hole_->SetIndex(LOD_);
 		break;
 
 	case 7:
-		Hole_->SetIndex(TrapLOD_);
+		Hole_->SetIndex(LOD_);
 		break;
 
 	case 9:
-		Hole_->SetIndex(TrapLOD_);
+		Hole_->SetIndex(LOD_);
 		break;
 
 	default:
-		TrapLOD_ = 0;
+		LOD_ = 0;
 		break;
 	}
 
