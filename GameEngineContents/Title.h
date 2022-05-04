@@ -27,5 +27,7 @@ private:
 	GameEngineRenderer* VeiledRender_;
 
 	LevelChanger* ChangerInfo_;
+	
+	bool SoundOn_;
 };
 

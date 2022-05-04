@@ -7,6 +7,10 @@
 
 
 Title::Title() 
+	: MainRender_(nullptr)
+	, VeiledRender_(nullptr)
+	, ChangerInfo_(nullptr)
+	, SoundOn_(false)
 {
 	
 }
@@ -44,7 +48,7 @@ void Title::Update()
 		VeiledRender_->SetPivotMove(float4::RIGHT * 1500.0f * GameEngineTime::GetDeltaTime());
 	}
 
-	if (2.8 < GetAccTime())
+	if (2.3 < GetAccTime())
 	{
 		if (false == ChangerInfo_->GetChanging())
 		{
@@ -56,11 +60,15 @@ void Title::Update()
 			}
 		}
 	}
-	else if (2.5f < GetAccTime())
+	else if (2.0f < GetAccTime())
 	{
 		VeiledRender_->SetPivot(float4::ZERO);
 		MainRender_->ChangeAnimation("TitleAnim");
-		GameEngineSound::SoundPlayOneShot("TitleBGM.mp3");
+		if (false == SoundOn_)
+		{
+			GameEngineSound::SoundPlayOneShot("TitleBGM.mp3");
+			SoundOn_ = true;
+		}
 	}
 	else if (1.0f < GetAccTime())
 	{

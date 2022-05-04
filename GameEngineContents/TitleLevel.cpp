@@ -1,7 +1,6 @@
 #include "TitleLevel.h"
 #include "Title.h"
 #include "LevelChanger.h"
-#include <GameEngineBase/GameEngineSound.h>
 
 TitleLevel::TitleLevel() 
 {
@@ -20,9 +19,4 @@ void TitleLevel::Loading()
 void TitleLevel::Update()
 {
 	
-}
-
-void TitleLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
-{
-	//GameEngineSound::SoundPlayOneShot("TitleBGM.mp3");
 }
