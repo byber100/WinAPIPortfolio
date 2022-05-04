@@ -50,6 +50,20 @@ void Player::CeremonyStart()
 	TriggerTime_ = 1.4f;
 }
 
+void Player::TakeHitStart()
+{
+
+}
+
+void Player::FallInStart()
+{
+
+}
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 void Player::MoveUpdate()
 {
 	if (0 >= PlayUI::RestDistance_)
@@ -223,4 +237,14 @@ void Player::CeremonyUpdate()
 	{
 		PlayUI::MainUI->StartTimeScore();
 	}
+}
+
+void Player::TakeHitUpdate()
+{
+
+}
+
+void Player::FallInUpdate()
+{
+
 }

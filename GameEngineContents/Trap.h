@@ -16,7 +16,8 @@ enum class TrapEvent
 	None,
 	Seal,
 	Fish,
-	Flag
+	Flag,
+	Crack
 };
 
 class Trap : public GameEngineActor
@@ -28,8 +29,10 @@ private:	// member Var
 	int LOD_;
 
 	GameEngineRenderer* Trap_;
+	GameEngineRenderer* Fish_;
 
 	GameEngineCollision* TrapCol_;
+	GameEngineCollision* TrapCenterCol_;
 	GameEngineCollision* L_FishCol_;
 	GameEngineCollision* R_FishCol_;
 
@@ -45,7 +48,9 @@ public:		//delete operator
 	Trap& operator=(const Trap& _Other) = delete; // default Copy operator 디폴트 대입 연산자
 	Trap& operator=(const Trap&& _Other) noexcept = delete; // default RValue Copy operator 디폴트 RValue 대입연산자
 
-protected:
+private:
+	void Hit(const TrapEvent& _Event);
+
 	void Start() override;
 	void Update() override;
 	void Render() override;

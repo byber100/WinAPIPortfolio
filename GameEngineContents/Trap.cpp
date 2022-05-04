@@ -1,8 +1,10 @@
 #include "Trap.h"
 #include "PlayLevel.h"
+#include "Player.h"
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngineBase/GameEngineRandom.h>
+#include <GameEngine/GameEngineCollision.h>
 
 // Static Var
 
@@ -14,7 +16,9 @@ Trap::Trap()
 	, Spawn_(SpawnLoc::CENTER)
 	, LOD_(0)
 	, Trap_(nullptr)
+	, Fish_(nullptr)
 	, TrapCol_(nullptr)
+	, TrapCenterCol_(nullptr)
 	, L_FishCol_(nullptr)
 	, R_FishCol_(nullptr)
 
@@ -26,6 +30,49 @@ Trap::~Trap()
 }
 
 //member Func
+void Trap::Hit(const TrapEvent& _Event)
+{
+	switch (_Event)
+	{
+	case TrapEvent::None:
+	{
+		if (true == Player::MainPlayer->IsJump())
+		{
+			break;
+		}
+		Player::MainPlayer->ChangeState(PlayerState::TakeHit);
+		break;
+	}
+	case TrapEvent::Seal:
+	{
+		Player::MainPlayer->ChangeState(PlayerState::TakeHit);
+		break;
+	}
+	case TrapEvent::Flag:
+	{
+		break;
+	}
+	case TrapEvent::Crack:
+	{
+		if (true == Player::MainPlayer->IsJump())
+		{
+			break;
+		}
+
+		if (true == TrapCol_->CollisionCheck("PlayerLeft", CollisionType::Rect, CollisionType::Rect) &&
+			true == TrapCol_->CollisionCheck("PlayerRight", CollisionType::Rect, CollisionType::Rect))
+		{
+			Player::MainPlayer->ChangeState(PlayerState::FallIn);
+			break;
+		}
+		Player::MainPlayer->ChangeState(PlayerState::TakeHit);
+		break;
+	}
+	default:
+		break;
+	}
+}
+
 void Trap::Start()
 {
 	float x = GameEngineWindow::GetScale().Half().x;
@@ -51,6 +98,7 @@ void Trap::Start()
 		Event_ = TrapEvent::Flag;
 		break;
 	default:
+		Event_ = TrapEvent::Crack;
 		break;
 	}
 
@@ -75,9 +123,10 @@ void Trap::Start()
 	}
 
 	Trap_ = CreateRenderer("Traps.bmp", 200);
+	TrapCol_ = CreateCollision("TrapCol", { 96,16 });
+	TrapCenterCol_ = CreateCollision("TrapCol", { 40,16 });
 
 	Trap_->SetIndex(LOD_);
-	TrapCol_ = CreateCollision("TrapCol", { 96,16 });
 }
 
 void Trap::Update()
@@ -108,6 +157,12 @@ void Trap::Update()
 			}
 		}
 		DownTime -= GameEngineTime::GetDeltaTime();
+	}
+
+	if (true == TrapCol_->CollisionCheck("PlayerLeft", CollisionType::Rect, CollisionType::Rect) ||
+		true == TrapCol_->CollisionCheck("PlayerRight", CollisionType::Rect, CollisionType::Rect))
+	{
+		Hit(Event_);
 	}
 
 	if (768 < GetPosition().y)

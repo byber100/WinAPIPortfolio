@@ -59,6 +59,10 @@ void Player::ChangeState(PlayerState _State)
 			JumpStart();
 			break;
 		case TakeHit:
+			TakeHitStart();
+			break;
+		case FallIn:
+			FallInStart();
 			break;
 		case Clear:
 			ClearStart();
@@ -96,6 +100,10 @@ void Player::StateUpdate()
 		JumpRUpdate();
 		break;
 	case TakeHit:
+		TakeHitUpdate();
+		break;
+	case FallIn:
+		FallInUpdate();
 		break;
 	case Clear:
 		ClearUpdate();
@@ -130,8 +138,9 @@ void Player::Start()
 	Shadow_ = CreateRenderer("PlayerShadow.bmp",300);
 	Shadow_->SetPivot({ 0,45 });
 	Shadow_->SetIndex(0);
-
-	PlayerCol_ = CreateCollision("PlayerCol", { 100,20 }, { 0,45 });
+	
+	PlayerLeftCol_ = CreateCollision("PlayerLeft", { 4,20 }, { -30,45 });
+	PlayerRightCol_ = CreateCollision("PlayerRight", { 4,20 }, { 30,45 });
 
 	LevelRegist("Penguin");
 

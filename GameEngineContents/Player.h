@@ -16,6 +16,7 @@ enum PlayerState
 	JumpL,
 	JumpR,
 	TakeHit,
+	FallIn,
 	Clear,
 	Ceremony,
 	Pause,
@@ -38,7 +39,8 @@ private:
 	PlayerState CurState_;
 	GameEngineRenderer* Penguin_;
 	GameEngineRenderer* Shadow_;
-	GameEngineCollision* PlayerCol_;
+	GameEngineCollision* PlayerLeftCol_;
+	GameEngineCollision* PlayerRightCol_;
 
 	GameEngineSoundPlayer PlayBGM_;
 
@@ -69,6 +71,10 @@ public:
 	{
 		return isClear_;
 	}
+	bool IsJump()
+	{
+		return isJumping_;
+	}
 
 protected:
 
@@ -90,6 +96,8 @@ private:
 	void PauseStart();
 	void ClearStart();
 	void CeremonyStart();
+	void TakeHitStart();
+	void FallInStart();
 
 	void MoveUpdate();
 	void JumpUpdate();
@@ -98,5 +106,7 @@ private:
 	void PauseUpdate();
 	void ClearUpdate();
 	void CeremonyUpdate();
+	void TakeHitUpdate();
+	void FallInUpdate();
 };
 
