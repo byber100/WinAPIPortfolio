@@ -3,6 +3,7 @@
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngineRenderer.h>
+#include <GameEngineBase/GameEngineSound.h>
 
 
 Title::Title() 
@@ -59,6 +60,7 @@ void Title::Update()
 	{
 		VeiledRender_->SetPivot(float4::ZERO);
 		MainRender_->ChangeAnimation("TitleAnim");
+		GameEngineSound::SoundPlayOneShot("TitleBGM.mp3");
 	}
 	else if (1.0f < GetAccTime())
 	{
