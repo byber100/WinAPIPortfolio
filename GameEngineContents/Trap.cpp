@@ -103,7 +103,7 @@ void Trap::Start()
 	}
 
 	float yDown = 38;
-	switch (NewRandom.RandomInt(0, 2))
+	switch (NewRandom.RandomInt(0, 0))
 	{
 	case 0:
 		DirVector_ = { 0, yDown };
@@ -123,8 +123,8 @@ void Trap::Start()
 	}
 
 	Trap_ = CreateRenderer("Traps.bmp", 200);
-	TrapCol_ = CreateCollision("TrapCol", { 96,16 });
-	TrapCenterCol_ = CreateCollision("TrapCol", { 40,16 });
+	TrapCol_ = CreateCollision("Trap", { 96,16 });
+	TrapCenterCol_ = CreateCollision("TrapCenter", { 55,16 });
 
 	Trap_->SetIndex(LOD_);
 }
