@@ -7,6 +7,7 @@
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngineBase/GameEngineTime.h>
 #include <GameEngine/GameEngineRenderer.h>
+#include <GameEngine/GameEngineCollision.h>
 
 
 void Player::MoveStart()
@@ -52,7 +53,20 @@ void Player::CeremonyStart()
 
 void Player::TakeHitStart()
 {
+	float Push = 100;
 
+	if (true == PlayerLeftCol_->CollisionCheck("Trap") ||
+		true == PlayerLeftCol_->CollisionCheck("TrapCenter")) // 오른쪽으로 밀림
+	{
+		Penguin_->ChangeAnimation("PushRight");
+		PushDir_= float4::RIGHT * Push;
+	}
+	if (true == PlayerRightCol_->CollisionCheck("Trap") ||
+		true == PlayerRightCol_->CollisionCheck("TrapCenter")) // 왼쪽으로 밀림
+	{
+		Penguin_->ChangeAnimation("PushLeft");
+		PushDir_ = float4::LEFT * Push;
+	}
 }
 
 void Player::FallInStart()
@@ -241,7 +255,70 @@ void Player::CeremonyUpdate()
 
 void Player::TakeHitUpdate()
 {
+	float y = GetPosition().y;
 
+	if (false == isBounce_)
+	{
+		++BounceCnt_;
+		isBounce_ = true;
+		PushDir_ += float4::UP * 10.0f;
+	}
+	
+	if (618 > GetPosition().y)
+	{
+		PushDir_ += float4::DOWN * GameEngineTime::GetDeltaTime() * 500.0f;
+	}
+	else
+	{
+		isBounce_ = false;
+	}
+
+
+	
+
+	//if (618 > GetPosition().y) // 높으면
+	//{
+	//	PushLoop();
+	//	
+	//	if (true == isBounce_)
+	//	{
+	//		isBounce_ = false;
+	//	}
+	//	if (5 > BounceCnt_)
+	//	{
+	//		if (618 > GetPosition().y)
+	//		{
+	//			PushDir_ += float4::DOWN * GameEngineTime::GetDeltaTime() * 500.0f;
+	//		}
+	//	}
+	//	else
+	//	{
+	//		BounceCnt_ = 0;
+	//		SetPosition({ GetPosition().x, 619.f });
+	//		ChangeState(PlayerState::Move);
+	//	}
+	//}
+	//else
+	//{
+	//	if (false == isBounce_)
+	//	{
+	//		++BounceCnt_;
+	//		isBounce_ = true;
+	//		PushDir_ += float4::UP * 100.0f;
+	//	}
+	//}
+
+	if (0 > PushDir_.x) // 왼쪽 밀림
+	{
+		if (288 < GetPosition().x)
+		{
+			SetMove(PushDir_ * GameEngineTime::GetDeltaTime());
+		}
+	}
+	else
+	{
+
+	}
 }
 
 void Player::FallInUpdate()

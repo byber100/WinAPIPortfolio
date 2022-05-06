@@ -13,15 +13,31 @@ Player::Player()
 	: ForwardSpeed_(7.0f) // 0¿¡ µµ´ÞÇÏ¸é ¾Ö´Ï¸ØÃã
 	, SideSpeed_(200.0f)
 	, isJumping_(false)
+	, BounceCnt_(0)
+	, isBounce_(false)
 	, isClear_(false)
 	, ClearSoundOn_(false)
 	, TriggerTime_(0)
+	, DebugModeOn_(false)
 {
 	ChangeState(MAX);
 }
 
 Player::~Player() 
 {
+}
+
+void Player::DebugPlayerOn()
+{
+	{
+		std::string UpdateText = std::to_string(BounceCnt_);
+		DedugText_.Draw("BounceCnt: " + UpdateText, { 0,400 }, RGB(255, 255, 255), 0, 0);
+	}
+	{
+		std::string xText = std::to_string(GetPosition().x);
+		std::string yText = std::to_string(GetPosition().y);
+		DedugText_.Draw("Position: " + xText + " , " + yText, {0,420}, RGB(255, 255, 255), 0, 0);
+	}
 }
 
 void Player::JumpLoop()
@@ -37,6 +53,10 @@ void Player::JumpLoop()
 			Shadow_->SetIndex(2);
 		}
 	}
+}
+
+void Player::PushLoop()
+{
 	
 }
 
@@ -133,6 +153,8 @@ void Player::Start()
 	Penguin_->CreateAnimation("Player.bmp", "Jump", 9, 10, 0.1f);
 	Penguin_->CreateAnimation("Player.bmp", "Clear", 11, 12, 0.5f);
 	Penguin_->CreateAnimation("Player.bmp", "Ceremony", 13, 13, 0, false);
+	Penguin_->CreateAnimation("Player.bmp", "PushLeft", 0, 0, 0, false);
+	Penguin_->CreateAnimation("Player.bmp", "PushRight", 1, 1, 0, false);
 	Penguin_->ChangeAnimation("Walk");
 
 	Shadow_ = CreateRenderer("PlayerShadow.bmp",300);
@@ -144,7 +166,6 @@ void Player::Start()
 
 	LevelRegist("Penguin");
 
-	if (false == GameEngineInput::GetInst()->IsKey("MoveLeft"))
 	{
 		GameEngineInput::GetInst()->CreateKey("MoveLeft", VK_LEFT);
 		GameEngineInput::GetInst()->CreateKey("MoveRight", VK_RIGHT);
@@ -152,6 +173,7 @@ void Player::Start()
 		GameEngineInput::GetInst()->CreateKey("DebugingFast", 'w');
 		GameEngineInput::GetInst()->CreateKey("Slow", VK_DOWN);
 		GameEngineInput::GetInst()->CreateKey("Jump", VK_SPACE);
+		GameEngineInput::GetInst()->CreateKey("PlayerDebug", VK_TAB);
 	}
 
 	ChangeState(Move);
@@ -165,6 +187,21 @@ void Player::Update()
 void Player::Render()
 {
 	//DebugRectRender();
+	if (GameEngineInput::GetInst()->IsDown("PlayerDebug"))
+	{
+		if (false == DebugModeOn_)
+		{
+			DebugModeOn_ = true;
+		}
+		else
+		{
+			DebugModeOn_ = false;
+		}
+	}
+	if (true == DebugModeOn_)
+	{
+		DebugPlayerOn();
+	}
 }
 
 void Player::LevelChangeStart(GameEngineLevel* _PrevLevel)

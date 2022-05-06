@@ -1,13 +1,7 @@
 #pragma once
 #include <GameEngine/GameEngineActor.h>
 #include <GameEngineBase/GameEngineSound.h>
-
-// 어떠한 객체는 1번에 1개의 상태만이 존재한다.
-// 플레이어는 1번에 1개의 함수밖에 실행할수 없다.
-
-// if 플레이어가 공격 중이라면
-//    if 플레이어가 이동중이 아니라면
-//       if
+#include <GameEngine/GameEngineFont.h>
 
 enum PlayerState
 {
@@ -16,6 +10,8 @@ enum PlayerState
 	JumpL,
 	JumpR,
 	TakeHit,
+	TakeHitL,
+	TakeHitR,
 	FallIn,
 	Clear,
 	Ceremony,
@@ -35,6 +31,9 @@ private:
 	float SideSpeed_;
 	bool isJumping_;
 	float4 JumpDir_;
+	float4 PushDir_;
+	int BounceCnt_;
+	bool isBounce_;
 
 	PlayerState CurState_;
 	GameEngineRenderer* Penguin_;
@@ -47,6 +46,9 @@ private:
 	bool isClear_;
 	bool ClearSoundOn_;
 	float TriggerTime_; // 각종 플레이어 이벤트를 위한 값
+
+	GameEngineFont DedugText_;
+	bool DebugModeOn_;
 
 public:
 	// constrcuter destructer
@@ -82,7 +84,9 @@ public:
 	void ChangeState(PlayerState _State);
 
 private:
+	void DebugPlayerOn();
 	void JumpLoop();
+	void PushLoop();
 	void StateUpdate();
 
 	void Start() override;
