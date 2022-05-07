@@ -10,13 +10,17 @@ enum PlayerState
 	JumpL,
 	JumpR,
 	TakeHit,
-	TakeHitL,
-	TakeHitR,
 	FallIn,
 	Clear,
 	Ceremony,
 	Pause,
 	MAX
+};
+
+enum class PlayerHit
+{
+	HitLeft,
+	HitRight
 };
 
 // 설명 :
@@ -30,8 +34,7 @@ private:
 	float ForwardSpeed_;
 	float SideSpeed_;
 	bool isJumping_;
-	float4 JumpDir_;
-	float4 PushDir_;
+	float4 MoveDir_;
 	int BounceCnt_;
 	bool isBounce_;
 
@@ -46,6 +49,8 @@ private:
 	bool isClear_;
 	bool ClearSoundOn_;
 	float TriggerTime_; // 각종 플레이어 이벤트를 위한 값
+
+	PlayerHit HitInfo_;
 
 	GameEngineFont DedugText_;
 	bool DebugModeOn_;
@@ -88,6 +93,7 @@ private:
 	void JumpLoop();
 	void PushLoop();
 	void StateUpdate();
+
 
 	void Start() override;
 	void Update() override;

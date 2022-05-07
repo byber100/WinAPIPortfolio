@@ -20,7 +20,8 @@ void Player::JumpStart()
 {
 	GameEngineSound::SoundPlayOneShot("SFX2.mp3");
 	Penguin_->ChangeAnimation("Jump");
-	JumpDir_ = float4::UP * 200.0f;
+	MoveDir_ = float4::UP * 200.0f;
+	isJumping_ = true;
 }
 
 void Player::PauseStart()
@@ -53,19 +54,27 @@ void Player::CeremonyStart()
 
 void Player::TakeHitStart()
 {
-	float Push = 100;
+	GameEngineSound::SoundPlayOneShot("SFX3.mp3");
 
-	if (true == PlayerLeftCol_->CollisionCheck("Trap") ||
-		true == PlayerLeftCol_->CollisionCheck("TrapCenter")) // 오른쪽으로 밀림
+	if (true == PlayerLeftCol_->CollisionCheck("TrapCenter"))
 	{
 		Penguin_->ChangeAnimation("PushRight");
-		PushDir_= float4::RIGHT * Push;
+		HitInfo_ = PlayerHit::HitRight;
 	}
-	if (true == PlayerRightCol_->CollisionCheck("Trap") ||
-		true == PlayerRightCol_->CollisionCheck("TrapCenter")) // 왼쪽으로 밀림
+	else if (true == PlayerRightCol_->CollisionCheck("TrapCenter"))
 	{
 		Penguin_->ChangeAnimation("PushLeft");
-		PushDir_ = float4::LEFT * Push;
+		HitInfo_ = PlayerHit::HitLeft;
+	}
+	else if (true == PlayerLeftCol_->CollisionCheck("Trap")) // 오른쪽으로 밀림
+	{
+		Penguin_->ChangeAnimation("PushRight");
+		HitInfo_ = PlayerHit::HitRight;
+	}
+	else if (true == PlayerRightCol_->CollisionCheck("Trap")) // 왼쪽으로 밀림
+	{
+		Penguin_->ChangeAnimation("PushLeft");
+		HitInfo_ = PlayerHit::HitLeft;
 	}
 }
 
@@ -255,70 +264,46 @@ void Player::CeremonyUpdate()
 
 void Player::TakeHitUpdate()
 {
-	float y = GetPosition().y;
-
 	if (false == isBounce_)
 	{
-		++BounceCnt_;
 		isBounce_ = true;
-		PushDir_ += float4::UP * 10.0f;
+		MoveDir_ = float4::UP * (200.0f -20 * BounceCnt_);
 	}
 	
-	if (618 > GetPosition().y)
+	Penguin_->SetPivotMove(MoveDir_ * GameEngineTime::GetDeltaTime());
+	MoveDir_ += float4::DOWN * GameEngineTime::GetDeltaTime() * 1000.0f;
+
+	if (0 < Penguin_->GetPivot().y)
 	{
-		PushDir_ += float4::DOWN * GameEngineTime::GetDeltaTime() * 500.0f;
+		if (true == isBounce_)
+		{
+			GameEngineSound::SoundPlayOneShot("SFX4.mp3");
+			Penguin_->SetPivot(float4::ZERO);
+			++BounceCnt_;
+			isBounce_ = false;
+		}
+		if (4 <= BounceCnt_)
+		{
+			BounceCnt_ = 0;
+			ChangeState(PlayerState::Move);
+		}
 	}
-	else
-	{
-		isBounce_ = false;
-	}
 
-
-	
-
-	//if (618 > GetPosition().y) // 높으면
-	//{
-	//	PushLoop();
-	//	
-	//	if (true == isBounce_)
-	//	{
-	//		isBounce_ = false;
-	//	}
-	//	if (5 > BounceCnt_)
-	//	{
-	//		if (618 > GetPosition().y)
-	//		{
-	//			PushDir_ += float4::DOWN * GameEngineTime::GetDeltaTime() * 500.0f;
-	//		}
-	//	}
-	//	else
-	//	{
-	//		BounceCnt_ = 0;
-	//		SetPosition({ GetPosition().x, 619.f });
-	//		ChangeState(PlayerState::Move);
-	//	}
-	//}
-	//else
-	//{
-	//	if (false == isBounce_)
-	//	{
-	//		++BounceCnt_;
-	//		isBounce_ = true;
-	//		PushDir_ += float4::UP * 100.0f;
-	//	}
-	//}
-
-	if (0 > PushDir_.x) // 왼쪽 밀림
+	if (PlayerHit::HitLeft == HitInfo_) // 왼쪽 밀림
 	{
 		if (288 < GetPosition().x)
 		{
-			SetMove(PushDir_ * GameEngineTime::GetDeltaTime());
+			SetMove(float4::LEFT * GameEngineTime::GetDeltaTime() * 150.f);
 		}
 	}
 	else
 	{
-
+		if (736 > GetPosition().x)
+		{
+			SetMove(float4::RIGHT * GameEngineTime::GetDeltaTime() * 150.f);
+		}
 	}
+	
 }
 
 void Player::FallInUpdate()

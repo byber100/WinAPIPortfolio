@@ -124,7 +124,7 @@ void Trap::Start()
 
 	Trap_ = CreateRenderer("Traps.bmp", 200);
 	TrapCol_ = CreateCollision("Trap", { 96,16 });
-	TrapCenterCol_ = CreateCollision("TrapCenter", { 55,16 });
+	TrapCenterCol_ = CreateCollision("TrapCenter", { 4,16 });
 
 	Trap_->SetIndex(LOD_);
 }

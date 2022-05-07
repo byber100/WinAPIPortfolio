@@ -19,6 +19,7 @@ Player::Player()
 	, ClearSoundOn_(false)
 	, TriggerTime_(0)
 	, DebugModeOn_(false)
+	, HitInfo_(PlayerHit::HitLeft)
 {
 	ChangeState(MAX);
 }
@@ -38,12 +39,21 @@ void Player::DebugPlayerOn()
 		std::string yText = std::to_string(GetPosition().y);
 		DedugText_.Draw("Position: " + xText + " , " + yText, {0,420}, RGB(255, 255, 255), 0, 0);
 	}
+	{
+		std::string xText = std::to_string(Penguin_->GetPivot().x);
+		std::string yText = std::to_string(Penguin_->GetPivot().y);
+		DedugText_.Draw("Pivot: " + xText + " , " + yText, { 0,440 }, RGB(255, 255, 255), 0, 0);
+	}
+	{
+		std::string UpdateText = std::to_string(isJumping_);
+		DedugText_.Draw("isJump: " + UpdateText, { 0,460 }, RGB(255, 255, 255), 0, 0);
+	}
 }
 
 void Player::JumpLoop()
 {
-	Penguin_->SetPivotMove(JumpDir_ * GameEngineTime::GetDeltaTime());
-	JumpDir_ += float4::DOWN * GameEngineTime::GetDeltaTime() * 400.0f;
+	Penguin_->SetPivotMove(MoveDir_ * GameEngineTime::GetDeltaTime());
+	MoveDir_ += float4::DOWN * GameEngineTime::GetDeltaTime() * 400.0f;
 
 	if (-20 > Penguin_->GetPivot().y)
 	{
@@ -161,8 +171,8 @@ void Player::Start()
 	Shadow_->SetPivot({ 0,45 });
 	Shadow_->SetIndex(0);
 	
-	PlayerLeftCol_ = CreateCollision("PlayerLeft", { 4,20 }, { -30,45 });
-	PlayerRightCol_ = CreateCollision("PlayerRight", { 4,20 }, { 30,45 });
+	PlayerLeftCol_ = CreateCollision("PlayerLeft", { 30,20 }, { -20,45 });
+	PlayerRightCol_ = CreateCollision("PlayerRight", { 30,20 }, { 20,45 });
 
 	LevelRegist("Penguin");
 
