@@ -133,7 +133,7 @@ void PlayUI::UpdateSpeed()
 		SpeedTile5_->SetIndex(12);
 		SpeedTile6_->SetIndex(12);
 	}
-	else if (13.0f <= Speed)
+	else if (17.0f <= Speed)
 	{
 		Speed_ = 12;
 		SpeedTile1_->SetIndex(10);
@@ -143,7 +143,7 @@ void PlayUI::UpdateSpeed()
 		SpeedTile5_->SetIndex(10);
 		SpeedTile6_->SetIndex(10);
 	}
-	else if (12.0f <= Speed && 13.0f > Speed)
+	else if (16.0f <= Speed && 17.0f > Speed)
 	{
 		Speed_ = 11;
 		SpeedTile1_->SetIndex(10);
@@ -153,7 +153,7 @@ void PlayUI::UpdateSpeed()
 		SpeedTile5_->SetIndex(10);
 		SpeedTile6_->SetIndex(11);
 	}
-	else if (11.0f <= Speed && 12.0f > Speed)
+	else if (15.0f <= Speed && 16.0f > Speed)
 	{
 		Speed_ = 10;
 		SpeedTile1_->SetIndex(10);
@@ -163,7 +163,7 @@ void PlayUI::UpdateSpeed()
 		SpeedTile5_->SetIndex(10);
 		SpeedTile6_->SetIndex(12);
 	}
-	else if (10.0f <= Speed && 11.0f > Speed)
+	else if (14.0f <= Speed && 15.0f > Speed)
 	{
 		Speed_ = 9;
 		SpeedTile1_->SetIndex(10);
@@ -173,7 +173,7 @@ void PlayUI::UpdateSpeed()
 		SpeedTile5_->SetIndex(11);
 		SpeedTile6_->SetIndex(12);
 	}
-	else if (9.0f <= Speed && 10.0f > Speed)
+	else if (13.0f <= Speed && 14.0f > Speed)
 	{
 		Speed_ = 8;
 		SpeedTile1_->SetIndex(10);
@@ -183,7 +183,7 @@ void PlayUI::UpdateSpeed()
 		SpeedTile5_->SetIndex(12);
 		SpeedTile6_->SetIndex(12);
 	}
-	else if (8.0f <= Speed && 9.0f > Speed)
+	else if (12.0f <= Speed && 13.0f > Speed)
 	{
 		Speed_ = 7;
 		SpeedTile1_->SetIndex(10);
@@ -193,7 +193,7 @@ void PlayUI::UpdateSpeed()
 		SpeedTile5_->SetIndex(12);
 		SpeedTile6_->SetIndex(12);
 	}
-	else if (7.0f <= Speed && 8.0f > Speed)
+	else if (11.0f <= Speed && 12.0f > Speed)
 	{
 		Speed_ = 6;
 		SpeedTile1_->SetIndex(10);
@@ -203,7 +203,7 @@ void PlayUI::UpdateSpeed()
 		SpeedTile5_->SetIndex(12);
 		SpeedTile6_->SetIndex(12);
 	}
-	else if (6.0f <= Speed && 7.0f > Speed)
+	else if (10.0f <= Speed && 11.0f > Speed)
 	{
 		Speed_ = 5;
 		SpeedTile1_->SetIndex(10);
@@ -213,7 +213,7 @@ void PlayUI::UpdateSpeed()
 		SpeedTile5_->SetIndex(12);
 		SpeedTile6_->SetIndex(12);
 	}
-	else if (5.0f <= Speed && 6.0f > Speed)
+	else if (9.0f <= Speed && 10.0f > Speed)
 	{
 		Speed_ = 4;
 		SpeedTile1_->SetIndex(10);
@@ -223,7 +223,7 @@ void PlayUI::UpdateSpeed()
 		SpeedTile5_->SetIndex(12);
 		SpeedTile6_->SetIndex(12);
 	}
-	else if (4.0f <= Speed && 5.0f > Speed)
+	else if (8.0f <= Speed && 9.0f > Speed)
 	{
 		Speed_ = 3;
 		SpeedTile1_->SetIndex(10);
@@ -233,7 +233,7 @@ void PlayUI::UpdateSpeed()
 		SpeedTile5_->SetIndex(12);
 		SpeedTile6_->SetIndex(12);
 	}
-	else if (3.0f <= Speed && 4.0f > Speed)
+	else if (7.0f <= Speed && 8.0f > Speed)
 	{
 		Speed_ = 2;
 		SpeedTile1_->SetIndex(10);
@@ -243,7 +243,7 @@ void PlayUI::UpdateSpeed()
 		SpeedTile5_->SetIndex(12);
 		SpeedTile6_->SetIndex(12);
 	}
-	else if (1.0f <= Speed && 3.0f > Speed)
+	else if (1.0f <= Speed && 7.0f > Speed)
 	{
 		Speed_ = 1;
 		SpeedTile1_->SetIndex(11);

@@ -55,6 +55,7 @@ void Player::CeremonyStart()
 void Player::TakeHitStart()
 {
 	GameEngineSound::SoundPlayOneShot("SFX3.mp3");
+	ForwardSpeed_ = 4.0f;
 
 	if (true == PlayerLeftCol_->CollisionCheck("TrapCenter"))
 	{
