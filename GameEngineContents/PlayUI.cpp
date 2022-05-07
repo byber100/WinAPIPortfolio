@@ -259,6 +259,8 @@ void PlayUI::Start()
 {
 	DedugText_.Load("arial.ttf");
 	GameEngineInput::GetInst()->CreateKey("UIDebug", VK_TAB);
+	GameEngineInput::GetInst()->CreateKey("TimeChit", 'a');
+	GameEngineInput::GetInst()->CreateKey("RestChit", 's');
 	
 	SetPosition(float4::ZERO);
 	SetScale(GameEngineWindow::GetScale());
@@ -441,6 +443,16 @@ void PlayUI::Render()
 	if (true == DebugModeOn_)
 	{
 		DebugUIOn();
+	}
+
+	if (GameEngineInput::GetInst()->IsDown("TimeChit"))
+	{
+		CountTime_ = 12;
+	}
+	if (GameEngineInput::GetInst()->IsDown("RestChit"))
+	{
+		RestDistance_ = 101;
+		CountTime_ = 30;
 	}
 }
 
