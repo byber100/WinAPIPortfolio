@@ -62,6 +62,13 @@ void Trap::Hit(const TrapEvent& _Event)
 	}
 	case TrapEvent::Flag:
 	{
+		if (true == Player::MainPlayer->IsJump())
+		{
+			break;
+		}
+		GameEngineSound::SoundPlayOneShot("SFX6.mp3");
+		PlayUI::MainUI->AddScore(500);
+		Death();
 		break;
 	}
 	case TrapEvent::Crack:
@@ -95,7 +102,7 @@ void Trap::Start()
 
 	GameEngineRandom NewRandom;
 
-	switch (NewRandom.RandomInt(2, 2)) // 임시로 None으로
+	switch (NewRandom.RandomInt(3, 3)) // 임시로 None으로
 	{
 	case 0:
 		Event_ = TrapEvent::None;
@@ -137,9 +144,21 @@ void Trap::Start()
 		break;
 	}
 
-	Trap_ = CreateRenderer("Traps.bmp", 200);
-	TrapCol_ = CreateCollision("Trap", { 96,16 });
-	TrapCenterCol_ = CreateCollision("TrapCenter", { 4,16 });
+	if (Event_ == TrapEvent::Flag)
+	{
+		Trap_ = CreateRenderer("ScoreFlag.bmp", 200);
+		TrapCol_ = CreateCollision("Trap", { 24,32 });
+	}
+	else if (Event_ == TrapEvent::Crack)
+	{
+
+	}
+	else
+	{
+		Trap_ = CreateRenderer("Traps.bmp", 200);
+		TrapCol_ = CreateCollision("Trap", { 96,16 });
+		TrapCenterCol_ = CreateCollision("TrapCenter", { 4,16 });
+	}
 
 	Trap_->SetIndex(LOD_);
 }
@@ -212,7 +231,7 @@ void Trap::Update()
 		{
 			GameEngineSound::SoundPlayOneShot("SFX7.mp3");
 			PlayUI::MainUI->AddScore(300);
-			Fish_->SetPivot({ -1000,-1000 });
+			Fish_->SetPivot({ -1000,1000 });
 		}
 	}
 
@@ -312,6 +331,7 @@ void Trap::Render()
 		{
 			Seal_->SetOrder(301);
 		}
+		Trap_->SetOrder(301);
 		Trap_->SetIndex(LOD_);
 		break;
 
