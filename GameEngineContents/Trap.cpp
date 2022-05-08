@@ -15,6 +15,7 @@ Trap::Trap()
 	: Event_(TrapEvent::None)
 	, Spawn_(SpawnLoc::CENTER)
 	, LOD_(0)
+	, FishState_(FishState::None)
 	, Trap_(nullptr)
 	, Seal_(nullptr)
 	, Fish_(nullptr)
@@ -46,6 +47,15 @@ void Trap::Hit(const TrapEvent& _Event)
 	}
 	case TrapEvent::Seal:
 	{
+		Player::MainPlayer->ChangeState(PlayerState::TakeHit);
+		break;
+	}
+	case TrapEvent::Fish:
+	{
+		if (true == Player::MainPlayer->IsJump())
+		{
+			break;
+		}
 		Player::MainPlayer->ChangeState(PlayerState::TakeHit);
 		break;
 	}
@@ -84,13 +94,16 @@ void Trap::Start()
 
 	GameEngineRandom NewRandom;
 
-	switch (NewRandom.RandomInt(1, 1)) // 임시로 None으로
+	switch (NewRandom.RandomInt(2, 2)) // 임시로 None으로
 	{
 	case 0:
 		Event_ = TrapEvent::None;
 		break;
 	case 1:
 		Event_ = TrapEvent::Seal;
+		Seal_ = CreateRenderer("Seal.bmp");
+		Seal_->SetIndex(0);
+		Seal_->SetPivot({ 0,-48 });
 		break;
 	case 2:
 		Event_ = TrapEvent::Fish;
@@ -138,7 +151,6 @@ void Trap::Update()
 		int LODInterval = 607;
 		if (false == PlayLevel::is2FrameUnit_)
 		{
-
 			if (LODInterval > GetPosition().y)
 			{
 				SetMove(DirVector_);
@@ -158,6 +170,40 @@ void Trap::Update()
 			}
 		}
 		DownTime -= GameEngineTime::GetDeltaTime();
+	}
+
+	if (nullptr != Fish_)
+	{
+		if (FishState_ == FishState::Jump)
+		{
+			if (0 > Fish_->GetPivot().y)
+			{
+				FishDir_ += float4::DOWN * GameEngineTime::GetDeltaTime() * 2000.0f;
+
+				if (-30 < Fish_->GetPivot().x && 30 > Fish_->GetPivot().x)
+				{
+					if (Spawn_ == SpawnLoc::RIGHT || Spawn_ == SpawnLoc::CENTER)
+					{
+						FishDir_ += float4::LEFT * 2000.f * GameEngineTime::GetDeltaTime();
+					}
+					else if (Spawn_ == SpawnLoc::LEFT)
+					{
+						FishDir_ += float4::RIGHT * 2000.f * GameEngineTime::GetDeltaTime();
+					}
+				}
+			}
+			else
+			{
+				Fish_->SetOrder(0);
+			}
+		}
+		else
+		{
+			FishDir_ = float4::UP * 700.f;
+			FishState_ = FishState::Jump;
+		}
+
+		Fish_->SetPivotMove(FishDir_ * GameEngineTime::GetDeltaTime());
 	}
 
 	if (true == TrapCol_->CollisionCheck("PlayerLeft", CollisionType::Rect, CollisionType::Rect) ||
@@ -185,10 +231,35 @@ void Trap::Render()
 		break;
 
 	case 2:
+		if (Event_ == TrapEvent::Seal)
+		{
+			Seal_->SetOrder(201);
+		}
+		else if (Event_ == TrapEvent::Fish)
+		{
+			if (FishState_ == FishState::None)
+			{
+				Fish_ = CreateRenderer(201);
+				Fish_->CreateAnimation("Fish.bmp", "L_Fish", 0, 3, 0.3f, false);
+				Fish_->CreateAnimation("Fish.bmp", "R_Fish", 4, 7, 0.3f, false);
+
+				if (Spawn_ == SpawnLoc::RIGHT)
+				{
+					Fish_->ChangeAnimation("L_Fish");
+				}
+				else if (Spawn_ == SpawnLoc::LEFT)
+				{
+					Fish_->ChangeAnimation("R_Fish");
+				}
+				else if (Spawn_ == SpawnLoc::CENTER)
+				{
+					Fish_->ChangeAnimation("L_Fish");
+				}
+
+				FishState_ = FishState::Create;
+			}
+		}
 		Trap_->SetIndex(LOD_);
-		Seal_ = CreateRenderer("Seal.bmp", 201);
-		Seal_->SetIndex(0);
-		Seal_->SetPivot({ 0,-48 });
 		break;
 
 	case 3:

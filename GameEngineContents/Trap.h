@@ -20,6 +20,13 @@ enum class TrapEvent
 	Crack
 };
 
+enum class FishState
+{
+	None,
+	Create,
+	Jump
+};
+
 class Trap : public GameEngineActor
 {
 private:	// member Var
@@ -27,6 +34,9 @@ private:	// member Var
 	SpawnLoc Spawn_;
 	float4 DirVector_;
 	int LOD_;
+
+	float4 FishDir_;
+	FishState FishState_;
 
 	GameEngineRenderer* Trap_;
 	GameEngineRenderer* Seal_;
