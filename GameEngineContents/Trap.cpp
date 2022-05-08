@@ -16,7 +16,7 @@ Trap::Trap()
 	, Spawn_(SpawnLoc::CENTER)
 	, LOD_(0)
 	, Trap_(nullptr)
-	, Fish_(nullptr)
+	, Object_(nullptr)
 	, TrapCol_(nullptr)
 	, TrapCenterCol_(nullptr)
 	, L_FishCol_(nullptr)
@@ -83,7 +83,7 @@ void Trap::Start()
 
 	GameEngineRandom NewRandom;
 
-	switch (NewRandom.RandomInt(0, 0)) // 임시로 None으로
+	switch (NewRandom.RandomInt(1, 1)) // 임시로 None으로
 	{
 	case 0:
 		Event_ = TrapEvent::None;
@@ -185,6 +185,9 @@ void Trap::Render()
 
 	case 2:
 		Trap_->SetIndex(LOD_);
+		Object_ = CreateRenderer("Seal.bmp", 201);
+		Object_->SetIndex(0);
+		Object_->SetPivot({ 0,-48 });
 		break;
 
 	case 3:
@@ -192,6 +195,10 @@ void Trap::Render()
 		break;
 
 	case 4:
+		if (nullptr != Object_)
+		{
+			Object_->SetIndex(1);
+		}
 		Trap_->SetIndex(LOD_);
 		break;
 
@@ -200,6 +207,10 @@ void Trap::Render()
 		break;
 
 	case 6:
+		if (nullptr != Object_)
+		{
+			Object_->SetIndex(2);
+		}
 		Trap_->SetIndex(LOD_);
 		break;
 

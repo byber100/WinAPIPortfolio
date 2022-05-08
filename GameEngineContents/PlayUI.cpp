@@ -447,12 +447,12 @@ void PlayUI::Render()
 
 	if (GameEngineInput::GetInst()->IsDown("TimeChit"))
 	{
-		CountTime_ = 12;
+		CountTime_ = 1;
 	}
 	if (GameEngineInput::GetInst()->IsDown("RestChit"))
 	{
 		RestDistance_ = 101;
-		CountTime_ = 30;
+		CountTime_ = 12;
 	}
 }
 
