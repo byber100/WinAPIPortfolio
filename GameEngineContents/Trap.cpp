@@ -16,7 +16,8 @@ Trap::Trap()
 	, Spawn_(SpawnLoc::CENTER)
 	, LOD_(0)
 	, Trap_(nullptr)
-	, Object_(nullptr)
+	, Seal_(nullptr)
+	, Fish_(nullptr)
 	, TrapCol_(nullptr)
 	, TrapCenterCol_(nullptr)
 	, L_FishCol_(nullptr)
@@ -185,9 +186,9 @@ void Trap::Render()
 
 	case 2:
 		Trap_->SetIndex(LOD_);
-		Object_ = CreateRenderer("Seal.bmp", 201);
-		Object_->SetIndex(0);
-		Object_->SetPivot({ 0,-48 });
+		Seal_ = CreateRenderer("Seal.bmp", 201);
+		Seal_->SetIndex(0);
+		Seal_->SetPivot({ 0,-48 });
 		break;
 
 	case 3:
@@ -195,9 +196,9 @@ void Trap::Render()
 		break;
 
 	case 4:
-		if (nullptr != Object_)
+		if (nullptr != Seal_)
 		{
-			Object_->SetIndex(1);
+			Seal_->SetIndex(1);
 		}
 		Trap_->SetIndex(LOD_);
 		break;
@@ -207,14 +208,18 @@ void Trap::Render()
 		break;
 
 	case 6:
-		if (nullptr != Object_)
+		if (nullptr != Seal_)
 		{
-			Object_->SetIndex(2);
+			Seal_->SetIndex(2);
 		}
 		Trap_->SetIndex(LOD_);
 		break;
 
 	case 7:
+		if (nullptr != Seal_)
+		{
+			Seal_->SetOrder(301);
+		}
 		Trap_->SetIndex(LOD_);
 		break;
 

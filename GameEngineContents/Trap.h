@@ -29,7 +29,8 @@ private:	// member Var
 	int LOD_;
 
 	GameEngineRenderer* Trap_;
-	GameEngineRenderer* Object_;
+	GameEngineRenderer* Seal_;
+	GameEngineRenderer* Fish_;
 
 	GameEngineCollision* TrapCol_;
 	GameEngineCollision* TrapCenterCol_;
