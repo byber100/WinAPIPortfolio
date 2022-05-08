@@ -159,9 +159,9 @@ void Trap::Update()
 		else if (Event_ == TrapEvent::Crack)
 		{
 			Trap_ = CreateRenderer("Crack.bmp", 200);
-			TrapCol_ = CreateCollision("LCrack", { 128,16 }, { -192,0 });
-			TrapSubCol_ = CreateCollision("RCrack", { 128,16 }, { 144,0 });
-			TrapCenterCol_ = CreateCollision("TrapCenter", { 160,16 }, { -24,0 });
+			TrapCol_ = CreateCollision("LCrack", { 108,16 }, { -200,0 });
+			TrapSubCol_ = CreateCollision("RCrack", { 92,16 }, { 158,0 });
+			TrapCenterCol_ = CreateCollision("TrapCenter", { 216,16 }, { -8,0 });
 		}
 		else
 		{

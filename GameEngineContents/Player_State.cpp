@@ -98,6 +98,7 @@ void Player::EvasionStart()
 
 void Player::FallInStart()
 {
+	GameEngineSound::SoundPlayOneShot("SFX5.mp3");
 	ForwardSpeed_ = 0.85f;
 	TriggerTime_ = 0;
 	Penguin_->ChangeAnimation("HangOn");
