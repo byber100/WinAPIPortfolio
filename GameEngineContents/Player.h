@@ -120,7 +120,6 @@ private:
 	void ClearUpdate();
 	void CeremonyUpdate();
 	void TakeHitUpdate();
-	void EvasionUpdate();
 	void FallInUpdate();
 };
 

@@ -161,7 +161,7 @@ void Trap::Update()
 			Trap_ = CreateRenderer("Crack.bmp", 200);
 			TrapCol_ = CreateCollision("LCrack", { 128,16 }, { -192,0 });
 			TrapSubCol_ = CreateCollision("RCrack", { 128,16 }, { 144,0 });
-			TrapCenterCol_ = CreateCollision("TrapCenter", { 164,16 }, { -24,0 });
+			TrapCenterCol_ = CreateCollision("TrapCenter", { 160,16 }, { -24,0 });
 		}
 		else
 		{
@@ -269,7 +269,9 @@ void Trap::Update()
 	else
 	{
 		if (true == TrapSubCol_->CollisionCheck("PlayerLeft", CollisionType::Rect, CollisionType::Rect) ||
-			true == TrapCol_->CollisionCheck("PlayerRight", CollisionType::Rect, CollisionType::Rect))
+			true == TrapCol_->CollisionCheck("PlayerRight", CollisionType::Rect, CollisionType::Rect) ||
+			true == TrapCenterCol_->CollisionCheck("PlayerLeft", CollisionType::Rect, CollisionType::Rect) ||
+			true == TrapCenterCol_->CollisionCheck("PlayerRight", CollisionType::Rect, CollisionType::Rect))
 		{
 			Hit(Event_);
 		}

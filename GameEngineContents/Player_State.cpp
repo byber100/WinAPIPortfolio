@@ -98,7 +98,10 @@ void Player::EvasionStart()
 
 void Player::FallInStart()
 {
-
+	ForwardSpeed_ = 0.85f;
+	TriggerTime_ = 0;
+	Penguin_->ChangeAnimation("HangOn");
+	Penguin_->SetPivot({ 0,42 });
 }
 
 
@@ -324,12 +327,21 @@ void Player::TakeHitUpdate()
 	
 }
 
-void Player::EvasionUpdate()
-{
-
-}
-
 void Player::FallInUpdate()
 {
-
+	TriggerTime_ += GameEngineTime::GetInst()->GetDeltaTime();
+	if (2.5f < TriggerTime_)
+	{
+		Penguin_->SetPivot({ 0,0 });
+		ChangeState(PlayerState::Move);
+	}
+	else if (1.f < TriggerTime_)
+	{
+		Penguin_->ChangeAnimation("ClimbUp2");
+	}
+	else if (0.7f < TriggerTime_)
+	{
+		Penguin_->ChangeAnimation("ClimbUp1");
+		Penguin_->SetPivot({ 0,16 });
+	}
 }

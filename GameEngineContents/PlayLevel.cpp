@@ -152,7 +152,7 @@ void PlayLevel::Update()
 	}
 
 	float LevelInterTime = PlayLevelStage->GetLevelInterTime();
-
+	
 	if (0.0f >= CurframeTime_)
 	{
 		++FrameUnitCount_;
@@ -170,7 +170,6 @@ void PlayLevel::Update()
 			is2FrameUnit_ = true;
 
 			RandomStage::MainStage->MountainFrame();
-			//CreateActor<Trap>((int)ORDER::TRAP);
 		}
 	}
 	CurframeTime_ -= GameEngineTime::GetDeltaTime();
