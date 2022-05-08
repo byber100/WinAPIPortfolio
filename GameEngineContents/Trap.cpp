@@ -1,10 +1,12 @@
 #include "Trap.h"
 #include "PlayLevel.h"
 #include "Player.h"
+#include "PlayUI.h"
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngineBase/GameEngineRandom.h>
 #include <GameEngine/GameEngineCollision.h>
+#include <GameEngineBase/GameEngineSound.h>
 
 // Static Var
 
@@ -15,15 +17,14 @@ Trap::Trap()
 	: Event_(TrapEvent::None)
 	, Spawn_(SpawnLoc::CENTER)
 	, LOD_(0)
+	, isFishLeft_(true)
 	, FishState_(FishState::None)
 	, Trap_(nullptr)
 	, Seal_(nullptr)
 	, Fish_(nullptr)
 	, TrapCol_(nullptr)
 	, TrapCenterCol_(nullptr)
-	, L_FishCol_(nullptr)
-	, R_FishCol_(nullptr)
-
+	, FishCol_(nullptr)
 {
 }
 
@@ -182,11 +183,11 @@ void Trap::Update()
 
 				if (-30 < Fish_->GetPivot().x && 30 > Fish_->GetPivot().x)
 				{
-					if (Spawn_ == SpawnLoc::RIGHT || Spawn_ == SpawnLoc::CENTER)
+					if (Spawn_ == SpawnLoc::RIGHT || true == isFishLeft_)
 					{
 						FishDir_ += float4::LEFT * 2000.f * GameEngineTime::GetDeltaTime();
 					}
-					else if (Spawn_ == SpawnLoc::LEFT)
+					else if (Spawn_ == SpawnLoc::LEFT || false == isFishLeft_)
 					{
 						FishDir_ += float4::RIGHT * 2000.f * GameEngineTime::GetDeltaTime();
 					}
@@ -194,7 +195,7 @@ void Trap::Update()
 			}
 			else
 			{
-				Fish_->SetOrder(0);
+				Fish_->SetPivot({ -1000,-1000 });
 			}
 		}
 		else
@@ -202,8 +203,17 @@ void Trap::Update()
 			FishDir_ = float4::UP * 700.f;
 			FishState_ = FishState::Jump;
 		}
-
+		
 		Fish_->SetPivotMove(FishDir_ * GameEngineTime::GetDeltaTime());
+		FishCol_->SetPivot(Fish_->GetPivot());
+
+		if (true == FishCol_->CollisionCheck("PlayerJump", CollisionType::Rect, CollisionType::Rect) &&
+			true == Player::MainPlayer->IsJump())
+		{
+			GameEngineSound::SoundPlayOneShot("SFX7.mp3");
+			PlayUI::MainUI->AddScore(300);
+			Fish_->SetPivot({ -1000,-1000 });
+		}
 	}
 
 	if (true == TrapCol_->CollisionCheck("PlayerLeft", CollisionType::Rect, CollisionType::Rect) ||
@@ -240,8 +250,9 @@ void Trap::Render()
 			if (FishState_ == FishState::None)
 			{
 				Fish_ = CreateRenderer(201);
-				Fish_->CreateAnimation("Fish.bmp", "L_Fish", 0, 3, 0.3f, false);
-				Fish_->CreateAnimation("Fish.bmp", "R_Fish", 4, 7, 0.3f, false);
+				Fish_->CreateAnimation("Fish.bmp", "L_Fish", 0, 3, 0.2f, false);
+				Fish_->CreateAnimation("Fish.bmp", "R_Fish", 4, 7, 0.2f, false);
+				FishCol_ = CreateCollision("Fish", { 32,32 });
 
 				if (Spawn_ == SpawnLoc::RIGHT)
 				{
@@ -253,9 +264,19 @@ void Trap::Render()
 				}
 				else if (Spawn_ == SpawnLoc::CENTER)
 				{
-					Fish_->ChangeAnimation("L_Fish");
-				}
+					GameEngineRandom NewRandom;
 
+					switch (NewRandom.RandomInt(0, 1)) // 임시로 None으로
+					{
+					case 0:
+						Fish_->ChangeAnimation("L_Fish");
+						break;
+					default:
+						isFishLeft_ = false;
+						Fish_->ChangeAnimation("R_Fish");
+						break;
+					}
+				}
 				FishState_ = FishState::Create;
 			}
 		}

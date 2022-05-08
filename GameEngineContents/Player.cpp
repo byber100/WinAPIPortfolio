@@ -6,6 +6,7 @@
 #include <GameEngineBase/GameEngineTime.h>
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngineBase/GameEngineSound.h>
+#include <GameEngine/GameEngineCollision.h>
 
 Player* Player::MainPlayer = nullptr;
 
@@ -173,6 +174,7 @@ void Player::Start()
 	
 	PlayerLeftCol_ = CreateCollision("PlayerLeft", { 30,20 }, { -20,45 });
 	PlayerRightCol_ = CreateCollision("PlayerRight", { 30,20 }, { 20,45 });
+	PlayerJumpCol_ = CreateCollision("PlayerJump", { 48,64 });
 
 	LevelRegist("Penguin");
 
@@ -192,6 +194,7 @@ void Player::Start()
 void Player::Update()
 {
 	StateUpdate();
+	PlayerJumpCol_->SetPivot(Penguin_->GetPivot());
 }
 
 void Player::Render()

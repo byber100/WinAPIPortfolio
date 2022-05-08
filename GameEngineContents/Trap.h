@@ -34,6 +34,7 @@ private:	// member Var
 	SpawnLoc Spawn_;
 	float4 DirVector_;
 	int LOD_;
+	bool isFishLeft_;
 
 	float4 FishDir_;
 	FishState FishState_;
@@ -44,8 +45,7 @@ private:	// member Var
 
 	GameEngineCollision* TrapCol_;
 	GameEngineCollision* TrapCenterCol_;
-	GameEngineCollision* L_FishCol_;
-	GameEngineCollision* R_FishCol_;
+	GameEngineCollision* FishCol_;
 
 public:		
 	Trap(); // default constructor 디폴트 생성자

@@ -103,6 +103,10 @@ public:
 	{
 		return DebugModeOn_;
 	}
+	void AddScore(int _Score)
+	{
+		Score_ += _Score;
+	}
 
 protected:
 

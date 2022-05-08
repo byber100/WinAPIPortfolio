@@ -43,6 +43,7 @@ private:
 	GameEngineRenderer* Shadow_;
 	GameEngineCollision* PlayerLeftCol_;
 	GameEngineCollision* PlayerRightCol_;
+	GameEngineCollision* PlayerJumpCol_;
 
 	GameEngineSoundPlayer PlayBGM_;
 
