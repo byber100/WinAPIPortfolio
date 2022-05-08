@@ -92,7 +92,7 @@ void PlayLevel::Update()
 	if (GameEngineInput::GetInst()->IsDown("TestTrap"))
 	{
 		Trap* TrapUnit = CreateActor<Trap>((int)ORDER::TRAP);
-		TrapUnit->TrapSetting(TrapEvent::Flag, SpawnLoc::LEFT);
+		TrapUnit->TrapSetting(TrapEvent::Crack, SpawnLoc::LEFT);
 	}
 	if (GameEngineInput::GetInst()->IsDown("DebugCol"))
 	{

@@ -46,6 +46,7 @@ private:	// member Var
 	GameEngineRenderer* Fish_;
 
 	GameEngineCollision* TrapCol_;
+	GameEngineCollision* TrapSubCol_;
 	GameEngineCollision* TrapCenterCol_;
 	GameEngineCollision* FishCol_;
 

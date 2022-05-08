@@ -24,6 +24,7 @@ Trap::Trap()
 	, Seal_(nullptr)
 	, Fish_(nullptr)
 	, TrapCol_(nullptr)
+	, TrapSubCol_(nullptr)
 	, TrapCenterCol_(nullptr)
 	, FishCol_(nullptr)
 {
@@ -88,8 +89,8 @@ void Trap::Hit(const TrapEvent& _Event)
 			break;
 		}
 
-		if (true == TrapCol_->CollisionCheck("PlayerLeft", CollisionType::Rect, CollisionType::Rect) &&
-			true == TrapCol_->CollisionCheck("PlayerRight", CollisionType::Rect, CollisionType::Rect))
+		if (true == TrapCenterCol_->CollisionCheck("PlayerLeft", CollisionType::Rect, CollisionType::Rect) ||
+			true == TrapCenterCol_->CollisionCheck("PlayerRight", CollisionType::Rect, CollisionType::Rect))
 		{
 			Player::MainPlayer->ChangeState(PlayerState::FallIn);
 			break;
@@ -121,10 +122,10 @@ void Trap::Update()
 			switch (Spawn_)
 			{
 			case SpawnLoc::RIGHT:
-				DirVector_ = { 32, yDown };
+				DirVector_ = { 12, yDown };
 				break;
 			case SpawnLoc::LEFT:
-				DirVector_ = { -32, yDown };
+				DirVector_ = { -12, yDown };
 				break;
 			default:
 				Death();
@@ -157,7 +158,10 @@ void Trap::Update()
 		}
 		else if (Event_ == TrapEvent::Crack)
 		{
-
+			Trap_ = CreateRenderer("Crack.bmp", 200);
+			TrapCol_ = CreateCollision("LCrack", { 128,16 }, { -192,0 });
+			TrapSubCol_ = CreateCollision("RCrack", { 128,16 }, { 144,0 });
+			TrapCenterCol_ = CreateCollision("TrapCenter", { 192,16 }, { -24,0 });
 		}
 		else
 		{
@@ -348,9 +352,18 @@ void Trap::Render()
 	case 7:
 		if (nullptr != Seal_)
 		{
-			Seal_->SetOrder(301);
+			Seal_->SetOrder(302);
 		}
-		Trap_->SetOrder(301);
+		if (Event_ == TrapEvent::Crack)
+		{
+			LOD_ = 6;
+			PlayUI::MainUI->AddScore(30);
+			Death();
+		}
+		else if (Event_ == TrapEvent::Flag)
+		{
+			Trap_->SetOrder(301);
+		}
 		Trap_->SetIndex(LOD_);
 		break;
 

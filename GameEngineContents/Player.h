@@ -10,6 +10,7 @@ enum PlayerState
 	JumpL,
 	JumpR,
 	TakeHit,
+	Evasion,
 	FallIn,
 	Clear,
 	Ceremony,
