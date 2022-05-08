@@ -19,6 +19,7 @@ Player::Player()
 	, isClear_(false)
 	, ClearSoundOn_(false)
 	, TriggerTime_(0)
+	, Invincibility_(false)
 	, DebugModeOn_(false)
 	, HitInfo_(PlayerHit::HitLeft)
 {
@@ -48,6 +49,10 @@ void Player::DebugPlayerOn()
 	{
 		std::string UpdateText = std::to_string(isJumping_);
 		DedugText_.Draw("isJump: " + UpdateText, { 0,460 }, RGB(255, 255, 255), 0, 0);
+	}
+	{
+		std::string UpdateText = std::to_string(Invincibility_);
+		DedugText_.Draw("¹«Àû: " + UpdateText, { 0,480 }, RGB(255, 255, 255), 0, 0);
 	}
 }
 
@@ -192,6 +197,7 @@ void Player::Start()
 		GameEngineInput::GetInst()->CreateKey("MoveRight", VK_RIGHT);
 		GameEngineInput::GetInst()->CreateKey("Fast", VK_UP);
 		GameEngineInput::GetInst()->CreateKey("DebugingFast", 'w');
+		GameEngineInput::GetInst()->CreateKey("Invincibility", 'e');
 		GameEngineInput::GetInst()->CreateKey("Slow", VK_DOWN);
 		GameEngineInput::GetInst()->CreateKey("Jump", VK_SPACE);
 		GameEngineInput::GetInst()->CreateKey("PlayerDebug", VK_TAB);
@@ -202,6 +208,18 @@ void Player::Start()
 
 void Player::Update()
 {
+	if (GameEngineInput::GetInst()->IsDown("Invincibility"))
+	{
+		if (false == Invincibility_)
+		{
+			Invincibility_ = true;
+		}
+		else
+		{
+			Invincibility_ = false;
+		}
+	}
+
 	StateUpdate();
 	PlayerJumpCol_->SetPivot(Penguin_->GetPivot());
 }

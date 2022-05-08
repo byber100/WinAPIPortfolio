@@ -55,6 +55,7 @@ private:
 	PlayerHit HitInfo_;
 
 	GameEngineFont DedugText_;
+	bool Invincibility_;
 	bool DebugModeOn_;
 
 public:
@@ -83,6 +84,10 @@ public:
 	bool IsJump()
 	{
 		return isJumping_;
+	}
+	bool GetInvincibility()
+	{
+		return Invincibility_;
 	}
 
 protected:

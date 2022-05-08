@@ -46,6 +46,11 @@ void Trap::TrapSetting(TrapEvent _Event, SpawnLoc _Spawn)
 
 void Trap::Hit(const TrapEvent& _Event)
 {
+	if (true == Player::MainPlayer->GetInvincibility())
+	{
+		return;
+	}
+
 	switch (_Event)
 	{
 	case TrapEvent::Hole:
