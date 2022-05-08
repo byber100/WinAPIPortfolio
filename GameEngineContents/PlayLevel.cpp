@@ -22,6 +22,8 @@ PlayLevel::PlayLevel()
 	, ArriveOn_(false)
 	, LevelChanger_(nullptr)
 	, HouseInfo_ (nullptr)
+	, CreateState_(CreateTrap::None)
+	, PatternVal_(0)
 	, isColDebug_(false)
 {
 }
@@ -52,6 +54,152 @@ void PlayLevel::Arrive()
 		}
 		ArriveOn_ = true;
 	}
+}
+
+void PlayLevel::TrapSpawnSetting(TrapSpawn _SpawnState)
+{
+	switch (_SpawnState)
+	{
+	case TrapSpawn::L_Crack:
+	{
+		Trap* TrapUnit0 = CreateActor<Trap>((int)ORDER::TRAP);
+		TrapUnit0->TrapSetting(TrapEvent::Crack, SpawnLoc::LEFT);
+	}
+		break;
+
+	case TrapSpawn::R_Crack:
+	{
+		Trap* TrapUnit0 = CreateActor<Trap>((int)ORDER::TRAP);
+		TrapUnit0->TrapSetting(TrapEvent::Crack, SpawnLoc::RIGHT);
+	}
+		break;
+
+	case TrapSpawn::L_Hole:
+	{
+		Trap* TrapUnit0 = CreateActor<Trap>((int)ORDER::TRAP);
+		TrapUnit0->TrapSetting(TrapEvent::Hole, SpawnLoc::LEFT);
+	}
+		break;
+
+	case TrapSpawn::C_Hole:
+	{
+		Trap* TrapUnit0 = CreateActor<Trap>((int)ORDER::TRAP);
+		TrapUnit0->TrapSetting(TrapEvent::Hole, SpawnLoc::CENTER);
+	}
+		break;
+
+	case TrapSpawn::R_Hole:
+	{
+		Trap* TrapUnit0 = CreateActor<Trap>((int)ORDER::TRAP);
+		TrapUnit0->TrapSetting(TrapEvent::Hole, SpawnLoc::RIGHT);
+	}
+		break;
+
+	case TrapSpawn::LR_Hole:
+	{
+		Trap* TrapUnit0 = CreateActor<Trap>((int)ORDER::TRAP);
+		TrapUnit0->TrapSetting(TrapEvent::Hole, SpawnLoc::LEFT);
+		Trap* TrapUnit1 = CreateActor<Trap>((int)ORDER::TRAP);
+		TrapUnit1->TrapSetting(TrapEvent::Hole, SpawnLoc::RIGHT);
+	}
+		break;
+
+	case TrapSpawn::L_Seal:
+	{
+		Trap* TrapUnit0 = CreateActor<Trap>((int)ORDER::TRAP);
+		TrapUnit0->TrapSetting(TrapEvent::Seal, SpawnLoc::LEFT);
+	}
+		break;
+
+	case TrapSpawn::C_Seal:
+	{
+		Trap* TrapUnit0 = CreateActor<Trap>((int)ORDER::TRAP);
+		TrapUnit0->TrapSetting(TrapEvent::Seal, SpawnLoc::CENTER);
+	}
+		break;
+
+	case TrapSpawn::R_Seal:
+	{
+		Trap* TrapUnit0 = CreateActor<Trap>((int)ORDER::TRAP);
+		TrapUnit0->TrapSetting(TrapEvent::Seal, SpawnLoc::RIGHT);
+	}
+		break;
+
+	case TrapSpawn::L_Random:
+	{
+		Trap* TrapUnit0 = CreateActor<Trap>((int)ORDER::TRAP);
+		GameEngineRandom NewRandom;
+		int RandomVal = NewRandom.RandomInt(0, 3);
+		if (0 == RandomVal)
+		{
+			TrapUnit0->TrapSetting(TrapEvent::Hole, SpawnLoc::LEFT);
+		}
+		else if (1 == RandomVal)
+		{
+			TrapUnit0->TrapSetting(TrapEvent::Seal, SpawnLoc::LEFT);
+		}
+		else if (2 == RandomVal)
+		{
+			TrapUnit0->TrapSetting(TrapEvent::Fish, SpawnLoc::LEFT);
+		}
+		else if (3 == RandomVal)
+		{
+			TrapUnit0->TrapSetting(TrapEvent::Flag, SpawnLoc::LEFT);
+		}
+	}
+		break;
+
+	case TrapSpawn::C_Random:
+	{
+		Trap* TrapUnit0 = CreateActor<Trap>((int)ORDER::TRAP);
+		GameEngineRandom NewRandom;
+		int RandomVal = NewRandom.RandomInt(0, 3);
+		if (0 == RandomVal)
+		{
+			TrapUnit0->TrapSetting(TrapEvent::Hole, SpawnLoc::CENTER);
+		}													  
+		else if (1 == RandomVal)							  
+		{													  
+			TrapUnit0->TrapSetting(TrapEvent::Seal, SpawnLoc::CENTER);
+		}													  
+		else if (2 == RandomVal)							  
+		{													  
+			TrapUnit0->TrapSetting(TrapEvent::Fish, SpawnLoc::CENTER);
+		}													  
+		else if (3 == RandomVal)							  
+		{													  
+			TrapUnit0->TrapSetting(TrapEvent::Flag, SpawnLoc::CENTER);
+		}
+	}
+		break;
+
+	case TrapSpawn::R_Random:
+	{
+		Trap* TrapUnit0 = CreateActor<Trap>((int)ORDER::TRAP);
+		GameEngineRandom NewRandom;
+		int RandomVal = NewRandom.RandomInt(0, 3);
+		if (0 == RandomVal)
+		{
+			TrapUnit0->TrapSetting(TrapEvent::Hole, SpawnLoc::RIGHT);
+		}
+		else if (1 == RandomVal)
+		{
+			TrapUnit0->TrapSetting(TrapEvent::Seal, SpawnLoc::RIGHT);
+		}
+		else if (2 == RandomVal)
+		{
+			TrapUnit0->TrapSetting(TrapEvent::Fish, SpawnLoc::RIGHT);
+		}
+		else if (3 == RandomVal)
+		{
+			TrapUnit0->TrapSetting(TrapEvent::Flag, SpawnLoc::RIGHT);
+		}
+	}
+		break;
+	default:
+		break;
+	}
+	CreateState_ = CreateTrap::Ready;
 }
 
 void PlayLevel::Loading()
@@ -92,7 +240,7 @@ void PlayLevel::Update()
 	if (GameEngineInput::GetInst()->IsDown("TestTrap"))
 	{
 		Trap* TrapUnit = CreateActor<Trap>((int)ORDER::TRAP);
-		TrapUnit->TrapSetting(TrapEvent::Crack, SpawnLoc::RIGHT);
+		TrapUnit->TrapSetting(TrapEvent::Fish, SpawnLoc::LEFT);
 	}
 	if (GameEngineInput::GetInst()->IsDown("DebugCol"))
 	{
@@ -111,6 +259,11 @@ void PlayLevel::Update()
  			HouseInfo_ = CreateActor<House>((int)ORDER::OBJECT);
 			HouseInfo_->isFlagUp_ = false;
 		}
+	}
+
+	if (CreateState_ == CreateTrap::None) // 단일 트랩 생성
+	{
+		TrapSpawnSetting(TrapSpawn::C_Random);
 	}
 
 	int t = PlayUI::MainUI->GetCountTime();
@@ -179,6 +332,7 @@ void PlayLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
 	ArriveOn_ = false;
 	CurframeTime_ = 0;
+	CreateState_ = CreateTrap::None;
 }
 
 void PlayLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)

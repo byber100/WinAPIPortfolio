@@ -1,6 +1,7 @@
 #pragma once
 #include <GameEngine/GameEngineLevel.h>
 #include <GameEngineBase/GameEngineSound.h>
+#include <GameEngineContents/ContentsEnum.h>
 
 // Ό³Έν :
 class Player;
@@ -33,6 +34,9 @@ private:
 	LevelChanger* LevelChanger_;
 	House* HouseInfo_;
 
+	CreateTrap CreateState_;
+	int PatternVal_;
+
 	bool isColDebug_;
 
 public:
@@ -57,4 +61,5 @@ protected:
 
 private:
 	void Arrive();
+	void TrapSpawnSetting(TrapSpawn _SpawnState);
 };

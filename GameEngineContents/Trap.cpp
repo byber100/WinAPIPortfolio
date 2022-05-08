@@ -230,11 +230,15 @@ void Trap::Update()
 
 				if (-30 < Fish_->GetPivot().x && 30 > Fish_->GetPivot().x)
 				{
-					if (Spawn_ == SpawnLoc::RIGHT || true == isFishLeft_)
+					if (Spawn_ == SpawnLoc::LEFT)
+					{
+						isFishLeft_ = false;
+					}
+					if (true == isFishLeft_)
 					{
 						FishDir_ += float4::LEFT * 2000.f * GameEngineTime::GetDeltaTime();
 					}
-					else if (Spawn_ == SpawnLoc::LEFT || false == isFishLeft_)
+					else
 					{
 						FishDir_ += float4::RIGHT * 2000.f * GameEngineTime::GetDeltaTime();
 					}
