@@ -266,7 +266,7 @@ void Trap::Render()
 				{
 					GameEngineRandom NewRandom;
 
-					switch (NewRandom.RandomInt(0, 1)) // 임시로 None으로
+					switch (NewRandom.RandomInt(0, 1))
 					{
 					case 0:
 						Fish_->ChangeAnimation("L_Fish");

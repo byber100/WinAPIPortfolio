@@ -97,6 +97,14 @@ void AntarcticAdventure::GameInit()
 		GameEngineImage* Image = GameEngineImageManager::GetInst()->Find("Fish.bmp");
 		Image->CutCount(8, 1);
 	}
+	{
+		GameEngineImage* Image = GameEngineImageManager::GetInst()->Find("ScoreFlag.bmp");
+		Image->CutCount(1, 8);
+	}
+	{
+		GameEngineImage* Image = GameEngineImageManager::GetInst()->Find("Crack.bmp");
+		Image->CutCount(1, 7);
+	}
 
 	CreateLevel<CompanyLevel>("Company");
 	CreateLevel<TitleLevel>("Title");
