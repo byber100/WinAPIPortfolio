@@ -175,10 +175,6 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="ContentsEnum.h" />
-    <ClInclude Include="Crack.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="Trap.h">
       <SubType>
       </SubType>
@@ -243,10 +239,6 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="CompanyLevel.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="Crack.cpp">
       <SubType>
       </SubType>
     </ClCompile>

@@ -14,7 +14,8 @@
 
 // constructor destructor
 Trap::Trap()
-	: Event_(TrapEvent::None)
+	: SetComplete_(false)
+	, Event_(TrapEvent::None)
 	, Spawn_(SpawnLoc::CENTER)
 	, LOD_(0)
 	, isFishLeft_(true)
@@ -33,11 +34,20 @@ Trap::~Trap()
 }
 
 //member Func
+void Trap::TrapSetting(TrapEvent _Event, SpawnLoc _Spawn)
+{
+	if (false == SetComplete_)
+	{
+		Event_ = _Event;
+		Spawn_ = _Spawn;
+	}
+}
+
 void Trap::Hit(const TrapEvent& _Event)
 {
 	switch (_Event)
 	{
-	case TrapEvent::None:
+	case TrapEvent::Hole:
 	{
 		if (true == Player::MainPlayer->IsJump())
 		{
@@ -96,75 +106,84 @@ void Trap::Start()
 {
 	float x = GameEngineWindow::GetScale().Half().x;
 	float y = GameEngineWindow::GetScale().Half().y;
-
 	SetPosition({ x , y + 32 });
 	SetScale(GameEngineWindow::GetScale());
-
-	GameEngineRandom NewRandom;
-
-	switch (NewRandom.RandomInt(3, 3)) // 임시로 None으로
-	{
-	case 0:
-		Event_ = TrapEvent::None;
-		break;
-	case 1:
-		Event_ = TrapEvent::Seal;
-		Seal_ = CreateRenderer("Seal.bmp");
-		Seal_->SetIndex(0);
-		Seal_->SetPivot({ 0,-48 });
-		break;
-	case 2:
-		Event_ = TrapEvent::Fish;
-		break;
-	case 3:
-		Event_ = TrapEvent::Flag;
-		break;
-	default:
-		Event_ = TrapEvent::Crack;
-		break;
-	}
-
-	float yDown = 38;
-	switch (NewRandom.RandomInt(0, 0))
-	{
-	case 0:
-		DirVector_ = { 0, yDown };
-		Spawn_ = SpawnLoc::CENTER;
-		break;
-	case 1:
-		DirVector_ = { 32, yDown };
-		Spawn_ = SpawnLoc::RIGHT;
-		break;
-	case 2:
-		DirVector_ = { -32, yDown };
-		Spawn_ = SpawnLoc::LEFT;
-		break;
-	default:
-		Death();
-		break;
-	}
-
-	if (Event_ == TrapEvent::Flag)
-	{
-		Trap_ = CreateRenderer("ScoreFlag.bmp", 200);
-		TrapCol_ = CreateCollision("Trap", { 24,32 });
-	}
-	else if (Event_ == TrapEvent::Crack)
-	{
-
-	}
-	else
-	{
-		Trap_ = CreateRenderer("Traps.bmp", 200);
-		TrapCol_ = CreateCollision("Trap", { 96,16 });
-		TrapCenterCol_ = CreateCollision("TrapCenter", { 4,16 });
-	}
-
-	Trap_->SetIndex(LOD_);
 }
 
 void Trap::Update()
 {
+	if (false == SetComplete_)
+	{
+		// 트랩이 내려가는 방향
+		float yDown = 38;
+		if (Event_ == TrapEvent::Crack)
+		{
+			switch (Spawn_)
+			{
+			case SpawnLoc::RIGHT:
+				DirVector_ = { 32, yDown };
+				break;
+			case SpawnLoc::LEFT:
+				DirVector_ = { -32, yDown };
+				break;
+			default:
+				Death();
+				return;
+			}
+		}
+		else
+		{
+			switch (Spawn_)
+			{
+			case SpawnLoc::CENTER:
+				DirVector_ = { 0, yDown };
+				break;
+			case SpawnLoc::RIGHT:
+				DirVector_ = { 32, yDown };
+				break;
+			case SpawnLoc::LEFT:
+				DirVector_ = { -32, yDown };
+				break;
+			default:
+				break;
+			}
+		}
+
+		// 트랩의 충돌 및 랜더링 초기화
+		if (Event_ == TrapEvent::Flag)
+		{
+			Trap_ = CreateRenderer("ScoreFlag.bmp", 200);
+			TrapCol_ = CreateCollision("Trap", { 24,32 });
+		}
+		else if (Event_ == TrapEvent::Crack)
+		{
+
+		}
+		else
+		{
+			if (Event_ == TrapEvent::Seal)
+			{
+				Seal_ = CreateRenderer("Seal.bmp");
+				Seal_->SetIndex(0);
+				Seal_->SetPivot({ 0,-48 });
+			}
+			Trap_ = CreateRenderer("Traps.bmp", 200);
+			TrapCol_ = CreateCollision("Trap", { 96,16 });
+			TrapCenterCol_ = CreateCollision("TrapCenter", { 4,16 });
+		}
+
+		Trap_->SetIndex(LOD_); // LOD 자동
+		SetComplete_ = true;
+	}
+
+	if (Event_ == TrapEvent::None)
+	{
+		Death();
+		return;
+	}
+
+	///////////////////////////////////////////////////////////////////////////////////////
+
 	float DownTime = PlayLevel::PlayLevelStage->GetCurframeTime();
 	if (0.0f >= DownTime)
 	{

@@ -14,6 +14,7 @@ enum class SpawnLoc
 enum class TrapEvent
 {
 	None,
+	Hole,
 	Seal,
 	Fish,
 	Flag,
@@ -30,6 +31,7 @@ enum class FishState
 class Trap : public GameEngineActor
 {
 private:	// member Var
+	bool SetComplete_;
 	TrapEvent Event_;
 	SpawnLoc Spawn_;
 	float4 DirVector_;
@@ -58,6 +60,9 @@ public:		// delete constructor
 public:		//delete operator
 	Trap& operator=(const Trap& _Other) = delete; // default Copy operator 디폴트 대입 연산자
 	Trap& operator=(const Trap&& _Other) noexcept = delete; // default RValue Copy operator 디폴트 RValue 대입연산자
+
+public:
+	void TrapSetting(TrapEvent _Event, SpawnLoc _Spawn);
 
 private:
 	void Hit(const TrapEvent& _Event);
