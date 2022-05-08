@@ -109,6 +109,7 @@ private:
 	void ClearStart();
 	void CeremonyStart();
 	void TakeHitStart();
+	void EvasionStart();
 	void FallInStart();
 
 	void MoveUpdate();
@@ -119,6 +120,7 @@ private:
 	void ClearUpdate();
 	void CeremonyUpdate();
 	void TakeHitUpdate();
+	void EvasionUpdate();
 	void FallInUpdate();
 };
 

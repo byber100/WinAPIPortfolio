@@ -92,6 +92,9 @@ void Player::ChangeState(PlayerState _State)
 		case TakeHit:
 			TakeHitStart();
 			break;
+		case Evasion:
+			EvasionStart();
+			break;
 		case FallIn:
 			FallInStart();
 			break;
@@ -131,6 +134,9 @@ void Player::StateUpdate()
 		JumpRUpdate();
 		break;
 	case TakeHit:
+		TakeHitUpdate();
+		break;
+	case Evasion:
 		TakeHitUpdate();
 		break;
 	case FallIn:

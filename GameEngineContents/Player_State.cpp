@@ -79,6 +79,23 @@ void Player::TakeHitStart()
 	}
 }
 
+void Player::EvasionStart()
+{
+	GameEngineSound::SoundPlayOneShot("SFX3.mp3");
+	ForwardSpeed_ = 4.0f;
+
+	if (true == PlayerLeftCol_->CollisionCheck("RCrack"))
+	{
+		Penguin_->ChangeAnimation("PushRight");
+		HitInfo_ = PlayerHit::HitRight;
+	}
+	else if (true == PlayerRightCol_->CollisionCheck("LCrack"))
+	{
+		Penguin_->ChangeAnimation("PushLeft");
+		HitInfo_ = PlayerHit::HitLeft;
+	}
+}
+
 void Player::FallInStart()
 {
 
@@ -305,6 +322,11 @@ void Player::TakeHitUpdate()
 		}
 	}
 	
+}
+
+void Player::EvasionUpdate()
+{
+
 }
 
 void Player::FallInUpdate()

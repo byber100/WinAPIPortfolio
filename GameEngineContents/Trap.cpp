@@ -95,7 +95,7 @@ void Trap::Hit(const TrapEvent& _Event)
 			Player::MainPlayer->ChangeState(PlayerState::FallIn);
 			break;
 		}
-		Player::MainPlayer->ChangeState(PlayerState::TakeHit);
+		Player::MainPlayer->ChangeState(PlayerState::Evasion);
 		break;
 	}
 	default:
@@ -161,7 +161,7 @@ void Trap::Update()
 			Trap_ = CreateRenderer("Crack.bmp", 200);
 			TrapCol_ = CreateCollision("LCrack", { 128,16 }, { -192,0 });
 			TrapSubCol_ = CreateCollision("RCrack", { 128,16 }, { 144,0 });
-			TrapCenterCol_ = CreateCollision("TrapCenter", { 192,16 }, { -24,0 });
+			TrapCenterCol_ = CreateCollision("TrapCenter", { 164,16 }, { -24,0 });
 		}
 		else
 		{
@@ -258,10 +258,21 @@ void Trap::Update()
 		}
 	}
 
-	if (true == TrapCol_->CollisionCheck("PlayerLeft", CollisionType::Rect, CollisionType::Rect) ||
-		true == TrapCol_->CollisionCheck("PlayerRight", CollisionType::Rect, CollisionType::Rect))
+	if (nullptr == TrapSubCol_)
 	{
-		Hit(Event_);
+		if (true == TrapCol_->CollisionCheck("PlayerLeft", CollisionType::Rect, CollisionType::Rect) ||
+			true == TrapCol_->CollisionCheck("PlayerRight", CollisionType::Rect, CollisionType::Rect))
+		{
+			Hit(Event_);
+		}
+	}
+	else
+	{
+		if (true == TrapSubCol_->CollisionCheck("PlayerLeft", CollisionType::Rect, CollisionType::Rect) ||
+			true == TrapCol_->CollisionCheck("PlayerRight", CollisionType::Rect, CollisionType::Rect))
+		{
+			Hit(Event_);
+		}
 	}
 
 	if (768 < GetPosition().y)
