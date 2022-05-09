@@ -2,6 +2,7 @@
 #include <GameEngine/GameEngineLevel.h>
 #include <GameEngineBase/GameEngineSound.h>
 #include <GameEngineContents/ContentsEnum.h>
+#include <GameEngineBase/GameEngineRandom.h>
 
 // Ό³Έν :
 class Player;
@@ -9,7 +10,6 @@ class PlayUI;
 class RandomStage;
 class LevelChanger;
 class House;
-class GameEngineRandom;
 class PlayLevel : public GameEngineLevel
 {
 public:
@@ -38,7 +38,7 @@ private:
 	CreateTrap CreateState_;
 	int SpawnCnt_;
 	int NumOfTrap_;
-	GameEngineRandom* RandomTrap_;
+	GameEngineRandom RandomTrap_;
 	int PatternVal_;
 
 	bool isColDebug_;
@@ -65,6 +65,6 @@ protected:
 
 private:
 	void Arrive();
-	void TrapSpawnSetting(TrapSpawn _SpawnState, const int& _Km = 1);
+	void TrapSpawnSetting(int _RandomTrap, const int& _Km = 1);
 	void TrapPattern();
 };

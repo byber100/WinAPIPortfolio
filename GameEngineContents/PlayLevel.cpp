@@ -25,7 +25,6 @@ PlayLevel::PlayLevel()
 	, CreateState_(CreateTrap::None)
 	, SpawnCnt_(0)
 	, NumOfTrap_(1)
-	, RandomTrap_(nullptr)
 	, PatternVal_(0)
 	, isColDebug_(false)
 {
@@ -59,7 +58,7 @@ void PlayLevel::Arrive()
 	}
 }
 
-void PlayLevel::TrapSpawnSetting(TrapSpawn _SpawnState, const int& _Km /*= 1*/)
+void PlayLevel::TrapSpawnSetting(int _RandomTrap, const int& _Km /*= 1*/)
 {
 	if (CreateState_ == CreateTrap::Ready)
 	{
@@ -74,44 +73,44 @@ void PlayLevel::TrapSpawnSetting(TrapSpawn _SpawnState, const int& _Km /*= 1*/)
 		}
 	}
 
-	switch (_SpawnState)
+	switch (_RandomTrap)
 	{
-	case TrapSpawn::L_Crack:
+	case 1:
 	{
 		Trap* TrapUnit0 = CreateActor<Trap>((int)ORDER::TRAP);
 		TrapUnit0->TrapSetting(TrapEvent::Crack, SpawnLoc::LEFT);
 	}
 		break;
 
-	case TrapSpawn::R_Crack:
+	case 2:
 	{
 		Trap* TrapUnit0 = CreateActor<Trap>((int)ORDER::TRAP);
 		TrapUnit0->TrapSetting(TrapEvent::Crack, SpawnLoc::RIGHT);
 	}
 		break;
 
-	case TrapSpawn::L_Hole:
+	case 3:
 	{
 		Trap* TrapUnit0 = CreateActor<Trap>((int)ORDER::TRAP);
 		TrapUnit0->TrapSetting(TrapEvent::Hole, SpawnLoc::LEFT);
 	}
 		break;
 
-	case TrapSpawn::C_Hole:
+	case 4:
 	{
 		Trap* TrapUnit0 = CreateActor<Trap>((int)ORDER::TRAP);
 		TrapUnit0->TrapSetting(TrapEvent::Hole, SpawnLoc::CENTER);
 	}
 		break;
 
-	case TrapSpawn::R_Hole:
+	case 5:
 	{
 		Trap* TrapUnit0 = CreateActor<Trap>((int)ORDER::TRAP);
 		TrapUnit0->TrapSetting(TrapEvent::Hole, SpawnLoc::RIGHT);
 	}
 		break;
 
-	case TrapSpawn::LR_Hole:
+	case 6:
 	{
 		Trap* TrapUnit0 = CreateActor<Trap>((int)ORDER::TRAP);
 		TrapUnit0->TrapSetting(TrapEvent::Hole, SpawnLoc::LEFT);
@@ -120,28 +119,28 @@ void PlayLevel::TrapSpawnSetting(TrapSpawn _SpawnState, const int& _Km /*= 1*/)
 	}
 		break;
 
-	case TrapSpawn::L_Seal:
+	case 7:
 	{
 		Trap* TrapUnit0 = CreateActor<Trap>((int)ORDER::TRAP);
 		TrapUnit0->TrapSetting(TrapEvent::Seal, SpawnLoc::LEFT);
 	}
 		break;
 
-	case TrapSpawn::C_Seal:
+	case 8:
 	{
 		Trap* TrapUnit0 = CreateActor<Trap>((int)ORDER::TRAP);
 		TrapUnit0->TrapSetting(TrapEvent::Seal, SpawnLoc::CENTER);
 	}
 		break;
 
-	case TrapSpawn::R_Seal:
+	case 9:
 	{
 		Trap* TrapUnit0 = CreateActor<Trap>((int)ORDER::TRAP);
 		TrapUnit0->TrapSetting(TrapEvent::Seal, SpawnLoc::RIGHT);
 	}
 		break;
 
-	case TrapSpawn::L_Random:
+	case 10:
 	{
 		Trap* TrapUnit0 = CreateActor<Trap>((int)ORDER::TRAP);
 		GameEngineRandom NewRandom;
@@ -161,7 +160,7 @@ void PlayLevel::TrapSpawnSetting(TrapSpawn _SpawnState, const int& _Km /*= 1*/)
 	}
 		break;
 
-	case TrapSpawn::C_Random:
+	case 11:
 	{
 		Trap* TrapUnit0 = CreateActor<Trap>((int)ORDER::TRAP);
 		GameEngineRandom NewRandom;
@@ -181,7 +180,7 @@ void PlayLevel::TrapSpawnSetting(TrapSpawn _SpawnState, const int& _Km /*= 1*/)
 	}
 		break;
 
-	case TrapSpawn::R_Random:
+	case 12:
 	{
 		Trap* TrapUnit0 = CreateActor<Trap>((int)ORDER::TRAP);
 		GameEngineRandom NewRandom;
@@ -212,25 +211,23 @@ void PlayLevel::TrapSpawnSetting(TrapSpawn _SpawnState, const int& _Km /*= 1*/)
 
 void PlayLevel::TrapPattern()
 {
-	if (CreateState_ == CreateTrap::Arrangement)
+	if (60 >= PlayUI::RestDistance_)
 	{
 		return;
 	}
 
-
-
 	switch (NumOfTrap_)
 	{
 	case 1:
-		//RandomTrap_->RandomInt(0);
-		TrapSpawnSetting(TrapSpawn::None, 5);
+	{
+		TrapSpawnSetting(0, 15);
+	}
 		break;
 	case 2:
-		TrapSpawnSetting(TrapSpawn::L_Crack);
+		TrapSpawnSetting(RandomTrap_.RandomInt(1, 12));
 		break;
 	default:
 		NumOfTrap_ = 1;
-		//CreateState_ = CreateTrap::Arrangement;
 		break;
 	}
 }
