@@ -19,6 +19,7 @@ enum class CreateTrap
 
 enum class TrapSpawn
 {
+	None,
 	L_Crack,
 	R_Crack,
 	L_Hole,

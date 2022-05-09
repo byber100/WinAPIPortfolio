@@ -9,6 +9,7 @@ class PlayUI;
 class RandomStage;
 class LevelChanger;
 class House;
+class GameEngineRandom
 class PlayLevel : public GameEngineLevel
 {
 public:
@@ -35,6 +36,9 @@ private:
 	House* HouseInfo_;
 
 	CreateTrap CreateState_;
+	int SpawnCnt_;
+	int NumOfTrap_;
+	GameEngineRandom* RandomTrap_;
 	int PatternVal_;
 
 	bool isColDebug_;
@@ -61,5 +65,6 @@ protected:
 
 private:
 	void Arrive();
-	void TrapSpawnSetting(TrapSpawn _SpawnState);
+	void TrapSpawnSetting(TrapSpawn _SpawnState, const int& _Km = 1);
+	void TrapPattern();
 };

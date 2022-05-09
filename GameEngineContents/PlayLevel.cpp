@@ -17,12 +17,15 @@ int PlayLevel::FrameCount = 64; // Start Stage Stay Time
 bool PlayLevel::is2FrameUnit_ = false;
 bool PlayLevel::LevelChangeOn_ = false;
 
-PlayLevel::PlayLevel() 
+PlayLevel::PlayLevel()
 	: UnitSecond_(1.0f)
 	, ArriveOn_(false)
 	, LevelChanger_(nullptr)
-	, HouseInfo_ (nullptr)
+	, HouseInfo_(nullptr)
 	, CreateState_(CreateTrap::None)
+	, SpawnCnt_(0)
+	, NumOfTrap_(1)
+	, RandomTrap_(nullptr)
 	, PatternVal_(0)
 	, isColDebug_(false)
 {
@@ -56,8 +59,21 @@ void PlayLevel::Arrive()
 	}
 }
 
-void PlayLevel::TrapSpawnSetting(TrapSpawn _SpawnState)
+void PlayLevel::TrapSpawnSetting(TrapSpawn _SpawnState, const int& _Km /*= 1*/)
 {
+	if (CreateState_ == CreateTrap::Ready)
+	{
+		if (_Km > SpawnCnt_)
+		{
+			return;
+		}
+		else
+		{
+			SpawnCnt_ = 0;
+			++NumOfTrap_;
+		}
+	}
+
 	switch (_SpawnState)
 	{
 	case TrapSpawn::L_Crack:
@@ -129,20 +145,16 @@ void PlayLevel::TrapSpawnSetting(TrapSpawn _SpawnState)
 	{
 		Trap* TrapUnit0 = CreateActor<Trap>((int)ORDER::TRAP);
 		GameEngineRandom NewRandom;
-		int RandomVal = NewRandom.RandomInt(0, 3);
+		int RandomVal = NewRandom.RandomInt(0, 2);
 		if (0 == RandomVal)
 		{
 			TrapUnit0->TrapSetting(TrapEvent::Hole, SpawnLoc::LEFT);
 		}
 		else if (1 == RandomVal)
 		{
-			TrapUnit0->TrapSetting(TrapEvent::Seal, SpawnLoc::LEFT);
-		}
-		else if (2 == RandomVal)
-		{
 			TrapUnit0->TrapSetting(TrapEvent::Fish, SpawnLoc::LEFT);
 		}
-		else if (3 == RandomVal)
+		else if (2 == RandomVal)
 		{
 			TrapUnit0->TrapSetting(TrapEvent::Flag, SpawnLoc::LEFT);
 		}
@@ -153,20 +165,16 @@ void PlayLevel::TrapSpawnSetting(TrapSpawn _SpawnState)
 	{
 		Trap* TrapUnit0 = CreateActor<Trap>((int)ORDER::TRAP);
 		GameEngineRandom NewRandom;
-		int RandomVal = NewRandom.RandomInt(0, 3);
+		int RandomVal = NewRandom.RandomInt(0, 2);
 		if (0 == RandomVal)
 		{
 			TrapUnit0->TrapSetting(TrapEvent::Hole, SpawnLoc::CENTER);
-		}													  
+		}													  												  
 		else if (1 == RandomVal)							  
-		{													  
-			TrapUnit0->TrapSetting(TrapEvent::Seal, SpawnLoc::CENTER);
-		}													  
-		else if (2 == RandomVal)							  
 		{													  
 			TrapUnit0->TrapSetting(TrapEvent::Fish, SpawnLoc::CENTER);
 		}													  
-		else if (3 == RandomVal)							  
+		else if (2 == RandomVal)							  
 		{													  
 			TrapUnit0->TrapSetting(TrapEvent::Flag, SpawnLoc::CENTER);
 		}
@@ -177,20 +185,16 @@ void PlayLevel::TrapSpawnSetting(TrapSpawn _SpawnState)
 	{
 		Trap* TrapUnit0 = CreateActor<Trap>((int)ORDER::TRAP);
 		GameEngineRandom NewRandom;
-		int RandomVal = NewRandom.RandomInt(0, 3);
+		int RandomVal = NewRandom.RandomInt(0, 2);
 		if (0 == RandomVal)
 		{
 			TrapUnit0->TrapSetting(TrapEvent::Hole, SpawnLoc::RIGHT);
 		}
 		else if (1 == RandomVal)
 		{
-			TrapUnit0->TrapSetting(TrapEvent::Seal, SpawnLoc::RIGHT);
-		}
-		else if (2 == RandomVal)
-		{
 			TrapUnit0->TrapSetting(TrapEvent::Fish, SpawnLoc::RIGHT);
 		}
-		else if (3 == RandomVal)
+		else if (2 == RandomVal)
 		{
 			TrapUnit0->TrapSetting(TrapEvent::Flag, SpawnLoc::RIGHT);
 		}
@@ -199,7 +203,36 @@ void PlayLevel::TrapSpawnSetting(TrapSpawn _SpawnState)
 	default:
 		break;
 	}
-	CreateState_ = CreateTrap::Ready;
+
+	if (CreateState_ == CreateTrap::None)
+	{
+		CreateState_ = CreateTrap::Ready;
+	}
+}
+
+void PlayLevel::TrapPattern()
+{
+	if (CreateState_ == CreateTrap::Arrangement)
+	{
+		return;
+	}
+
+
+
+	switch (NumOfTrap_)
+	{
+	case 1:
+		RandomTrap_->RandomInt(0)
+		TrapSpawnSetting(TrapSpawn::None, 5);
+		break;
+	case 2:
+		TrapSpawnSetting(TrapSpawn::L_Crack);
+		break;
+	default:
+		NumOfTrap_ = 1;
+		//CreateState_ = CreateTrap::Arrangement;
+		break;
+	}
 }
 
 void PlayLevel::Loading()
@@ -261,10 +294,7 @@ void PlayLevel::Update()
 		}
 	}
 
-	if (CreateState_ == CreateTrap::None) // 단일 트랩 생성
-	{
-		TrapSpawnSetting(TrapSpawn::C_Random);
-	}
+	TrapPattern();
 
 	int t = PlayUI::MainUI->GetCountTime();
 	if (0 != t)
@@ -309,6 +339,7 @@ void PlayLevel::Update()
 	if (0.0f >= CurframeTime_)
 	{
 		++FrameUnitCount_;
+		++SpawnCnt_;
 		is2FrameUnit_ = false;
 		CurframeTime_ = LevelInterTime;
 		if (0 != PlayUI::RestDistance_)
@@ -332,6 +363,8 @@ void PlayLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
 	ArriveOn_ = false;
 	CurframeTime_ = 0;
+	SpawnCnt_ = 0;
+	NumOfTrap_ = 1;
 	CreateState_ = CreateTrap::None;
 }
 
