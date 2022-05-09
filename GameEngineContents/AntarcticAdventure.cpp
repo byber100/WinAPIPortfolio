@@ -110,7 +110,7 @@ void AntarcticAdventure::GameInit()
 	CreateLevel<TitleLevel>("Title");
 	CreateLevel<MapLevel>("Map");
 	CreateLevel<PlayLevel>("Play");
-	ChangeLevel("Map");
+	ChangeLevel("Company");
 }
 
 void AntarcticAdventure::GameLoop()
