@@ -12,7 +12,7 @@ Player* Player::MainPlayer = nullptr;
 
 Player::Player() 
 	: ForwardSpeed_(7.0f) // 0ø° µµ¥ﬁ«œ∏È æ÷¥œ∏ÿ√„
-	, SideSpeed_(200.0f)
+	, SideSpeed_(300.0f)
 	, isJumping_(false)
 	, BounceCnt_(0)
 	, isBounce_(false)
