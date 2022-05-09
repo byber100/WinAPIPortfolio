@@ -9,7 +9,7 @@ class PlayUI;
 class RandomStage;
 class LevelChanger;
 class House;
-class GameEngineRandom
+class GameEngineRandom;
 class PlayLevel : public GameEngineLevel
 {
 public:

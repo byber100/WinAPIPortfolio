@@ -222,7 +222,7 @@ void PlayLevel::TrapPattern()
 	switch (NumOfTrap_)
 	{
 	case 1:
-		RandomTrap_->RandomInt(0)
+		//RandomTrap_->RandomInt(0);
 		TrapSpawnSetting(TrapSpawn::None, 5);
 		break;
 	case 2:
