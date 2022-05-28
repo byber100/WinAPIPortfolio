@@ -79,6 +79,7 @@ void PlayLevel::TrapSpawnSetting(int _RandomTrap, const int& _Km /*= 1*/)
 	{
 		Trap* TrapUnit0 = CreateActor<Trap>((int)ORDER::TRAP);
 		TrapUnit0->TrapSetting(TrapEvent::Crack, SpawnLoc::LEFT);
+		CreatedTrap_.push_back(TrapUnit0);
 	}
 		break;
 
@@ -86,6 +87,7 @@ void PlayLevel::TrapSpawnSetting(int _RandomTrap, const int& _Km /*= 1*/)
 	{
 		Trap* TrapUnit0 = CreateActor<Trap>((int)ORDER::TRAP);
 		TrapUnit0->TrapSetting(TrapEvent::Crack, SpawnLoc::RIGHT);
+		CreatedTrap_.push_back(TrapUnit0);
 	}
 		break;
 
@@ -93,6 +95,7 @@ void PlayLevel::TrapSpawnSetting(int _RandomTrap, const int& _Km /*= 1*/)
 	{
 		Trap* TrapUnit0 = CreateActor<Trap>((int)ORDER::TRAP);
 		TrapUnit0->TrapSetting(TrapEvent::Hole, SpawnLoc::LEFT);
+		CreatedTrap_.push_back(TrapUnit0);
 	}
 		break;
 
@@ -100,6 +103,7 @@ void PlayLevel::TrapSpawnSetting(int _RandomTrap, const int& _Km /*= 1*/)
 	{
 		Trap* TrapUnit0 = CreateActor<Trap>((int)ORDER::TRAP);
 		TrapUnit0->TrapSetting(TrapEvent::Hole, SpawnLoc::CENTER);
+		CreatedTrap_.push_back(TrapUnit0);
 	}
 		break;
 
@@ -107,6 +111,7 @@ void PlayLevel::TrapSpawnSetting(int _RandomTrap, const int& _Km /*= 1*/)
 	{
 		Trap* TrapUnit0 = CreateActor<Trap>((int)ORDER::TRAP);
 		TrapUnit0->TrapSetting(TrapEvent::Hole, SpawnLoc::RIGHT);
+		CreatedTrap_.push_back(TrapUnit0);
 	}
 		break;
 
@@ -116,6 +121,8 @@ void PlayLevel::TrapSpawnSetting(int _RandomTrap, const int& _Km /*= 1*/)
 		TrapUnit0->TrapSetting(TrapEvent::Hole, SpawnLoc::LEFT);
 		Trap* TrapUnit1 = CreateActor<Trap>((int)ORDER::TRAP);
 		TrapUnit1->TrapSetting(TrapEvent::Hole, SpawnLoc::RIGHT);
+		CreatedTrap_.push_back(TrapUnit0);
+		CreatedTrap_.push_back(TrapUnit1);
 	}
 		break;
 
@@ -123,6 +130,7 @@ void PlayLevel::TrapSpawnSetting(int _RandomTrap, const int& _Km /*= 1*/)
 	{
 		Trap* TrapUnit0 = CreateActor<Trap>((int)ORDER::TRAP);
 		TrapUnit0->TrapSetting(TrapEvent::Seal, SpawnLoc::LEFT);
+		CreatedTrap_.push_back(TrapUnit0);
 	}
 		break;
 
@@ -130,6 +138,7 @@ void PlayLevel::TrapSpawnSetting(int _RandomTrap, const int& _Km /*= 1*/)
 	{
 		Trap* TrapUnit0 = CreateActor<Trap>((int)ORDER::TRAP);
 		TrapUnit0->TrapSetting(TrapEvent::Seal, SpawnLoc::CENTER);
+		CreatedTrap_.push_back(TrapUnit0);
 	}
 		break;
 
@@ -137,6 +146,7 @@ void PlayLevel::TrapSpawnSetting(int _RandomTrap, const int& _Km /*= 1*/)
 	{
 		Trap* TrapUnit0 = CreateActor<Trap>((int)ORDER::TRAP);
 		TrapUnit0->TrapSetting(TrapEvent::Seal, SpawnLoc::RIGHT);
+		CreatedTrap_.push_back(TrapUnit0);
 	}
 		break;
 
@@ -157,6 +167,7 @@ void PlayLevel::TrapSpawnSetting(int _RandomTrap, const int& _Km /*= 1*/)
 		{
 			TrapUnit0->TrapSetting(TrapEvent::Flag, SpawnLoc::LEFT);
 		}
+		CreatedTrap_.push_back(TrapUnit0);
 	}
 		break;
 
@@ -177,6 +188,7 @@ void PlayLevel::TrapSpawnSetting(int _RandomTrap, const int& _Km /*= 1*/)
 		{													  
 			TrapUnit0->TrapSetting(TrapEvent::Flag, SpawnLoc::CENTER);
 		}
+		CreatedTrap_.push_back(TrapUnit0);
 	}
 		break;
 
@@ -197,6 +209,7 @@ void PlayLevel::TrapSpawnSetting(int _RandomTrap, const int& _Km /*= 1*/)
 		{
 			TrapUnit0->TrapSetting(TrapEvent::Flag, SpawnLoc::RIGHT);
 		}
+		CreatedTrap_.push_back(TrapUnit0);
 	}
 		break;
 	default:
@@ -271,6 +284,7 @@ void PlayLevel::Update()
 	{
 		Trap* TrapUnit = CreateActor<Trap>((int)ORDER::TRAP);
 		TrapUnit->TrapSetting(TrapEvent::Fish, SpawnLoc::LEFT);
+		CreatedTrap_.push_back(TrapUnit);
 	}
 	if (GameEngineInput::GetInst()->IsDown("DebugCol"))
 	{
@@ -379,5 +393,16 @@ void PlayLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 	if (false == PlayUI::MainUI->IsTimeOver())
 	{
 		++PlayUI::Stage_;
+	}
+
+	for (Trap* CreatedTrap : CreatedTrap_)
+	{
+		if (nullptr == CreatedTrap)
+		{
+			continue;
+		}
+		CreatedTrap->Death();
+
+		CreatedTrap_.clear();
 	}
 }

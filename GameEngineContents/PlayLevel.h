@@ -10,6 +10,7 @@ class PlayUI;
 class RandomStage;
 class LevelChanger;
 class House;
+class Trap;
 class PlayLevel : public GameEngineLevel
 {
 public:
@@ -42,6 +43,8 @@ private:
 	int PatternVal_;
 
 	bool isColDebug_;
+
+	std::vector<Trap*> CreatedTrap_;
 
 public:
 	static PlayLevel* PlayLevelStage;
